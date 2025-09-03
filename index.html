@@ -355,6 +355,24 @@
         .icon-filter-white {
             filter: brightness(0) invert(1);
         }
+        
+        /* Mobile-specific gallery improvements */
+        @media (max-width: 640px) {
+            #startup-gallery {
+                padding: 0 1rem;
+            }
+            
+            .startup-card {
+                min-height: 300px;
+            }
+            
+            /* Improve button touch targets */
+            #prev-btn, #next-btn {
+                padding: 0.75rem;
+                min-width: 44px;
+                min-height: 44px;
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-secondary">
@@ -586,7 +604,7 @@
                     <div class="text-center md:text-left">
                         <h3 class="text-2xl md:text-3xl font-bold text-primary editable">Jessica Manurung</h3>
                         <p class="mt-4 text-lg text-primary/80 editable">
-                            Jessica Manurung besser bekannt als @basel_eats, ist eine Food-Bloggerin aus Basel, die seit 2019 authentische Restaurant-Tipps auf Instagram und TikTok teilt. Neben ihrer Expertise in Marketing und Content Creation veröffentlichte sie 2023 das Basel Cookbook, lancierte 2024 den Bestie Cider und startete 2025 mit Basel Eats Together ein modernes Supper Club Konzept, das Menschen durch gutes Essen verbindet und die lokale Gastroszene erlebbar macht.
+                            Jessica Manurung besser bekannt als <a href="https://instagram.com/basel_eats" target="_blank" class="text-white font-bold hover:text-white/80 transition-colors">@basel_eats</a>, ist eine Food-Bloggerin aus Basel, die seit 2019 authentische Restaurant-Tipps auf Instagram und TikTok teilt. Neben ihrer Expertise in Marketing und Content Creation veröffentlichte sie 2023 das Basel Cookbook, lancierte 2024 den Bestie Cider und startete 2025 mit Basel Eats Together ein modernes Supper Club Konzept, das Menschen durch gutes Essen verbindet und die lokale Gastroszene erlebbar macht.
                         </p>
                     </div>
                 </div>
@@ -603,10 +621,10 @@
                 </div>
 
                 <!-- Startup Cards Gallery -->
-                <div class="relative overflow-hidden">
-                    <div id="startup-gallery" class="flex gap-6 transition-transform duration-500 ease-in-out">
+                <div class="relative overflow-hidden px-4 sm:px-0">
+                    <div id="startup-gallery" class="flex gap-4 md:gap-6 transition-transform duration-500 ease-in-out">
                         <!-- Startup Card 1 -->
-                        <div class="flex-shrink-0 w-80 bg-gradient-to-br from-white to-light-blue rounded-3xl p-6 shadow-lg border border-accent-blue/20 hover:scale-105 transition-all duration-300">
+                        <div class="flex-shrink-0 w-72 sm:w-80 bg-gradient-to-br from-white to-light-blue rounded-3xl p-4 sm:p-6 shadow-lg border border-accent-blue/20 hover:scale-105 transition-all duration-300">
                             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-md">
                                 <img src="./images/startup-1.png" alt="Startup 1 Logo" class="w-12 h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="w-12 h-12 bg-accent-blue/30 rounded-full flex items-center justify-center" style="display: none;">
@@ -627,7 +645,7 @@
                         </div>
 
                         <!-- Startup Card 2 -->
-                        <div class="flex-shrink-0 w-80 bg-gradient-to-br from-white to-light-orange rounded-3xl p-6 shadow-lg border border-accent/20 hover:scale-105 transition-all duration-300">
+                        <div class="flex-shrink-0 w-72 sm:w-80 bg-gradient-to-br from-white to-light-orange rounded-3xl p-4 sm:p-6 shadow-lg border border-accent/20 hover:scale-105 transition-all duration-300">
                             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-md">
                                 <img src="./images/startup-2.png" alt="Startup 2 Logo" class="w-12 h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="w-12 h-12 bg-accent/30 rounded-full flex items-center justify-center" style="display: none;">
@@ -648,7 +666,7 @@
                         </div>
 
                         <!-- Startup Card 3 -->
-                        <div class="flex-shrink-0 w-80 bg-gradient-to-br from-white to-light-purple rounded-3xl p-6 shadow-lg border border-primary/20 hover:scale-105 transition-all duration-300">
+                        <div class="flex-shrink-0 w-72 sm:w-80 bg-gradient-to-br from-white to-light-purple rounded-3xl p-4 sm:p-6 shadow-lg border border-primary/20 hover:scale-105 transition-all duration-300">
                             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-md">
                                 <img src="./images/startup-3.png" alt="Startup 3 Logo" class="w-12 h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="w-12 h-12 bg-primary/30 rounded-full flex items-center justify-center" style="display: none;">
@@ -669,7 +687,7 @@
                         </div>
 
                         <!-- Startup Card 4 -->
-                        <div class="flex-shrink-0 w-80 bg-gradient-to-br from-white to-light-blue rounded-3xl p-6 shadow-lg border border-accent-yellow/20 hover:scale-105 transition-all duration-300">
+                        <div class="flex-shrink-0 w-72 sm:w-80 bg-gradient-to-br from-white to-light-blue rounded-3xl p-4 sm:p-6 shadow-lg border border-accent-yellow/20 hover:scale-105 transition-all duration-300">
                             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-md">
                                 <img src="./images/startup-4.png" alt="Startup 4 Logo" class="w-12 h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="w-12 h-12 bg-accent-yellow/30 rounded-full flex items-center justify-center" style="display: none;">
@@ -711,7 +729,7 @@
                         </div>
 
                         <!-- Startup Card 6 -->
-                        <div class="flex-shrink-0 w-80 bg-gradient-to-br from-white to-light-blue rounded-3xl p-6 shadow-lg border border-accent-blue/20 hover:scale-105 transition-all duration-300">
+                        <div class="flex-shrink-0 w-72 sm:w-80 bg-gradient-to-br from-white to-light-blue rounded-3xl p-4 sm:p-6 shadow-lg border border-accent-blue/20 hover:scale-105 transition-all duration-300">
                             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-md">
                                 <img src="./images/startup-6.png" alt="Startup 6 Logo" class="w-12 h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="w-12 h-12 bg-accent-blue/30 rounded-full flex items-center justify-center" style="display: none;">
@@ -753,7 +771,7 @@
                         </div>
 
                         <!-- Startup Card 8 -->
-                        <div class="flex-shrink-0 w-80 bg-gradient-to-br from-white to-light-purple rounded-3xl p-6 shadow-lg border border-primary/20 hover:scale-105 transition-all duration-300">
+                        <div class="flex-shrink-0 w-72 sm:w-80 bg-gradient-to-br from-white to-light-purple rounded-3xl p-4 sm:p-6 shadow-lg border border-primary/20 hover:scale-105 transition-all duration-300">
                             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-md">
                                 <img src="./images/startup-8.png" alt="Startup 8 Logo" class="w-12 h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="w-12 h-12 bg-primary/30 rounded-full flex items-center justify-center" style="display: none;">
@@ -774,7 +792,7 @@
                         </div>
 
                         <!-- Startup Card 9 -->
-                        <div class="flex-shrink-0 w-80 bg-gradient-to-br from-white to-light-orange rounded-3xl p-6 shadow-lg border border-accent/20 hover:scale-105 transition-all duration-300">
+                        <div class="flex-shrink-0 w-72 sm:w-80 bg-gradient-to-br from-white to-light-orange rounded-3xl p-4 sm:p-6 shadow-lg border border-accent/20 hover:scale-105 transition-all duration-300">
                             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-md">
                                 <img src="./images/startup-9.png" alt="Startup 9 Logo" class="w-12 h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="w-12 h-12 bg-accent/30 rounded-full flex items-center justify-center" style="display: none;">
@@ -795,7 +813,7 @@
                         </div>
 
                         <!-- Startup Card 10 -->
-                        <div class="flex-shrink-0 w-80 bg-gradient-to-br from-white to-light-blue rounded-3xl p-6 shadow-lg border border-accent-blue/20 hover:scale-105 transition-all duration-300">
+                        <div class="flex-shrink-0 w-72 sm:w-80 bg-gradient-to-br from-white to-light-blue rounded-3xl p-4 sm:p-6 shadow-lg border border-accent-blue/20 hover:scale-105 transition-all duration-300">
                             <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mb-4 mx-auto shadow-md">
                                 <img src="./images/startup-10.png" alt="Startup 10 Logo" class="w-12 h-12 object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
                                 <div class="w-12 h-12 bg-accent-blue/30 rounded-full flex items-center justify-center" style="display: none;">
@@ -838,16 +856,21 @@
                     </div>
 
                     <!-- Navigation Buttons -->
-                    <button id="prev-btn" class="absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button id="prev-btn" class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300 z-10">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                         </svg>
                     </button>
-                    <button id="next-btn" class="absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button id="next-btn" class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full shadow-lg flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300 z-10">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </button>
+                    
+                    <!-- Dots Indicator for Mobile -->
+                    <div class="flex justify-center mt-6 sm:hidden">
+                        <div id="dots-indicator" class="flex space-x-2"></div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1182,8 +1205,23 @@
         const nextBtn = document.getElementById('next-btn');
         
         let currentIndex = 0;
-        const cardWidth = 320; // Width + gap
         const totalCards = 11;
+        
+        // Get responsive card width
+        function getCardWidth() {
+            const card = gallery.querySelector('.flex-shrink-0');
+            if (!card) return 320;
+            const cardRect = card.getBoundingClientRect();
+            const gap = window.innerWidth < 768 ? 16 : 24; // gap-4 = 16px, gap-6 = 24px
+            return cardRect.width + gap;
+        }
+        
+        // Get how many cards fit in viewport
+        function getVisibleCards() {
+            const containerWidth = gallery.parentElement.getBoundingClientRect().width - 96; // Account for padding
+            const cardWidth = getCardWidth();
+            return Math.floor(containerWidth / cardWidth);
+        }
         
         // Clone cards for infinite scroll
         function setupInfiniteScroll() {
@@ -1206,9 +1244,67 @@
             currentIndex = 3;
             updateGallery(false);
         }
+        
+        // Handle window resize
+        function handleResize() {
+            updateGallery(false);
+        }
+        
+        window.addEventListener('resize', handleResize);
+        
+        // Touch/swipe support for mobile
+        let startX = 0;
+        let isDragging = false;
+        
+        gallery.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            clearInterval(autoScrollInterval);
+        }, { passive: true });
+        
+        gallery.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+        }, { passive: false });
+        
+        gallery.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            
+            const endX = e.changedTouches[0].clientX;
+            const diffX = startX - endX;
+            
+            // Minimum swipe distance
+            if (Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    moveToNext();
+                } else {
+                    moveToPrev();
+                }
+            }
+            
+            isDragging = false;
+            
+            // Restart auto-scroll after 10 seconds of inactivity
+            autoScrollInterval = setInterval(() => {
+                moveToNext();
+            }, 10000);
+        }, { passive: true });
 
         function updateGallery(smooth = true) {
-            const translateX = -currentIndex * cardWidth;
+            const cardWidth = getCardWidth();
+            const visibleCards = getVisibleCards();
+            
+            // Center the cards if only one card is visible (mobile)
+            let translateX;
+            if (visibleCards === 1) {
+                const containerWidth = gallery.parentElement.getBoundingClientRect().width;
+                const cardActualWidth = gallery.querySelector('.flex-shrink-0').getBoundingClientRect().width;
+                const centerOffset = (containerWidth - cardActualWidth) / 2;
+                translateX = -currentIndex * cardWidth + centerOffset;
+            } else {
+                translateX = -currentIndex * cardWidth;
+            }
+            
             gallery.style.transition = smooth ? 'transform 0.5s ease-in-out' : 'none';
             gallery.style.transform = `translateX(${translateX}px)`;
         }
@@ -1216,12 +1312,14 @@
         function moveToNext() {
             currentIndex++;
             updateGallery();
+            updateDots();
             
             // If we've reached the cloned cards at the end, reset to beginning
             if (currentIndex >= totalCards + 3) {
                 setTimeout(() => {
                     currentIndex = 3; // Reset to first real card
                     updateGallery(false);
+                    updateDots();
                 }, 500); // Wait for transition to complete
             }
         }
@@ -1229,18 +1327,61 @@
         function moveToPrev() {
             currentIndex--;
             updateGallery();
+            updateDots();
             
             // If we've reached the cloned cards at the beginning, reset to end
             if (currentIndex < 3) {
                 setTimeout(() => {
                     currentIndex = totalCards + 2; // Reset to last real card
                     updateGallery(false);
+                    updateDots();
                 }, 500); // Wait for transition to complete
             }
+        }
+        
+        // Create dots indicator for mobile
+        function createDots() {
+            const dotsContainer = document.getElementById('dots-indicator');
+            if (!dotsContainer) return;
+            
+            dotsContainer.innerHTML = '';
+            
+            for (let i = 0; i < totalCards; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'w-2 h-2 rounded-full bg-primary/30 transition-all duration-300';
+                dot.addEventListener('click', () => {
+                    clearInterval(autoScrollInterval);
+                    currentIndex = i + 3; // Account for cloned cards
+                    updateGallery();
+                    updateDots();
+                    
+                    // Restart auto-scroll
+                    autoScrollInterval = setInterval(() => {
+                        moveToNext();
+                    }, 10000);
+                });
+                dotsContainer.appendChild(dot);
+            }
+            
+            updateDots();
+        }
+        
+        function updateDots() {
+            const dots = document.querySelectorAll('#dots-indicator button');
+            const realIndex = (currentIndex - 3 + totalCards) % totalCards;
+            
+            dots.forEach((dot, index) => {
+                if (index === realIndex) {
+                    dot.className = 'w-2 h-2 rounded-full bg-primary transition-all duration-300';
+                } else {
+                    dot.className = 'w-2 h-2 rounded-full bg-primary/30 transition-all duration-300';
+                }
+            });
         }
 
         // Initialize infinite scroll
         setupInfiniteScroll();
+        createDots();
 
         // Auto-scroll functionality
         let autoScrollInterval = setInterval(() => {
@@ -1264,6 +1405,19 @@
             autoScrollInterval = setInterval(() => {
                 moveToNext();
             }, 10000);
+        });
+        
+        // Improve touch experience on navigation buttons
+        [nextBtn, prevBtn].forEach(btn => {
+            btn.addEventListener('touchstart', (e) => {
+                e.stopPropagation();
+                btn.style.transform = btn.style.transform.replace('scale(1)', 'scale(0.95)');
+            }, { passive: true });
+            
+            btn.addEventListener('touchend', (e) => {
+                e.stopPropagation();
+                btn.style.transform = btn.style.transform.replace('scale(0.95)', 'scale(1)');
+            }, { passive: true });
         });
 
         // Pause auto-scroll on hover
