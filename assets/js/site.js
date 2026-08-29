@@ -102,13 +102,20 @@
 
   /* ------------------------------------------------------ text injection */
 
+  /* Anything still flagged in `tbd` shows a placeholder rather than last
+     year's value, so the page never publishes information we don't have. */
+  var TBD = DATA.tbd || {};
+
   var TOKENS = {
     date: dateShort,
     "date-long": dateLong,
-    time: timeRange,
-    "venue-name": venue.name,
-    "venue-address": venue.street + ", " + venue.postalCode + " " + venue.city,
-    "venue-line": venueLine,
+    time: TBD.times ? "Uhrzeit folgt" : timeRange,
+    "venue-name": TBD.venue ? "Location folgt" : venue.name,
+    "venue-address": TBD.venue
+      ? "Die neue Location geben wir in Kürze bekannt."
+      : venue.street + ", " + venue.postalCode + " " + venue.city,
+    "venue-note": TBD.venue ? "" : venue.note,
+    "venue-line": TBD.venue ? "Location wird noch bekannt gegeben" : venueLine,
     claim: DATA.event.claim,
     tagline: DATA.event.tagline,
     closing: DATA.event.closing,
@@ -119,7 +126,12 @@
   function injectText() {
     $$("[data-tu]").forEach(function (node) {
       var key = node.getAttribute("data-tu");
-      if (TOKENS[key] != null) node.textContent = TOKENS[key];
+      if (TOKENS[key] == null) return;
+      if (TOKENS[key] === "") {
+        node.remove();
+        return;
+      }
+      node.textContent = TOKENS[key];
     });
 
     $$("[data-tu-href]").forEach(function (node) {
@@ -128,6 +140,13 @@
       if (key === "maps") node.href = venue.mapsUrl;
       if (key === "mail") node.href = "mailto:" + DATA.event.contactEmail;
     });
+
+    /* No confirmed venue means no map to point at. */
+    if (TBD.venue) {
+      $$("[data-tu-maps]").forEach(function (node) {
+        node.remove();
+      });
+    }
   }
 
   /* --------------------------------------------- upcoming vs. past event */
@@ -135,40 +154,54 @@
   function renderEventState() {
     var countdown = $("#countdown");
     var note = $("#event-status");
+    var ticketsLive = !TBD.tickets && !!DATA.event.ticketUrl && isUpcoming;
 
-    if (isUpcoming) {
-      if (note) note.hidden = true;
-      if (countdown) startCountdown(countdown);
-      return;
+    if (countdown) {
+      if (isUpcoming) startCountdown(countdown);
+      else countdown.hidden = true;
     }
-
-    /* The announced date has passed: never show a live ticket link or a
-       negative countdown. Switch the page into "next edition" mode. */
-    if (countdown) countdown.hidden = true;
 
     if (note) {
-      note.hidden = false;
-      note.textContent = "";
-      note.appendChild(icon("info", 18));
-      note.appendChild(
-        document.createTextNode(
+      var message = "";
+
+      if (!isUpcoming) {
+        message =
           "Die letzte Ausgabe fand am " +
-            dateShort +
-            " im " +
-            venue.name +
-            " statt. Das Datum der nächsten Edition wird bald bekannt gegeben."
-        )
-      );
+          dateShort +
+          " statt. Das Datum der nächsten Edition wird bald bekannt gegeben.";
+      } else if (TBD.tickets) {
+        message =
+          "Das Datum steht: " +
+          dateLong +
+          ". Location, Programm und Ticketverkauf geben wir in den nächsten Wochen bekannt.";
+      }
+
+      if (message) {
+        note.hidden = false;
+        note.textContent = "";
+        note.appendChild(icon("info", 18));
+        note.appendChild(document.createTextNode(message));
+      } else {
+        note.hidden = true;
+      }
     }
+
+    /* Without a live ticket shop, every ticket button becomes a way to get
+       in touch instead — never a dead link. */
+    if (ticketsLive) return;
 
     $$("[data-tu-ticket]").forEach(function (link) {
       link.href =
         "mailto:" +
         DATA.event.contactEmail +
         "?subject=" +
-        encodeURIComponent("TasteUp – Infos zur nächsten Ausgabe");
+        encodeURIComponent("TasteUp " + start.getFullYear() + " – auf dem Laufenden bleiben");
+      link.removeAttribute("target");
+      link.removeAttribute("rel");
       var label = $(".btn__label", link);
-      (label || link).textContent = "Infos zur nächsten Ausgabe";
+      (label || link).textContent = isUpcoming
+        ? "Auf dem Laufenden bleiben"
+        : "Infos zur nächsten Ausgabe";
     });
   }
 
@@ -217,11 +250,25 @@
 
   /* ---------------------------------------------------------- highlights */
 
+  var NUMBER_WORDS = ["null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben"];
+
   function renderHighlights() {
     var root = $("#highlights");
     if (!root) return;
 
-    DATA.highlights.forEach(function (item) {
+    /* Same gate as the stats: never promise something not yet confirmed. */
+    var usable = DATA.highlights.filter(function (item) {
+      if (item.needs === "speaker") return !!DATA.speaker;
+      return !item.needs || !TBD[item.needs];
+    });
+
+    var heading = $("#highlights-heading");
+    if (heading) {
+      heading.textContent =
+        "Ein Abend, " + (NUMBER_WORDS[usable.length] || usable.length) + " Gründe";
+    }
+
+    usable.forEach(function (item) {
       var card = el("article", "highlight reveal");
       var box = el("div", "highlight__icon");
       box.appendChild(icon(item.icon));
@@ -238,7 +285,21 @@
     var root = $("#stats");
     if (!root) return;
 
-    DATA.stats.forEach(function (stat) {
+    /* Only claim a figure we can actually stand behind: a stat whose source
+       is still unconfirmed (or, for the keynote, absent) is left out. */
+    var usable = DATA.stats.filter(function (stat) {
+      if (stat.needs === "speaker") return !!DATA.speaker;
+      return !stat.needs || !TBD[stat.needs];
+    });
+
+    if (usable.length < 2) {
+      var section = root.closest("section");
+      if (section) section.remove();
+      else root.remove();
+      return;
+    }
+
+    usable.forEach(function (stat) {
       /* Counted values stay in sync with the data instead of being typed in. */
       var value = stat.from === "startups" ? String(DATA.startups.length) : stat.value;
       var box = el("div", "stat reveal");
@@ -253,6 +314,25 @@
   function renderAgenda() {
     var root = $("#agenda");
     if (!root) return;
+
+    if (TBD.agenda) {
+      var section = root.closest("section");
+      var head = section ? $(".section-head p", section) : null;
+      if (head) {
+        head.textContent =
+          "Das detaillierte Programm für " +
+          start.getFullYear() +
+          " stellen wir gerade zusammen und veröffentlichen es hier, sobald es steht.";
+      }
+      root.appendChild(
+        el(
+          "p",
+          "empty-note",
+          "Programm folgt — der Ablauf des Abends wird in Kürze bekannt gegeben."
+        )
+      );
+      return;
+    }
 
     DATA.agenda.forEach(function (slot) {
       var item = el("article", "slot reveal");
@@ -274,12 +354,81 @@
     });
   }
 
+  /* ------------------------------------------------------------- keynote
+     No speaker in the data means no Keynote section and no nav entry. */
+
+  function renderKeynote() {
+    var section = $("#keynote");
+    var speaker = DATA.speaker;
+
+    if (!section) return;
+
+    if (!speaker) {
+      section.remove();
+      $$("a[href='#keynote']").forEach(function (a) {
+        a.remove();
+      });
+      return;
+    }
+
+    section.hidden = false;
+
+    var body = $("#keynote-body");
+    if (!body) return;
+
+    if (speaker.image) {
+      var portrait = el("div", "keynote__portrait");
+      var img = el("img");
+      img.src = speaker.image;
+      img.alt = "Porträt von " + speaker.name;
+      img.loading = "lazy";
+      img.decoding = "async";
+      portrait.appendChild(img);
+      body.appendChild(portrait);
+    }
+
+    var text = el("div");
+    text.appendChild(el("p", "keynote__role", speaker.role));
+    text.appendChild(el("h3", null, speaker.name));
+    if (speaker.talk) text.appendChild(el("p", "keynote__talk", speaker.talk));
+    text.appendChild(el("p", null, speaker.bio));
+
+    if (speaker.links && speaker.links.length) {
+      var row = el("div", "btn-row");
+      speaker.links.forEach(function (link, i) {
+        var a = el("a", i === 0 ? "btn btn--ink" : "btn btn--outline", link.label);
+        a.href = link.url;
+        a.target = "_blank";
+        a.rel = "noopener";
+        row.appendChild(a);
+      });
+      text.appendChild(row);
+    }
+
+    body.appendChild(text);
+  }
+
   /* ------------------------------------------------------------ startups */
 
   function renderStartups() {
     var grid = $("#startup-grid");
     var filterBar = $("#startup-filters");
     if (!grid) return;
+
+    /* Until the 2026 line-up is confirmed, say plainly that these are last
+       year's exhibitors rather than presenting them as this year's. */
+    if (TBD.startups) {
+      var section = grid.closest("section");
+      var note = section ? $(".section-head p", section) : null;
+      if (note) {
+        note.textContent =
+          "Die Startups für " +
+          start.getFullYear() +
+          " werden gerade ausgewählt. Zur Einstimmung: das Line-up der letzten Ausgabe.";
+      }
+      var badge = section ? $(".section-head .eyebrow", section) : null;
+      if (badge) badge.textContent = "Line-up 2025";
+    }
 
     var counts = {};
     DATA.startups.forEach(function (s) {
@@ -408,13 +557,16 @@
 
     var replacements = {
       "{date}": dateShort,
-      "{time}": timeRange,
-      "{venue}": venueLine,
+      "{time}": TOKENS.time,
+      "{venue}": TOKENS["venue-line"],
       "{ticket}": "Eventfrog",
       "{mail}": DATA.event.contactEmail
     };
 
     DATA.faq.forEach(function (entry, index) {
+      /* An entry may carry a stand-in answer for while its facts are open. */
+      var answer = entry.altIf && TBD[entry.altIf] && entry.alt ? entry.alt : entry.a;
+
       var item = el("div", "faq__item");
       var id = "faq-panel-" + index;
 
@@ -431,7 +583,7 @@
       var para = el("p");
 
       /* Split the answer on the tokens so live values become real links. */
-      var parts = entry.a.split(/(\{date\}|\{time\}|\{venue\}|\{ticket\}|\{mail\})/g);
+      var parts = answer.split(/(\{date\}|\{time\}|\{venue\}|\{ticket\}|\{mail\})/g);
       parts.forEach(function (part) {
         if (part === "{ticket}") {
           var a = el("a", null, "Eventfrog");
@@ -578,29 +730,39 @@
       eventStatus: "https://schema.org/EventScheduled",
       eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
       image: "https://taste-up.ch/images/banner.png",
-      location: {
-        "@type": "Place",
-        name: venue.name,
-        address: {
-          "@type": "PostalAddress",
-          streetAddress: venue.street,
-          postalCode: venue.postalCode,
-          addressLocality: venue.city,
-          addressCountry: venue.country
-        }
-      },
+      location: TBD.venue
+        ? {
+            "@type": "Place",
+            name: "Basel — Location wird bekannt gegeben",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: "Basel",
+              addressCountry: "CH"
+            }
+          }
+        : {
+            "@type": "Place",
+            name: venue.name,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: venue.street,
+              postalCode: venue.postalCode,
+              addressLocality: venue.city,
+              addressCountry: venue.country
+            }
+          },
       organizer: {
         "@type": "Organization",
         name: DATA.event.organiser.name,
         url: DATA.event.organiser.url
-      },
-      performer: {
-        "@type": "Person",
-        name: DATA.speaker.name
       }
     };
 
-    if (isUpcoming) {
+    if (DATA.speaker) {
+      payload.performer = { "@type": "Person", name: DATA.speaker.name };
+    }
+
+    if (isUpcoming && !TBD.tickets && DATA.event.ticketUrl) {
       payload.offers = {
         "@type": "Offer",
         url: DATA.event.ticketUrl,
@@ -622,6 +784,7 @@
     renderHighlights();
     renderStats();
     renderAgenda();
+    renderKeynote();
     renderStartups();
     renderPartners();
     renderFaq();

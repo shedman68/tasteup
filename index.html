@@ -143,7 +143,7 @@
     <div class="shell">
       <div class="section-head is-centred reveal">
         <span class="eyebrow">Das erwartet dich</span>
-        <h2>Ein Abend, fünf Gründe</h2>
+        <h2 id="highlights-heading">Ein Abend, fünf Gründe</h2>
         <p>TasteUp ist ein Ort des Austauschs, der Degustation und des Netzwerkens — in entspannter Afterwork-Atmosphäre statt im Konferenzsaal.</p>
       </div>
 
@@ -203,9 +203,9 @@
           <p>
             <strong data-tu="venue-name">Literaturhaus Basel</strong><br>
             <span data-tu="venue-address">Barfüssergasse 3, 4051 Basel</span><br>
-            Mitten in der Basler Innenstadt, direkt beim Barfüsserplatz.
+            <span data-tu="venue-note">Mitten in der Basler Innenstadt, direkt beim Barfüsserplatz.</span>
           </p>
-          <a class="link" href="#" data-tu-href="maps" target="_blank" rel="noopener">
+          <a class="link" href="#" data-tu-href="maps" data-tu-maps target="_blank" rel="noopener">
             Auf Google Maps öffnen
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 6l6 6-6 6"/></svg>
           </a>
@@ -227,32 +227,15 @@
     </div>
   </section>
 
-  <!-- ====================================================== keynote -->
-  <section class="section section--amber" id="keynote">
+  <!-- ================================== keynote (only when data.speaker set) -->
+  <section class="section section--amber" id="keynote" hidden>
     <div class="shell">
       <div class="section-head reveal">
         <span class="eyebrow">Input aus der Praxis</span>
         <h2>Keynote</h2>
       </div>
 
-      <div class="keynote reveal">
-        <div class="keynote__portrait">
-          <img src="./images/speaker.png" alt="Porträt von Jessica Manurung" loading="lazy" decoding="async" width="320" height="320">
-        </div>
-
-        <div>
-          <p class="keynote__role">Keynote Speakerin</p>
-          <h3>Jessica Manurung</h3>
-          <p class="keynote__talk">„Storytelling mit Geschmack: Die Kraft von Content in der Gastro-Welt“</p>
-          <p>
-            Jessica Manurung, besser bekannt als <strong>@basel_eats</strong>, ist eine Food-Bloggerin aus Basel, die seit 2019 authentische Restaurant-Tipps auf Instagram und TikTok teilt. Neben ihrer Expertise in Marketing und Content Creation veröffentlichte sie 2023 das Basel Cookbook, lancierte 2024 den Bestie Cider und startete 2025 mit Basel Eats Together ein modernes Supper-Club-Konzept, das Menschen durch gutes Essen verbindet und die lokale Gastroszene erlebbar macht.
-          </p>
-          <div class="btn-row">
-            <a class="btn btn--ink" href="https://instagram.com/basel_eats" target="_blank" rel="noopener">@basel_eats</a>
-            <a class="btn btn--outline" href="https://www.baseleats.ch/" target="_blank" rel="noopener">baseleats.ch</a>
-          </div>
-        </div>
-      </div>
+      <div class="keynote reveal" id="keynote-body"></div>
     </div>
   </section>
 
@@ -387,7 +370,7 @@
         <address>
           <span data-tu="venue-name">Literaturhaus Basel</span><br>
           <span data-tu="venue-address">Barfüssergasse 3, 4051 Basel</span><br>
-          <a href="#" data-tu-href="maps" target="_blank" rel="noopener">Google Maps</a>
+          <a href="#" data-tu-href="maps" data-tu-maps target="_blank" rel="noopener">Google Maps</a>
         </address>
       </div>
 

@@ -5,16 +5,32 @@
    Everything on the page (facts, programme, startups, partners, FAQ) is
    rendered from the object below.
 
-   >>> TO ANNOUNCE THE NEXT EDITION, EDIT `event.startsAt` / `event.endsAt`
-   >>> AND `event.ticketUrl` BELOW. Everything else — the countdown, the
-   >>> structured data for Google, the date shown in the hero, the FAQ answer
-   >>> and the ticket buttons — updates itself from those values.
+   >>> WHAT STILL NEEDS FILLING IN FOR 2026 is listed in the `tbd` block at
+   >>> the top. While a `tbd` flag is true, that part of the page shows a
+   >>> "wird bekannt gegeben" placeholder rather than 2025's information.
+   >>> Enter the real content, set the flag to false, done.
+
+   >>> THE DATE lives in `event.startsAt` / `event.endsAt`. The countdown,
+   >>> the hero, the FAQ answers and the structured data for Google all read
+   >>> from it, so it only ever needs changing in that one place.
 
    >>> TO ADD A STARTUP, copy one entry in the `startups` array. `category`
    >>> must be one of the ids listed in `startupCategories`.
    ========================================================================== */
 
 window.TASTEUP = {
+  /* -------------------------------------------------- 2026 OPEN QUESTIONS
+     Set each flag to false once the real information is in. While a flag is
+     true the page shows an honest "wird bekannt gegeben" placeholder instead
+     of last year's data, so nothing outdated is ever published. */
+  tbd: {
+    times: true, // start/end time below are carried over from 2025
+    venue: true, // new location not yet announced
+    agenda: true, // programme for 2026 not yet set
+    startups: true, // list below is the 2025 line-up, not the 2026 one
+    tickets: true // no ticket link for 2026 yet
+  },
+
   /* ---------------------------------------------------------------- event */
   event: {
     name: "TasteUp",
@@ -23,10 +39,15 @@ window.TASTEUP = {
       "Der Afterwork-Marktplatz für Craft Food & Beverage Startups, Foodies & Gastronomie",
     closing: "Probieren, entdecken & vernetzen. Alles an einem Abend.",
 
-    // ISO 8601 with Swiss timezone offset (+02:00 summer, +01:00 winter).
-    startsAt: "2025-10-14T18:00:00+02:00",
-    endsAt: "2025-10-14T21:00:00+02:00",
+    /* CONFIRMED: 13 October 2026.
+       ISO 8601 with Swiss timezone offset (+02:00 summer, +01:00 winter).
+       The times are still last year's — set tbd.times to false once fixed. */
+    startsAt: "2026-10-13T18:00:00+02:00",
+    endsAt: "2026-10-13T21:00:00+02:00",
 
+    /* New location still to be announced (tbd.venue). The 2025 venue is kept
+       here only so the fields are easy to overwrite — it is NOT shown on the
+       page while tbd.venue is true. */
     venue: {
       name: "Literaturhaus Basel",
       street: "Barfüssergasse 3",
@@ -71,6 +92,9 @@ window.TASTEUP = {
     {
       icon: "mic",
       title: "Keynote mit Impact",
+      /* `needs` gates a highlight on data being present. Shown only when a
+         keynote speaker is actually booked. */
+      needs: "speaker",
       text: "Ein kurzer, praxisnaher Input aus der Basler Foodszene – Wissen zum Mitnehmen statt langer Vortragsblock."
     },
     {
@@ -81,7 +105,11 @@ window.TASTEUP = {
     {
       icon: "book",
       title: "Food-Literatur zum Stöbern",
-      text: "Eine Leseecke im Literaturhaus mit Kochbüchern und Food-Literatur zum Blättern zwischen zwei Degustationen."
+      /* This was a feature of the Literaturhaus venue — hidden until the new
+         location is confirmed, so we don't promise something that may not
+         exist there. */
+      needs: "venue",
+      text: "Eine Leseecke mit Kochbüchern und Food-Literatur zum Blättern zwischen zwei Degustationen."
     }
   ],
 
@@ -89,10 +117,10 @@ window.TASTEUP = {
      All four numbers are counted from the programme and the startup list
      below, so they stay honest when you add or remove entries. */
   stats: [
-    { value: "14", label: "Startups am Marktplatz", from: "startups" },
-    { value: "2", label: "Degustationsrunden" },
-    { value: "1", label: "Keynote" },
-    { value: "3h", label: "Afterwork-Programm" }
+    { value: "14", label: "Startups am Marktplatz", from: "startups", needs: "startups" },
+    { value: "2", label: "Degustationsrunden", needs: "agenda" },
+    { value: "1", label: "Keynote", needs: "speaker" },
+    { value: "3h", label: "Afterwork-Programm", needs: "times" }
   ],
 
   /* -------------------------------------------------------------- programme */
@@ -133,8 +161,14 @@ window.TASTEUP = {
     }
   ],
 
-  /* ---------------------------------------------------------------- speaker */
-  speaker: {
+  /* ---------------------------------------------------------------- speaker
+     No keynote speaker for the 2026 edition. `speaker: null` removes the
+     whole Keynote section and its navigation entry. To bring the section
+     back, move an object like `previousSpeaker` below into `speaker`. */
+  speaker: null,
+
+  /* Archived — the 2025 keynote. Not rendered anywhere. */
+  previousSpeaker: {
     name: "Jessica Manurung",
     role: "Keynote Speakerin",
     talk:
@@ -297,10 +331,16 @@ window.TASTEUP = {
     },
     {
       q: "Wann und wo findet TasteUp statt?",
-      a: "{date}, {time}, im {venue}. Die Location liegt mitten in der Basler Innenstadt, direkt beim Barfüsserplatz – die Anfahrt mit dem ÖV ist am einfachsten."
+      /* `altIf` names a `tbd` flag: while that flag is true the `alt` answer
+         is shown instead, so no stale venue or time is ever published. */
+      altIf: "venue",
+      alt: "Das Datum steht fest: {date}. TasteUp findet wie immer in Basel statt – die neue Location und die genauen Zeiten geben wir in den nächsten Wochen hier bekannt.",
+      a: "{date}, {time}, im {venue}. Die Anfahrt mit dem ÖV ist am einfachsten."
     },
     {
       q: "Brauche ich ein Ticket?",
+      altIf: "tickets",
+      alt: "Ja, der Anlass ist ticketpflichtig. Der Ticketverkauf für die kommende Ausgabe ist noch nicht eröffnet – schreib uns an {mail}, dann melden wir uns, sobald die Tickets verfügbar sind.",
       a: "Ja, der Anlass ist ticketpflichtig. Tickets gibt es über {ticket}. Da die Zahl der Plätze durch die Location begrenzt ist, lohnt sich eine frühzeitige Anmeldung."
     },
     {
@@ -321,7 +361,7 @@ window.TASTEUP = {
     },
     {
       q: "Wer steckt hinter TasteUp?",
-      a: "TasteUp ist ein Anlass des Vereins Startup Academy Basel, Picassoplatz 4, 4052 Basel – unter dem Patronat von Lunch-Check Schweiz und in Partnerschaft mit dem Literaturhaus Basel / Café Kafka und Basel Eats."
+      a: "TasteUp ist ein Anlass des Vereins Startup Academy Basel, Picassoplatz 4, 4052 Basel – unter dem Patronat von Lunch-Check Schweiz und gemeinsam mit unseren Partnern."
     }
   ]
 };
