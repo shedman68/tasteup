@@ -379,8 +379,8 @@
   }
 
   /* ----------------------------------------------------------- presenting
-     Bubbles flanking the "Line-up" title — #presenting-left before it,
-     #presenting-right after. */
+     Bubbles stacked above/below the "Line-up" title — #presenting-left
+     renders as the row above it, #presenting-right as the row below. */
 
   function renderPresenting() {
     var leftGroup = $("#presenting-left");

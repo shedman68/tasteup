@@ -72,20 +72,23 @@ window.TASTEUP = {
   },
 
   /* --------------------------------------------------------- presenting row
-     The sponsor/programme bubbles shown flanking the "Line-up" title,
-     above the startup cards. Each entry is `{ name, logo, group, url }`
-     (url optional): every bubble is a finished painted-oval graphic (colour,
-     brush-stroke edge and text baked into the artwork) shown as-is.
-       - group: "left" | "right" — which side of the title the bubble sits on.
+     The sponsor/programme bubbles shown stacked above and below the
+     "Line-up" title, ahead of the startup cards. Each entry is
+     `{ name, logo, group, url }` (url optional): every bubble is a finished
+     painted-oval graphic (colour, brush-stroke edge and text baked into the
+     artwork) shown as-is.
+       - group: "left" | "right" — "left" renders as the row of three above
+         the title, "right" as the row of three below it (the names are
+         legacy from when the two groups sat side by side).
      Leave `items` empty to fall back to a "folgen in Kürze" placeholder. */
   presenting: {
     items: [
-      { name: "Food Factory", logo: "./images/food-factory-badge.png", group: "left" },
-      { name: "FoodHealth", logo: "./images/foodhealth-badge.png", group: "left" },
       { name: "10+ Startups", logo: "./images/10 Startups.png", group: "left" },
-      { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" },
+      { name: "FoodHealth", logo: "./images/foodhealth-badge.png", group: "left" },
+      { name: "Food Factory", logo: "./images/food-factory-badge.png", group: "left" },
+      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", group: "right" },
       { name: "Food Fotografie", logo: "./images/Food Fotografie.png", group: "right" },
-      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", group: "right" }
+      { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" }
     ]
   },
 
