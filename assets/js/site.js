@@ -549,143 +549,6 @@
     });
   }
 
-  /* ----------------------------------------------------------------- faq */
-
-  function renderFaq() {
-    var root = $("#faq-list");
-    if (!root) return;
-
-    var replacements = {
-      "{date}": dateShort,
-      "{time}": TOKENS.time,
-      "{venue}": TOKENS["venue-line"],
-      "{ticket}": "Eventfrog",
-      "{mail}": DATA.event.contactEmail
-    };
-
-    DATA.faq.forEach(function (entry, index) {
-      /* An entry may carry a stand-in answer for while its facts are open. */
-      var answer = entry.altIf && TBD[entry.altIf] && entry.alt ? entry.alt : entry.a;
-
-      var item = el("div", "faq__item");
-      var id = "faq-panel-" + index;
-
-      var button = el("button", "faq__q");
-      button.type = "button";
-      button.setAttribute("aria-expanded", "false");
-      button.setAttribute("aria-controls", id);
-      button.appendChild(el("span", null, entry.q));
-      button.appendChild(el("span", "faq__icon"));
-
-      var panel = el("div", "faq__a");
-      panel.id = id;
-      var inner = el("div");
-      var para = el("p");
-
-      /* Split the answer on the tokens so live values become real links. */
-      var parts = answer.split(/(\{date\}|\{time\}|\{venue\}|\{ticket\}|\{mail\})/g);
-      parts.forEach(function (part) {
-        if (part === "{ticket}") {
-          var a = el("a", null, "Eventfrog");
-          a.href = DATA.event.ticketUrl;
-          a.target = "_blank";
-          a.rel = "noopener";
-          para.appendChild(a);
-        } else if (part === "{mail}") {
-          var m = el("a", null, DATA.event.contactEmail);
-          m.href = "mailto:" + DATA.event.contactEmail;
-          para.appendChild(m);
-        } else if (replacements[part]) {
-          para.appendChild(document.createTextNode(replacements[part]));
-        } else {
-          para.appendChild(document.createTextNode(part));
-        }
-      });
-
-      inner.appendChild(para);
-      panel.appendChild(inner);
-      item.appendChild(button);
-      item.appendChild(panel);
-      root.appendChild(item);
-
-      button.addEventListener("click", function () {
-        var open = button.getAttribute("aria-expanded") === "true";
-        button.setAttribute("aria-expanded", open ? "false" : "true");
-        item.classList.toggle("is-open", !open);
-      });
-    });
-  }
-
-  /* -------------------------------------------------------- navigation */
-
-  function initNav() {
-    var header = $(".site-header");
-    var toggle = $(".nav-toggle");
-    var nav = $("#primary-nav");
-
-    if (toggle && nav) {
-      toggle.addEventListener("click", function () {
-        var open = toggle.getAttribute("aria-expanded") === "true";
-        toggle.setAttribute("aria-expanded", open ? "false" : "true");
-        nav.classList.toggle("is-open", !open);
-      });
-
-      nav.addEventListener("click", function (evt) {
-        if (evt.target.tagName === "A") {
-          toggle.setAttribute("aria-expanded", "false");
-          nav.classList.remove("is-open");
-        }
-      });
-
-      document.addEventListener("keydown", function (evt) {
-        if (evt.key === "Escape" && nav.classList.contains("is-open")) {
-          toggle.setAttribute("aria-expanded", "false");
-          nav.classList.remove("is-open");
-          toggle.focus();
-        }
-      });
-    }
-
-    if (header) {
-      var onScroll = function () {
-        header.classList.toggle("is-stuck", window.scrollY > 8);
-      };
-      window.addEventListener("scroll", onScroll, { passive: true });
-      onScroll();
-    }
-
-    /* Highlight the section currently in view. */
-    var links = $$("#primary-nav a[href^='#']");
-    if (!links.length || !("IntersectionObserver" in window)) return;
-
-    var byId = {};
-    var targets = [];
-    links.forEach(function (link) {
-      var section = document.getElementById(link.hash.slice(1));
-      if (!section) return;
-      byId[section.id] = link;
-      targets.push(section);
-    });
-
-    var spy = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          links.forEach(function (l) {
-            l.classList.remove("is-active");
-          });
-          var active = byId[entry.target.id];
-          if (active) active.classList.add("is-active");
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" }
-    );
-
-    targets.forEach(function (t) {
-      spy.observe(t);
-    });
-  }
-
   /* ------------------------------------------------------ scroll reveal */
 
   function initReveal() {
@@ -787,11 +650,15 @@
     renderKeynote();
     renderStartups();
     renderPartners();
-    renderFaq();
     renderEventState();
-    initNav();
     initReveal();
-    injectStructuredData();
+
+    /* This file is also included on the legal pages so their footer can
+       share the same live venue/date/contact data. Only the homepage has
+       the hero's #top element, so the Event schema is only ever added
+       there — a "Datenschutzerklärung" page has no business claiming to
+       be a schema.org Event. */
+    if ($("#top")) injectStructuredData();
   }
 
   if (document.readyState === "loading") {

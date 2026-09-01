@@ -2,7 +2,7 @@
    TasteUp — site content
    --------------------------------------------------------------------------
    This is the only file you need to touch to update the website's content.
-   Everything on the page (facts, programme, startups, partners, FAQ) is
+   Everything on the page (facts, programme, startups, partners) is
    rendered from the object below.
 
    >>> WHAT STILL NEEDS FILLING IN FOR 2026 is listed in the `tbd` block at
@@ -11,7 +11,7 @@
    >>> Enter the real content, set the flag to false, done.
 
    >>> THE DATE lives in `event.startsAt` / `event.endsAt`. The countdown,
-   >>> the hero, the FAQ answers and the structured data for Google all read
+   >>> the hero and the structured data for Google all read
    >>> from it, so it only ever needs changing in that one place.
 
    >>> TO ADD A STARTUP, copy one entry in the `startups` array. `category`
@@ -318,50 +318,6 @@ window.TASTEUP = {
       name: "Basel Eats",
       logo: "./images/basel eats.png",
       url: "https://www.baseleats.ch/"
-    }
-  ],
-
-  /* -------------------------------------------------------------------- faq
-     `{date}`, `{time}`, `{venue}`, `{ticket}` and `{mail}` are replaced with
-     the live values from `event` above, so answers never go stale. */
-  faq: [
-    {
-      q: "Was ist TasteUp genau?",
-      a: "TasteUp ist ein Afterwork-Marktplatz: ein Ort des Austauschs, der Degustation und des Netzwerkens. Craft Food & Beverage Startups stellen ihre Produkte an Ständen vor, du probierst dich durch den Abend und kommst mit Gründer:innen, Foodies und Gastronomiebetrieben ins Gespräch."
-    },
-    {
-      q: "Wann und wo findet TasteUp statt?",
-      /* `altIf` names a `tbd` flag: while that flag is true the `alt` answer
-         is shown instead, so no stale venue or time is ever published. */
-      altIf: "venue",
-      alt: "Das Datum steht fest: {date}. TasteUp findet wie immer in Basel statt – die neue Location und die genauen Zeiten geben wir in den nächsten Wochen hier bekannt.",
-      a: "{date}, {time}, im {venue}. Die Anfahrt mit dem ÖV ist am einfachsten."
-    },
-    {
-      q: "Brauche ich ein Ticket?",
-      altIf: "tickets",
-      alt: "Ja, der Anlass ist ticketpflichtig. Der Ticketverkauf für die kommende Ausgabe ist noch nicht eröffnet – schreib uns an {mail}, dann melden wir uns, sobald die Tickets verfügbar sind.",
-      a: "Ja, der Anlass ist ticketpflichtig. Tickets gibt es über {ticket}. Da die Zahl der Plätze durch die Location begrenzt ist, lohnt sich eine frühzeitige Anmeldung."
-    },
-    {
-      q: "Sind die Degustationen im Ticket enthalten?",
-      a: "Ja. An allen Ständen wird offen verkostet – Fingerfood, Getränkeproben und Produktneuheiten inklusive. Du bewegst dich frei über den Marktplatz und probierst, was dich interessiert."
-    },
-    {
-      q: "Für wen ist der Anlass gedacht?",
-      a: "Für alle drei Seiten des Tisches: Foodies, die Neues entdecken wollen; Gastronom:innen, die nach Produkten und Lieferant:innen suchen; und Gründer:innen, die ihr Produkt zeigen und sich vernetzen möchten."
-    },
-    {
-      q: "Ich habe ein Food- oder Beverage-Startup. Kann ich ausstellen?",
-      a: "Sehr gerne. Schreib uns an {mail} mit einer kurzen Beschreibung deines Produkts – wir melden uns mit den Details zur nächsten Ausgabe und zu den Standplätzen."
-    },
-    {
-      q: "Können wir als Unternehmen Partner werden?",
-      a: "Ja. TasteUp wird von der Startup Academy unter dem Patronat von Lunch-Check organisiert und lebt von Partnerschaften. Melde dich unter {mail}, dann besprechen wir die Möglichkeiten."
-    },
-    {
-      q: "Wer steckt hinter TasteUp?",
-      a: "TasteUp ist ein Anlass des Vereins Startup Academy Basel, Picassoplatz 4, 4052 Basel – unter dem Patronat von Lunch-Check Schweiz und gemeinsam mit unseren Partnern."
     }
   ]
 };
