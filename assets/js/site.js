@@ -321,6 +321,34 @@
     });
   }
 
+  /* ------------------------------------------------------ partner banner
+     Stays out of the page (the <section> has `hidden`) until an image is
+     set in DATA.partnerBanner. */
+
+  function renderPartnerBanner() {
+    var section = $("#partner-banner");
+    var frame = $("#partner-banner-frame");
+    var banner = DATA.partnerBanner;
+    if (!section || !frame || !banner || !banner.image) return;
+
+    section.hidden = false;
+
+    var link = el(banner.url ? "a" : "div", "partner-banner__link");
+    if (banner.url) {
+      link.href = banner.url;
+      link.target = "_blank";
+      link.rel = "noopener";
+    }
+
+    var img = el("img");
+    img.src = banner.image;
+    img.alt = banner.alt || "";
+    img.loading = "lazy";
+    img.decoding = "async";
+    link.appendChild(img);
+    frame.appendChild(link);
+  }
+
   /* ------------------------------------------------------------ partners */
 
   function renderPartners() {
@@ -351,28 +379,25 @@
   }
 
   /* ----------------------------------------------------------- presenting
-     Bubbles arranged around the "Line-up" heading in #presenting-grid — each
-     item's `slot` maps straight to a CSS grid-area (see .presenting-grid__item
-     modifiers in site.css). */
+     Bubbles flanking the "Line-up" title — #presenting-left before it,
+     #presenting-right after. */
 
   function renderPresenting() {
-    var root = $("#presenting-grid");
-    if (!root) return;
+    var leftGroup = $("#presenting-left");
+    var rightGroup = $("#presenting-right");
+    if (!leftGroup || !rightGroup) return;
 
     var items = (DATA.presenting && DATA.presenting.items) || [];
 
     if (!items.length) {
-      root.appendChild(
+      leftGroup.appendChild(
         el("p", "presenting-row__placeholder", "Logos & Icons folgen in Kürze.")
       );
       return;
     }
 
     items.forEach(function (item) {
-      var box = el(
-        item.url ? "a" : "div",
-        "presenting-grid__item presenting-grid__item--" + item.slot + " reveal"
-      );
+      var box = el(item.url ? "a" : "div", "presenting-row__item reveal");
 
       if (item.url) {
         box.href = item.url;
@@ -388,7 +413,7 @@
       img.decoding = "async";
       box.appendChild(img);
 
-      root.appendChild(box);
+      (item.group === "right" ? rightGroup : leftGroup).appendChild(box);
     });
   }
 
@@ -524,6 +549,7 @@
     injectText();
     renderKeynote();
     renderStartups();
+    renderPartnerBanner();
     renderPartners();
     renderPresenting();
     initAboutDialog();

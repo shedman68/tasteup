@@ -72,25 +72,20 @@ window.TASTEUP = {
   },
 
   /* --------------------------------------------------------- presenting row
-     The sponsor/programme bubbles arranged around the "Line-up" heading,
-     above the startup cards. Each entry is `{ name, logo, slot, url }` (url
-     optional): every bubble is a finished painted-oval graphic (colour,
+     The sponsor/programme bubbles shown flanking the "Line-up" title,
+     above the startup cards. Each entry is `{ name, logo, group, url }`
+     (url optional): every bubble is a finished painted-oval graphic (colour,
      brush-stroke edge and text baked into the artwork) shown as-is.
-       - slot: "side-left" | "side-right" — the two logos, flanking the
-         heading directly, one on each side.
-       - slot: "corner-tl" | "corner-tr" — sized larger, tucked in above
-         the heading's top-left / top-right.
-       - slot: "corner-bl" | "corner-br" — sized smaller, tucked in below
-         the heading's bottom-left / bottom-right.
+       - group: "left" | "right" — which side of the title the bubble sits on.
      Leave `items` empty to fall back to a "folgen in Kürze" placeholder. */
   presenting: {
     items: [
-      { name: "Food Factory", logo: "./images/food-factory-badge.png", slot: "side-left" },
-      { name: "FoodHealth", logo: "./images/foodhealth-badge.png", slot: "side-right" },
-      { name: "10+ Startups", logo: "./images/10 Startups.png", slot: "corner-tl" },
-      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", slot: "corner-tr" },
-      { name: "Event Floristik", logo: "./images/Event Floristik.png", slot: "corner-bl" },
-      { name: "Food Fotografie", logo: "./images/Food Fotografie.png", slot: "corner-br" }
+      { name: "Food Factory", logo: "./images/food-factory-badge.png", group: "left" },
+      { name: "FoodHealth", logo: "./images/foodhealth-badge.png", group: "left" },
+      { name: "10+ Startups", logo: "./images/10 Startups.png", group: "left" },
+      { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" },
+      { name: "Food Fotografie", logo: "./images/Food Fotografie.png", group: "right" },
+      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", group: "right" }
     ]
   },
 
@@ -173,6 +168,16 @@ window.TASTEUP = {
       text: "Bilder, die Appetit machen. Seraina Oppliger ist diplomierte Fotodesignerin HFP aus Basel und seit 2016 freischaffend, mit Fokus auf Food- und Still-Life-Fotografie für Werbung und Firmenkunden. Am TasteUp zeigt sie, wie aus feinen Zutaten ein Bild wird, das man am liebsten anbeissen möchte."
     }
   ],
+
+  /* ---------------------------------------------------------- partner banner
+     A small image banner shown just above Partnerschaften. Leave `image`
+     empty (as now) and the section stays out of the page entirely; drop in
+     an image path (and optionally a `url`) once there's content for it. */
+  partnerBanner: {
+    image: "",
+    alt: "",
+    url: ""
+  },
 
   /* --------------------------------------------------------------- partners */
   partners: [
