@@ -439,6 +439,11 @@
       return;
     }
 
+    /* Two clusters: the logos (+ 10+ Startups) on the left, sized larger;
+       the remaining badges spread out on the right, a size step smaller. */
+    var leftGroup = el("div", "presenting-row__group presenting-row__group--left");
+    var rightGroup = el("div", "presenting-row__group presenting-row__group--right");
+
     items.forEach(function (item) {
       var variant = item.type === "badge" ? "badge" : "logo";
       var box = el(
@@ -460,8 +465,11 @@
       img.decoding = "async";
       box.appendChild(img);
 
-      root.appendChild(box);
+      (item.group === "right" ? rightGroup : leftGroup).appendChild(box);
     });
+
+    root.appendChild(leftGroup);
+    root.appendChild(rightGroup);
   }
 
   /* --------------------------------------------------------- about dialog */

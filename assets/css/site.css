@@ -750,13 +750,38 @@ p {
 /* --------------------------------------------------------------------------
    12. Presenting
    -------------------------------------------------------------------------- */
+/* Grid, not flex: two clusters that each need to spread within their own
+   half without a flex "space-between" line-wrap snapping a lone wrapped
+   group back to the start edge. auto-fit also collapses to one stacked
+   column on narrow viewports with no extra breakpoint needed. */
 .presenting-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(1.5rem, 1rem + 2vw, 3rem) clamp(2rem, 1rem + 3vw, 4rem);
+  align-items: center;
+}
+
+/* Two clusters: Food Factory + FoodHealth + 10+ Startups on the left;
+   the remaining badges spread out on the right. */
+.presenting-row__group {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
-  gap: clamp(1.5rem, 1.1rem + 2vw, 2.75rem);
-  min-height: 64px;
+  justify-content: flex-start;
+  gap: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+}
+
+.presenting-row__group--right {
+  justify-content: flex-end;
+  /* "Spread out" — noticeably more breathing room than the left cluster. */
+  gap: clamp(1.5rem, 1rem + 2vw, 2.25rem);
+}
+
+@media (max-width: 720px) {
+  .presenting-row__group,
+  .presenting-row__group--right {
+    justify-content: center;
+  }
 }
 
 .presenting-row__placeholder {
@@ -765,12 +790,12 @@ p {
 }
 
 /* Every item — painted brush-stroke badge or plain logo mark alike — sits
-   in the same fixed-height box so the row reads as one consistent set. */
+   in a fixed-height box so each cluster reads as one consistent set. */
 .presenting-row__item {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: clamp(88px, 7vw, 128px);
+  height: clamp(100px, 7.5vw, 148px);
   flex-shrink: 0;
   /* A flex item's default min-width/min-height is `auto`, which refuses
      to shrink below its content's intrinsic size — without this, the
@@ -799,19 +824,20 @@ p {
 
 /* Logo items (Food Factory, FoodHealth) are flat marks with no bubble of
    their own, so they get one: a plain white circle, matching the site's
-   circular icon-badge language, with the logo centred inside it. */
+   circular icon-badge language, with the logo centred inside it. Sized a
+   step bigger than the badges so the two logos read as the anchors of
+   the left-hand cluster. */
 .presenting-row__item--logo {
-  /* Match width to the base rule's height explicitly — relying on
-     aspect-ratio alone to square a flex item isn't reliable here. */
-  width: clamp(88px, 7vw, 128px);
+  width: clamp(132px, 10vw, 190px);
+  height: clamp(132px, 10vw, 190px);
   flex-shrink: 0;
   box-sizing: border-box;
   border-radius: 50%;
   background: var(--white);
   box-shadow: var(--shadow);
   /* A percentage here would resolve against the row's width, not this
-     item's own ~88-128px box, and blow it out — fixed units only. */
-  padding: clamp(16px, 1.6vw, 24px);
+     item's own box, and blow it out — fixed units only. */
+  padding: clamp(20px, 2vw, 30px);
 }
 
 .presenting-row__item--logo img {

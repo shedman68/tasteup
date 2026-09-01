@@ -107,22 +107,26 @@ window.TASTEUP = {
 
   /* ------------------------------------------------------------ presenting
      "Presenting" section, directly below Was/Wann/Wo. Each entry is
-     `{ name, logo, type, url }` (url is optional, for when one exists):
+     `{ name, logo, type, group, url }` (url is optional, for when one
+     exists):
        - type: "badge" — a finished bubble graphic (colour, brush-stroke
          edge and text already baked into the artwork) shown as-is.
        - type: "logo"  — a flat logo mark with no bubble of its own, shown
          inside a plain white circle so it matches the badges around it.
+       - group: "left" | "right" — the two logos and the 10+ Startups
+         badge cluster on the left, sized larger; the other badges spread
+         out on the right, sized a step smaller than the logos.
      Leave `items` empty to fall back to a "folgen in Kürze" placeholder. */
   presenting: {
     title: "Presenting",
     lede: "Tauche mit uns in die regionale Food & Beverage Szene ein:",
     items: [
-      { name: "10+ Startups", logo: "./images/10 Startups.png", type: "badge" },
-      { name: "Food Factory", logo: "./images/Food Factory.png", type: "logo" },
-      { name: "Event Floristik", logo: "./images/Event Floristik.png", type: "badge" },
-      { name: "FoodHealth", logo: "./images/logo-foodhealth.png", type: "logo" },
-      { name: "Food Fotografie", logo: "./images/Food Fotografie.png", type: "badge" },
-      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", type: "badge" }
+      { name: "Food Factory", logo: "./images/Food Factory.png", type: "logo", group: "left" },
+      { name: "FoodHealth", logo: "./images/logo-foodhealth.png", type: "logo", group: "left" },
+      { name: "10+ Startups", logo: "./images/10 Startups.png", type: "badge", group: "left" },
+      { name: "Event Floristik", logo: "./images/Event Floristik.png", type: "badge", group: "right" },
+      { name: "Food Fotografie", logo: "./images/Food Fotografie.png", type: "badge", group: "right" },
+      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", type: "badge", group: "right" }
     ]
   },
 
@@ -174,15 +178,15 @@ window.TASTEUP = {
     {
       name: "RadicalCacao",
       category: "sweets",
-      logo: "",
+      logo: "./images/Radical Cacao.png",
       url: "https://radicalcacao.com/",
       text: "Beyond cacao, nothing. RadicalCacao makes 100% single-origin bean-to-bar chocolate, handcrafted in small batches in Basel. No sugar, no additives, just stone-ground cacao beans, left to speak for themselves."
     },
     {
       name: "WÜRZMEISTER",
       category: "food",
-      logo: "",
-      url: "",
+      logo: "./images/wurzmeister-logo.jpg",
+      url: "https://www.wuerzmeister.ch/",
       text: "Gewürze mit Herz. WÜRZMEISTER stellt eigene Gewürzmischungen in kleinen Bio-Chargen her - frisch gemahlen, ohne Zusatzstoffe, glutenfrei und vegan. Gleichzeitig bietet das Sozialunternehmen rund zwanzig Menschen in schwierigen Lebenslagen eine sinnstiftende Aufgabe."
     },
     {
@@ -195,42 +199,42 @@ window.TASTEUP = {
     {
       name: "Mimmis Kombucha",
       category: "drinks",
-      logo: "",
+      logo: "./images/MIMMIS_Kombucha.png",
       url: "https://mimmis-kombucha.ch/",
       text: "Lebendig, spritzig, vegan. Das Team von Mimmis Kombucha braut in einer kleinen Basler Craft-Brauerei Kombucha aus biozertifiziertem Darjeeling- und Earl-Grey-Tee sowie Fairtrade-Rohrzucker. In einer zweiten Fermentation entstehen fruchtige Sorten wie Apfel & Rosmarin, Rhabarber & Chili oder Passionsfrucht."
     },
     {
       name: "Haferey",
       category: "food",
-      logo: "",
+      logo: "./images/Haferey_2025_black.png",
       url: "https://haferey.ch/",
       text: "Haferey – the hafer way. Samy Küng will mit seiner Basler Haferey den unterschätzten Hafer zum Trend-Food machen: Seine Haferbowls verkauft er an Basler Märkten im Gundeli und steht für eine bewusste Ernährung mitten im schnellen Alltag."
     },
     {
       name: "Kitchen Angel",
       category: "gastro",
-      logo: "",
+      logo: "./images/kitchen Angel Logo.png",
       url: "https://kitchenangel.ch/",
       text: "Kulinarik mit Herz & Verstand. Kitchen Angel ist Sarahs Herzensprojekt in Basel-Gundeli: ein Café- und Catering-Betrieb, der Menschen in herausfordernden Lebenslagen echte Arbeit mit Würde bietet. Für Events entstehen handgemachte Kreationen mit lokalen Zutaten – von Käse vom Milchhüsli beider Basel bis zu Bagels von Remi's."
     },
     {
       name: "Sauerteigfreude",
       category: "service",
-      logo: "",
+      logo: "./images/SauerteigFreude.png",
       url: "https://www.sauerteigfreude.ch/",
       text: "Freude am Backen teilen. In ihren Workshops zeigt Fallone, wie aus Mehl, Wasser und Salz mit viel Geduld ein luftiges, aromatisches Sauerteigbrot entsteht. Entspannt, in kleiner Runde und mit ganz viel SauerteigFreude begleitet sie Teilnehmende Schritt für Schritt zu ihrem eigenen Brot."
     },
     {
       name: "Stielbruch (Event & Gastro Floristik)",
       category: "service",
-      logo: "",
+      logo: "./images/stielbruch logo.jpg",
       url: "https://stielbruch.ch/index.html",
       text: "Ethische Floristik. Stielbruch verzichtet komplett auf importierte Pestizid-Schnittblumen und kombiniert stattdessen handgefertigte Kunstblumen aus Brockenstuben mit lokal gefundenem Grünschnitt. Die Basler Sträusse werden per Velo geliefert, später wieder abgeholt, neu zusammengestellt und wiederverwendet – nachhaltige Floristik im lokalen Kreislauf für Gastronomie und Events."
     },
     {
       name: "Seraina Oppliger Fotografie (Food Fotografie)",
       category: "service",
-      logo: "",
+      logo: "./images/Seraina Oppliger Logo.png",
       url: "https://www.serainaoppliger.com/",
       text: "Bilder, die Appetit machen. Seraina Oppliger ist diplomierte Fotodesignerin HFP aus Basel und seit 2016 freischaffend, mit Fokus auf Food- und Still-Life-Fotografie für Werbung und Firmenkunden. Am TasteUp zeigt sie, wie aus feinen Zutaten ein Bild wird, das man am liebsten anbeissen möchte."
     }
