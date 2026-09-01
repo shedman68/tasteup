@@ -470,11 +470,12 @@ p {
 .hero-narrow h1 {
   font-family: var(--font-body);
   font-size: clamp(1.7rem, 1.35rem + 2vw, 2.6rem);
-  font-weight: 700;
+  font-weight: 400;
   text-transform: none;
-  letter-spacing: normal;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
   color: var(--grape);
-  max-width: 30ch;
+  max-width: 46ch;
   margin-inline: auto;
   margin-bottom: 2rem;
 }
