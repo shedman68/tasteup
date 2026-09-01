@@ -518,7 +518,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   9. Highlights
+   9. Highlights — organic blobs in the same palette as Was/Wann/Wo
    -------------------------------------------------------------------------- */
 .highlights {
   display: grid;
@@ -527,59 +527,81 @@ p {
 }
 
 .highlight {
-  padding: 1.6rem 1.5rem;
-  background: var(--white);
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: clamp(230px, 190px + 8vw, 290px);
+  padding: clamp(1.8rem, 1.5rem + 1.5vw, 2.6rem) clamp(1.5rem, 1.2rem + 1.5vw, 2.1rem);
+  transition: transform 0.25s ease;
 }
 
 .highlight:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow);
+  transform: scale(1.03);
+}
+
+/* Five blob shapes, cycled so the layout still reads as organic — not
+   tiled — however many highlight cards are shown at once. */
+.highlight:nth-child(5n + 1) {
+  background: var(--orange-ink);
+  color: var(--white);
+  border-radius: 62% 38% 45% 55% / 45% 40% 60% 55%;
+}
+.highlight:nth-child(5n + 2) {
+  background: var(--amber);
+  color: var(--ink);
+  border-radius: 38% 62% 55% 45% / 55% 45% 55% 45%;
+}
+.highlight:nth-child(5n + 3) {
+  background: var(--sky);
+  color: var(--ink);
+  border-radius: 50% 50% 40% 60% / 40% 55% 45% 60%;
+}
+.highlight:nth-child(5n + 4) {
+  background: var(--forest);
+  color: var(--cream);
+  border-radius: 55% 45% 60% 40% / 60% 40% 55% 45%;
+}
+.highlight:nth-child(5n + 5) {
+  background: var(--grape);
+  color: var(--cream);
+  border-radius: 45% 55% 50% 50% / 50% 60% 40% 50%;
 }
 
 .highlight__icon {
-  width: 46px;
-  height: 46px;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
   display: grid;
   place-items: center;
-  border-radius: 14px;
-  margin-bottom: 1rem;
-  background: var(--amber);
-  color: var(--ink);
+  border-radius: 50%;
+  margin-bottom: 1.2rem;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.48);
 }
 
-.highlight:nth-child(2) .highlight__icon {
-  background: var(--sky);
-}
-.highlight:nth-child(3) .highlight__icon {
-  background: var(--blush);
-}
-.highlight:nth-child(4) .highlight__icon {
-  background: var(--orange);
-  color: var(--white);
-}
-.highlight:nth-child(5) .highlight__icon {
-  background: var(--forest);
-  color: var(--cream);
+.highlight:nth-child(5n + 2) .highlight__icon,
+.highlight:nth-child(5n + 3) .highlight__icon {
+  background: rgba(43, 15, 54, 0.12);
+  border-color: rgba(43, 15, 54, 0.22);
+  color: var(--grape);
 }
 
 .highlight__icon svg {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
 }
 
 .highlight h3 {
   font-size: var(--step-1);
-  margin-bottom: 0.5rem;
-  color: var(--grape);
+  margin-bottom: 0.6rem;
+  color: inherit;
 }
 
 .highlight p {
   font-size: 0.96rem;
-  color: var(--ink-soft);
+  color: inherit;
 }
 
 /* --------------------------------------------------------------------------
