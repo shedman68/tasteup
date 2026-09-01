@@ -478,6 +478,84 @@
     });
   }
 
+  /* ----------------------------------------------------------- presenting */
+
+  function renderPresenting() {
+    var root = $("#presenting-row");
+    if (!root) return;
+
+    var items = (DATA.presenting && DATA.presenting.items) || [];
+
+    if (!items.length) {
+      root.appendChild(
+        el(
+          "p",
+          "presenting-row__placeholder",
+          "Logos & Icons folgen in Kürze."
+        )
+      );
+      return;
+    }
+
+    items.forEach(function (item) {
+      var box = el("div", "presenting-row__logo reveal");
+      var img = el("img");
+      img.src = item.logo;
+      img.alt = item.name;
+      img.loading = "lazy";
+      img.decoding = "async";
+
+      if (item.url) {
+        var link = el("a");
+        link.href = item.url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.setAttribute("aria-label", item.name);
+        link.appendChild(img);
+        box.appendChild(link);
+      } else {
+        box.appendChild(img);
+      }
+
+      root.appendChild(box);
+    });
+  }
+
+  /* --------------------------------------------------------- about dialog */
+
+  function initAboutDialog() {
+    var dialog = $("#about-dialog");
+    var trigger = $("#about-trigger");
+    var closeBtn = $("#about-close");
+    var body = $("#about-body");
+    if (!dialog || !trigger) return;
+
+    if (body) {
+      (DATA.event.about || []).forEach(function (paragraph) {
+        body.appendChild(el("p", null, paragraph));
+      });
+    }
+
+    trigger.addEventListener("click", function (evt) {
+      evt.preventDefault();
+      dialog.showModal();
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener("click", function () {
+        dialog.close();
+      });
+    }
+
+    /* Native <dialog> click-outside-to-close: a click that lands on the
+       dialog element itself (rather than something inside it) landed on
+       the backdrop, since the dialog box is exactly the size of its
+       content. */
+    dialog.addEventListener("click", function (evt) {
+      if (evt.target === dialog) dialog.close();
+    });
+  }
+
   /* ------------------------------------------------------ scroll reveal */
 
   function initReveal() {
@@ -578,6 +656,8 @@
     renderKeynote();
     renderStartups();
     renderPartners();
+    renderPresenting();
+    initAboutDialog();
     renderEventState();
     initReveal();
 

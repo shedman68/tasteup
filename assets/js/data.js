@@ -2,8 +2,8 @@
    TasteUp — site content
    --------------------------------------------------------------------------
    This is the only file you need to touch to update the website's content.
-   Everything on the page (facts, startups, partners) is rendered from
-   the object below.
+   Everything on the page (facts, startups, partners, presenting logos) is
+   rendered from the object below.
 
    >>> WHAT STILL NEEDS FILLING IN FOR 2026 is listed in the `tbd` block at
    >>> the top. While a `tbd` flag is true, that part of the page shows a
@@ -24,8 +24,8 @@ window.TASTEUP = {
      true the page shows an honest "wird bekannt gegeben" placeholder instead
      of last year's data, so nothing outdated is ever published. */
   tbd: {
-    times: true, // start/end time below are carried over from 2025
-    venue: true, // new location not yet announced
+    times: false, // confirmed: 18:00 – 21:00
+    venue: false, // confirmed: Brauerei Unser Bier
     agenda: true, // set false once the round count for 2026 is confirmed (gates the "Degustationsrunden" stat — no Programm section on the page right now)
     startups: true, // list below is the 2025 line-up, not the 2026 one
     tickets: true // no ticket link for 2026 yet
@@ -39,23 +39,20 @@ window.TASTEUP = {
       "Der Afterwork-Marktplatz für Craft Food & Beverage Startups, Foodies & Gastronomie",
     closing: "Probieren, entdecken & vernetzen. Alles an einem Abend.",
 
-    /* CONFIRMED: 13 October 2026.
-       ISO 8601 with Swiss timezone offset (+02:00 summer, +01:00 winter).
-       The times are still last year's — set tbd.times to false once fixed. */
+    /* CONFIRMED: 13 October 2026, 18:00 – 21:00.
+       ISO 8601 with Swiss timezone offset (+02:00 summer, +01:00 winter). */
     startsAt: "2026-10-13T18:00:00+02:00",
     endsAt: "2026-10-13T21:00:00+02:00",
 
-    /* New location still to be announced (tbd.venue). The 2025 venue is kept
-       here only so the fields are easy to overwrite — it is NOT shown on the
-       page while tbd.venue is true. */
+    /* CONFIRMED venue for 2026. */
     venue: {
-      name: "Literaturhaus Basel",
-      street: "Barfüssergasse 3",
-      postalCode: "4051",
+      name: "Brauerei Unser Bier",
+      street: "Gundeldingerstrasse 287",
+      postalCode: "4053",
       city: "Basel",
       country: "CH",
-      mapsUrl: "https://maps.app.goo.gl/Zt3R4wRxnyoVk1Lc8",
-      note: "Mitten in der Basler Innenstadt, direkt beim Barfüsserplatz."
+      mapsUrl: "https://maps.app.goo.gl/FUinzqZwu4mQvghSA",
+      note: "Im Gundeldingerfeld."
     },
 
     ticketUrl:
@@ -70,8 +67,9 @@ window.TASTEUP = {
       url: "https://startup-academy.ch/"
     },
 
+    /* Shown in the "Mehr Details" dialog opened from the Was?-card. */
     about: [
-      "TasteUp ist ein Ort des Austauschs, der Degustation und des Netzwerkens. Entdecke kulinarische Trends und degustiere in entspannter Afterwork-Atmosphäre neue Produkte, lerne spannende Gründer:innen kennen und vernetze dich mit der Food & Beverage Startup Community.",
+      "TasteUp ist ein Ort des Austauschs, der Degustation und des Netzwerkens. Entdecke kulinarische Trends und degustiere in entspannter Afterwork-Atmosphäre neue Produkte. Lerne spannende Gründer:innen kennen, triff Programme wie FoodFactory und FoodHealth und vernetze dich mit der Food & Beverage Startup Community.",
       "Ob als Foodie, Gastronom:in oder Startup – bei TasteUp findest du Inspiration, Geschmack und neue Kontakte."
     ]
   },
@@ -101,17 +99,24 @@ window.TASTEUP = {
       icon: "users",
       title: "Inspiration & Networking",
       text: "Foodies, Gastronomiebetriebe und Gründer:innen an einem Ort. Fliessend, in entspannter Afterwork-Atmosphäre."
-    },
-    {
-      icon: "book",
-      title: "Food-Literatur zum Stöbern",
-      /* This was a feature of the Literaturhaus venue — hidden until the new
-         location is confirmed, so we don't promise something that may not
-         exist there. */
-      needs: "venue",
-      text: "Eine Leseecke mit Kochbüchern und Food-Literatur zum Blättern zwischen zwei Degustationen."
     }
+    /* The 2025 line-up had a fifth highlight ("Food-Literatur zum Stöbern")
+       about the reading corner at the old Literaturhaus venue. Removed
+       outright rather than re-gated: it was specific to that location, and
+       nothing about it carries over to Brauerei Unser Bier. */
   ],
+
+  /* ------------------------------------------------------------ presenting
+     "Presenting" section between the facts and the highlights. `items` is
+     empty until the logos/icons are supplied — the section then shows a
+     placeholder instead of rendering nothing. Once you have them, add
+     entries here shaped like `{ name, logo, url }` (url is optional) and
+     they render as a logo row automatically. */
+  presenting: {
+    title: "Presenting",
+    lede: "Tauche mit uns in die regionale Food & Beverage Szene ein:",
+    items: []
+  },
 
   /* --------------------------------------------------------------- figures
      The startup count is read live from the `startups` array below; the

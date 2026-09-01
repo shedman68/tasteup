@@ -729,8 +729,50 @@ p {
   color: var(--grape);
 }
 
+/* The venue name/address doubles as the maps link — underlined so it reads
+   as clickable without needing its own separate "open maps" label. */
+.venue-link {
+  display: inline-block;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
 /* --------------------------------------------------------------------------
-   12. Keynote
+   12. Presenting
+   -------------------------------------------------------------------------- */
+.presenting-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(1.5rem, 1rem + 2vw, 3rem);
+  min-height: 64px;
+}
+
+.presenting-row__placeholder {
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.presenting-row__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+}
+
+.presenting-row__logo img {
+  max-height: 100%;
+  max-width: 160px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* --------------------------------------------------------------------------
+   13. Keynote
    -------------------------------------------------------------------------- */
 .keynote {
   display: grid;
@@ -805,7 +847,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   13. Startups
+   14. Startups
    -------------------------------------------------------------------------- */
 .filters {
   display: flex;
@@ -944,7 +986,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   14. Partners
+   15. Partners
    -------------------------------------------------------------------------- */
 .partners {
   display: grid;
@@ -999,7 +1041,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   15. Ticket band
+   16. Ticket band
    -------------------------------------------------------------------------- */
 .ticket-band {
   text-align: center;
@@ -1017,7 +1059,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   16. Footer
+   17. Footer
    -------------------------------------------------------------------------- */
 .site-footer {
   background: var(--ink);
@@ -1081,7 +1123,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   17. Legal / prose pages
+   18. Legal / prose pages
    -------------------------------------------------------------------------- */
 .page-head {
   background: var(--grape);
@@ -1187,7 +1229,66 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   18. Motion
+   19. About dialog (opened from the Was?-card's "Mehr Details")
+   -------------------------------------------------------------------------- */
+.about-dialog {
+  width: min(90vw, 560px);
+  padding: clamp(2rem, 1.6rem + 1.5vw, 2.75rem);
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+
+.about-dialog::backdrop {
+  background: rgba(43, 15, 54, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.about-dialog h3 {
+  font-size: var(--step-2);
+  color: var(--grape);
+  margin-bottom: 1.2rem;
+  padding-right: 2rem;
+}
+
+.about-dialog__body p {
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+.about-dialog__body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-dialog__close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+
+.about-dialog__close:hover {
+  background: var(--line-strong);
+}
+
+.about-dialog__close svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --------------------------------------------------------------------------
+   20. Motion
    -------------------------------------------------------------------------- */
 .reveal {
   opacity: 0;
@@ -1220,7 +1321,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   19. Print
+   21. Print
    -------------------------------------------------------------------------- */
 @media print {
   .filters,

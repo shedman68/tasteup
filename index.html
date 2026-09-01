@@ -63,26 +63,6 @@
     <img src="./images/Icon cup.png" alt=""><img src="./images/Icon plate.png" alt=""><img src="./images/Icon glas.png" alt=""><img src="./images/Icon Bottle.png" alt=""><img src="./images/Icon plate.png" alt=""><img src="./images/Icon cup.png" alt=""><img src="./images/Icon Bottle.png" alt=""><img src="./images/Icon glas.png" alt=""><img src="./images/Icon cup.png" alt=""><img src="./images/Icon plate.png" alt=""><img src="./images/Icon glas.png" alt=""><img src="./images/Icon Bottle.png" alt=""><img src="./images/Icon plate.png" alt=""><img src="./images/Icon cup.png" alt=""><img src="./images/Icon Bottle.png" alt=""><img src="./images/Icon glas.png" alt=""><img src="./images/Icon cup.png" alt=""><img src="./images/Icon plate.png" alt=""><img src="./images/Icon glas.png" alt=""><img src="./images/Icon Bottle.png" alt=""><img src="./images/Icon plate.png" alt=""><img src="./images/Icon cup.png" alt=""><img src="./images/Icon Bottle.png" alt=""><img src="./images/Icon glas.png" alt="">
   </div>
 
-  <!-- ====================================================== what you get -->
-  <section class="section section--paper" id="erlebnis">
-    <div class="shell">
-      <div class="section-head is-centred reveal">
-        <span class="eyebrow">Das erwartet dich</span>
-        <h2 id="highlights-heading">Ein Abend, fünf Gründe</h2>
-        <p>TasteUp ist ein Ort des Austauschs, der Degustation und des Netzwerkens — in entspannter Afterwork-Atmosphäre statt im Konferenzsaal.</p>
-      </div>
-
-      <div class="highlights" id="highlights"></div>
-    </div>
-  </section>
-
-  <!-- ====================================================== figures -->
-  <section class="section section--forest">
-    <div class="shell">
-      <div class="stats" id="stats"></div>
-    </div>
-  </section>
-
   <!-- ====================================================== facts -->
   <section class="section section--sky" id="infos">
     <div class="shell">
@@ -96,7 +76,11 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.4"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16.5 5.2a3.4 3.4 0 010 5.6"/><path d="M17.5 14.4A6.5 6.5 0 0121.5 20"/></svg>
           </div>
           <h3>Was?</h3>
-          <p>TasteUp bringt Craft Food &amp; Beverage Startups mit Konsument:innen, anderen Gründer:innen und Gastronomiebetrieben zusammen. Degustieren, Gründer:innen kennenlernen, Kontakte knüpfen.</p>
+          <p>TasteUp bringt Food &amp; Beverage Startups mit Konsument:innen, anderen Gründer:innen, Unterstützungsangebote und Gastronomiebetrieben zusammen.</p>
+          <a class="link" href="#" id="about-trigger">
+            Mehr Details
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="M12.5 6l6 6-6 6"/></svg>
+          </a>
         </article>
 
         <article class="blob-card blob-card--amber reveal">
@@ -117,8 +101,10 @@
           </div>
           <h3>Wo?</h3>
           <p>
-            <strong data-tu="venue-name">Literaturhaus Basel</strong><br>
-            <span data-tu="venue-address">Barfüssergasse 3, 4051 Basel</span><br>
+            <a class="venue-link" href="#" data-tu-href="maps" data-tu-maps target="_blank" rel="noopener">
+              <strong data-tu="venue-name">Literaturhaus Basel</strong><br>
+              <span data-tu="venue-address">Barfüssergasse 3, 4051 Basel</span>
+            </a><br>
             <span data-tu="venue-note">Mitten in der Basler Innenstadt, direkt beim Barfüsserplatz.</span>
           </p>
           <a class="link" href="#" data-tu-href="maps" data-tu-maps target="_blank" rel="noopener">
@@ -129,6 +115,47 @@
       </div>
     </div>
   </section>
+
+  <!-- ====================================================== presenting -->
+  <section class="section section--cream" id="presenting">
+    <div class="shell">
+      <div class="section-head is-centred reveal">
+        <h2>Presenting</h2>
+        <p>Tauche mit uns in die regionale Food &amp; Beverage Szene ein:</p>
+      </div>
+
+      <div class="presenting-row" id="presenting-row"></div>
+    </div>
+  </section>
+
+  <!-- ====================================================== figures -->
+  <section class="section section--forest">
+    <div class="shell">
+      <div class="stats" id="stats"></div>
+    </div>
+  </section>
+
+  <!-- ====================================================== what you get -->
+  <section class="section section--paper" id="erlebnis">
+    <div class="shell">
+      <div class="section-head is-centred reveal">
+        <span class="eyebrow">Das erwartet dich</span>
+        <h2 id="highlights-heading">Ein Abend, fünf Gründe</h2>
+        <p>TasteUp ist ein Ort des Austauschs, der Degustation und des Netzwerkens — in entspannter Afterwork-Atmosphäre statt im Konferenzsaal.</p>
+      </div>
+
+      <div class="highlights" id="highlights"></div>
+    </div>
+  </section>
+
+  <!-- ====================================================== about dialog -->
+  <dialog class="about-dialog" id="about-dialog">
+    <button type="button" class="about-dialog__close" id="about-close" aria-label="Schliessen">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <h3>Über TasteUp</h3>
+    <div class="about-dialog__body" id="about-body"></div>
+  </dialog>
 
   <!-- ================================== keynote (only when data.speaker set) -->
   <section class="section section--amber" id="keynote" hidden>
