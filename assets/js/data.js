@@ -28,7 +28,7 @@ window.TASTEUP = {
     venue: false, // confirmed: Brauerei Unser Bier
     agenda: true, // set false once the round count for 2026 is confirmed (gates the "Degustationsrunden" stat — no Programm section on the page right now)
     startups: true, // list below is the 2025 line-up, not the 2026 one
-    tickets: true // no ticket link for 2026 yet
+    tickets: false // confirmed: eventfrog.ch/taste-up
   },
 
   /* ---------------------------------------------------------------- event */
@@ -55,8 +55,7 @@ window.TASTEUP = {
       note: "Im Gundeldingerfeld."
     },
 
-    ticketUrl:
-      "https://eventfrog.ch/de/p/essen-trinken/tasteup-7369472601196881855.html",
+    ticketUrl: "https://eventfrog.ch/taste-up",
     contactEmail: "info@startup-academy.ch",
     organiser: {
       name: "Verein Startup Academy Basel",

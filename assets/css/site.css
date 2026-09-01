@@ -469,12 +469,12 @@ p {
 
 .hero-narrow h1 {
   font-family: var(--font-body);
-  font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
-  font-weight: 500;
+  font-size: clamp(1.7rem, 1.35rem + 2vw, 2.6rem);
+  font-weight: 700;
   text-transform: none;
   letter-spacing: normal;
   color: var(--grape);
-  max-width: 44ch;
+  max-width: 30ch;
   margin-inline: auto;
   margin-bottom: 2rem;
 }
