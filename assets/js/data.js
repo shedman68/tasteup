@@ -14,8 +14,7 @@
    >>> the hero and the structured data for Google all read
    >>> from it, so it only ever needs changing in that one place.
 
-   >>> TO ADD A STARTUP, copy one entry in the `startups` array. `category`
-   >>> must be one of the ids listed in `startupCategories`.
+   >>> TO ADD A STARTUP, copy one entry in the `startups` array.
    ========================================================================== */
 
 window.TASTEUP = {
@@ -73,20 +72,25 @@ window.TASTEUP = {
   },
 
   /* --------------------------------------------------------- presenting row
-     The sponsor/programme bubbles shown flanking the "Line-up 2026" title,
-     above the startup cards. Each entry is `{ name, logo, group, url }`
-     (url optional): every bubble is a finished painted-oval graphic (colour,
+     The sponsor/programme bubbles arranged around the "Line-up" heading,
+     above the startup cards. Each entry is `{ name, logo, slot, url }` (url
+     optional): every bubble is a finished painted-oval graphic (colour,
      brush-stroke edge and text baked into the artwork) shown as-is.
-       - group: "left" | "right" — which side of the title the bubble sits on.
+       - slot: "side-left" | "side-right" — the two logos, flanking the
+         heading directly, one on each side.
+       - slot: "corner-tl" | "corner-tr" — sized larger, tucked in above
+         the heading's top-left / top-right.
+       - slot: "corner-bl" | "corner-br" — sized smaller, tucked in below
+         the heading's bottom-left / bottom-right.
      Leave `items` empty to fall back to a "folgen in Kürze" placeholder. */
   presenting: {
     items: [
-      { name: "Food Factory", logo: "./images/food-factory-badge.png", group: "left" },
-      { name: "FoodHealth", logo: "./images/foodhealth-badge.png", group: "left" },
-      { name: "10+ Startups", logo: "./images/10 Startups.png", group: "left" },
-      { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" },
-      { name: "Food Fotografie", logo: "./images/Food Fotografie.png", group: "right" },
-      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", group: "right" }
+      { name: "Food Factory", logo: "./images/food-factory-badge.png", slot: "side-left" },
+      { name: "FoodHealth", logo: "./images/foodhealth-badge.png", slot: "side-right" },
+      { name: "10+ Startups", logo: "./images/10 Startups.png", slot: "corner-tl" },
+      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", slot: "corner-tr" },
+      { name: "Event Floristik", logo: "./images/Event Floristik.png", slot: "corner-bl" },
+      { name: "Food Fotografie", logo: "./images/Food Fotografie.png", slot: "corner-br" }
     ]
   },
 
@@ -110,79 +114,60 @@ window.TASTEUP = {
     ]
   },
 
-  /* ------------------------------------------------------------- categories */
-  startupCategories: [
-    { id: "drinks", label: "Getränke" },
-    { id: "sweets", label: "Süsses & Gebäck" },
-    { id: "food", label: "Food" },
-    { id: "foodtech", label: "FoodTech" },
-    { id: "gastro", label: "Gastro & Catering" },
-    { id: "service", label: "Service & Programm" }
-  ],
-
   /* --------------------------------------------------------------- startups
      2026 line-up. No logo files supplied yet for any of these — each card
      falls back to a plain name tag in place of a logo until one is added. */
   startups: [
     {
       name: "RadicalCacao",
-      category: "sweets",
       logo: "./images/Radical Cacao.png",
       url: "https://radicalcacao.com/",
       text: "Beyond cacao, nothing. RadicalCacao makes 100% single-origin bean-to-bar chocolate, handcrafted in small batches in Basel. No sugar, no additives, just stone-ground cacao beans, left to speak for themselves."
     },
     {
       name: "WÜRZMEISTER",
-      category: "food",
       logo: "./images/wurzmeister-logo.jpg",
       url: "https://www.wuerzmeister.ch/",
       text: "Gewürze mit Herz. WÜRZMEISTER stellt eigene Gewürzmischungen in kleinen Bio-Chargen her - frisch gemahlen, ohne Zusatzstoffe, glutenfrei und vegan. Gleichzeitig bietet das Sozialunternehmen rund zwanzig Menschen in schwierigen Lebenslagen eine sinnstiftende Aufgabe."
     },
     {
       name: "Atelier Gourmetch",
-      category: "sweets",
       logo: "",
       url: "https://www.instagram.com/ateliergourmetch/?hl=de",
       text: "Süsse Erinnerung an Brasilien. Atelier Gourmetch fertigt in Basel handgemachte brasilianische Kuchen und Süssigkeiten auf Bestellung, allen voran den brasilianischen Klassiker Brigadeiro."
     },
     {
       name: "Mimmis Kombucha",
-      category: "drinks",
       logo: "./images/MIMMIS_Kombucha.png",
       url: "https://mimmis-kombucha.ch/",
       text: "Lebendig, spritzig, vegan. Das Team von Mimmis Kombucha braut in einer kleinen Basler Craft-Brauerei Kombucha aus biozertifiziertem Darjeeling- und Earl-Grey-Tee sowie Fairtrade-Rohrzucker. In einer zweiten Fermentation entstehen fruchtige Sorten wie Apfel & Rosmarin, Rhabarber & Chili oder Passionsfrucht."
     },
     {
       name: "Haferey",
-      category: "food",
       logo: "./images/Haferey_2025_black.png",
       url: "https://haferey.ch/",
       text: "Haferey – the hafer way. Samy Küng will mit seiner Basler Haferey den unterschätzten Hafer zum Trend-Food machen: Seine Haferbowls verkauft er an Basler Märkten im Gundeli und steht für eine bewusste Ernährung mitten im schnellen Alltag."
     },
     {
       name: "Kitchen Angel",
-      category: "gastro",
       logo: "./images/kitchen Angel Logo.png",
       url: "https://kitchenangel.ch/",
       text: "Kulinarik mit Herz & Verstand. Kitchen Angel ist Sarahs Herzensprojekt in Basel-Gundeli: ein Café- und Catering-Betrieb, der Menschen in herausfordernden Lebenslagen echte Arbeit mit Würde bietet. Für Events entstehen handgemachte Kreationen mit lokalen Zutaten – von Käse vom Milchhüsli beider Basel bis zu Bagels von Remi's."
     },
     {
       name: "Sauerteigfreude",
-      category: "service",
       logo: "./images/SauerteigFreude.png",
       url: "https://www.sauerteigfreude.ch/",
-      text: "Freude am Backen teilen. In ihren Workshops zeigt Fallone, wie aus Mehl, Wasser und Salz mit viel Geduld ein luftiges, aromatisches Sauerteigbrot entsteht. Entspannt, in kleiner Runde und mit ganz viel SauerteigFreude begleitet sie Teilnehmende Schritt für Schritt zu ihrem eigenen Brot."
+      text: "Sauerteig mit Geduld und Hingabe. Bei SauerteigFreude entsteht jede Woche frisches Sauerteigbrot aus Bio-Mehl – von Hand geformt und über viele Stunden fermentiert, bis sich Geschmack, Aroma und eine saftige Krume entwickeln. Wer das Handwerk selbst lernen möchte, wird in Fallones Workshops Schritt für Schritt dorthin begleitet: entspannt, in kleiner Runde und mit ganz viel SauerteigFreude."
     },
     {
       name: "Stielbruch (Event & Gastro Floristik)",
-      category: "service",
       logo: "./images/stielbruch logo.jpg",
       url: "https://stielbruch.ch/index.html",
       text: "Ethische Floristik. Stielbruch verzichtet komplett auf importierte Pestizid-Schnittblumen und kombiniert stattdessen handgefertigte Kunstblumen aus Brockenstuben mit lokal gefundenem Grünschnitt. Die Basler Sträusse werden per Velo geliefert, später wieder abgeholt, neu zusammengestellt und wiederverwendet – nachhaltige Floristik im lokalen Kreislauf für Gastronomie und Events."
     },
     {
       name: "Seraina Oppliger Fotografie (Food Fotografie)",
-      category: "service",
       logo: "./images/Seraina Oppliger Logo.png",
       url: "https://www.serainaoppliger.com/",
       text: "Bilder, die Appetit machen. Seraina Oppliger ist diplomierte Fotodesignerin HFP aus Basel und seit 2016 freischaffend, mit Fokus auf Food- und Still-Life-Fotografie für Werbung und Firmenkunden. Am TasteUp zeigt sie, wie aus feinen Zutaten ein Bild wird, das man am liebsten anbeissen möchte."

@@ -631,28 +631,35 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   10. Presenting — bubbles flanking the "Line-up 2026" title
+   10. Presenting — bubbles arranged around the "Line-up" heading
    -------------------------------------------------------------------------- */
 /* Wider than the standard .section-head's 68ch cap — this one needs room
-   for a full-size heading plus a cluster of bubbles either side of it. */
+   for a full-size heading plus bubbles either side and at its corners. */
 .startups-head {
   max-width: none;
 }
 
-.presenting-row {
-  display: flex;
-  flex-wrap: wrap;
+/* Desktop: a halo around the heading — a logo directly left/right of it,
+   a larger badge tucked at each top corner, a smaller one at each bottom
+   corner. Areas either side of the centre column are left empty so the
+   corner badges pull in toward the heading instead of the row's edges. */
+.presenting-grid {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-areas:
+    "tl   .      tr"
+    "left title  right"
+    "bl   .      br";
   align-items: center;
-  justify-content: center;
-  gap: clamp(1.2rem, 0.9rem + 1.5vw, 2.25rem);
+  justify-items: center;
+  column-gap: clamp(1rem, 0.6rem + 2vw, 2.5rem);
+  row-gap: clamp(0.75rem, 0.5rem + 1vw, 1.5rem);
 }
 
-.presenting-row__group {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-  gap: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+.presenting-grid__title {
+  grid-area: title;
+  margin: 0;
+  white-space: nowrap;
 }
 
 .presenting-row__placeholder {
@@ -661,34 +668,90 @@ p {
 }
 
 /* Every bubble is a finished painted-oval graphic (colour, brush-stroke
-   edge and text baked into the artwork) — shown as-is, just boxed to a
-   shared height so the two clusters read as one consistent set. */
-.presenting-row__item {
+   edge and text baked into the artwork) — shown as-is. */
+.presenting-grid__item {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: clamp(88px, 6.5vw, 128px);
   flex-shrink: 0;
   /* A flex item's default min-width/min-height is `auto`, which refuses
      to shrink below its content's intrinsic size — without this, the
      img's own (much larger) natural dimensions win over the height set
-     above, regardless of what this rule specifies. */
+     below, regardless of what each modifier specifies. */
   min-width: 0;
   min-height: 0;
   text-decoration: none;
   transition: transform 0.22s ease;
 }
 
-.presenting-row__item:hover {
+.presenting-grid__item:hover {
   transform: scale(1.05);
 }
 
-.presenting-row__item img {
+.presenting-grid__item img {
   height: 100%;
   width: auto;
   min-width: 0;
   min-height: 0;
   object-fit: contain;
+}
+
+/* The two logos, flanking the heading directly. */
+.presenting-grid__item--side-left {
+  grid-area: left;
+  justify-self: end;
+  height: clamp(84px, 6vw, 118px);
+}
+.presenting-grid__item--side-right {
+  grid-area: right;
+  justify-self: start;
+  height: clamp(84px, 6vw, 118px);
+}
+
+/* Top corners — sized up, pulled in toward the heading's top edge. */
+.presenting-grid__item--corner-tl {
+  grid-area: tl;
+  justify-self: end;
+  align-self: end;
+  height: clamp(100px, 7.5vw, 150px);
+}
+.presenting-grid__item--corner-tr {
+  grid-area: tr;
+  justify-self: start;
+  align-self: end;
+  height: clamp(100px, 7.5vw, 150px);
+}
+
+/* Bottom corners — sized down, pulled in toward the heading's bottom edge. */
+.presenting-grid__item--corner-bl {
+  grid-area: bl;
+  justify-self: end;
+  align-self: start;
+  height: clamp(68px, 5vw, 96px);
+}
+.presenting-grid__item--corner-br {
+  grid-area: br;
+  justify-self: start;
+  align-self: start;
+  height: clamp(68px, 5vw, 96px);
+}
+
+/* Below the halo's minimum comfortable width, drop the grid-area
+   positioning: heading first, then every bubble wrapped in one centred
+   row underneath. */
+@media (max-width: 860px) {
+  .presenting-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: clamp(1rem, 0.8rem + 2vw, 1.75rem);
+  }
+
+  .presenting-grid__title {
+    order: -1;
+    width: 100%;
+    white-space: normal;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -862,8 +925,7 @@ p {
   margin-bottom: 1.2rem;
 }
 
-/* Stand-in for a missing logo — a condensed wordmark rather than another
-   small pill, so it doesn't just repeat the category tag underneath it. */
+/* Stand-in for a missing logo — a condensed wordmark in its place. */
 .card__logo-fallback {
   font-family: var(--font-display);
   font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.4rem);
@@ -880,19 +942,6 @@ p {
   max-width: 78%;
   width: auto;
   object-fit: contain;
-}
-
-.card__tag {
-  align-self: flex-start;
-  padding: 0.3rem 0.7rem;
-  border-radius: 999px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--cream);
-  color: var(--grape);
-  margin-bottom: 0.7rem;
 }
 
 .card h3 {
@@ -920,23 +969,6 @@ p {
   font-weight: 600;
   color: var(--ink-soft);
   font-style: italic;
-}
-
-/* Accent rotation so the grid reads like the tile artwork */
-.card:nth-child(5n + 1) .card__tag {
-  background: rgba(252, 168, 10, 0.24);
-}
-.card:nth-child(5n + 2) .card__tag {
-  background: rgba(111, 159, 197, 0.26);
-}
-.card:nth-child(5n + 3) .card__tag {
-  background: rgba(238, 189, 170, 0.4);
-}
-.card:nth-child(5n + 4) .card__tag {
-  background: rgba(229, 81, 33, 0.16);
-}
-.card:nth-child(5n + 5) .card__tag {
-  background: rgba(1, 58, 32, 0.14);
 }
 
 /* --------------------------------------------------------------------------

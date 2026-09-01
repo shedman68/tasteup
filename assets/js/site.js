@@ -272,11 +272,6 @@
     var grid = $("#startup-grid");
     if (!grid) return;
 
-    var labels = {};
-    DATA.startupCategories.forEach(function (cat) {
-      labels[cat.id] = cat.label;
-    });
-
     function buildCard(startup, isDuplicate) {
       var card = el("article", "card");
       if (isDuplicate) card.setAttribute("aria-hidden", "true");
@@ -298,9 +293,6 @@
       }
       card.appendChild(logoBox);
 
-      card.appendChild(
-        el("span", "card__tag", labels[startup.category] || startup.category)
-      );
       card.appendChild(el("h3", null, startup.name));
       card.appendChild(el("p", null, startup.text));
 
@@ -359,25 +351,28 @@
   }
 
   /* ----------------------------------------------------------- presenting
-     Bubbles flanking the "Line-up 2026" title — #presenting-left before it,
-     #presenting-right after. */
+     Bubbles arranged around the "Line-up" heading in #presenting-grid — each
+     item's `slot` maps straight to a CSS grid-area (see .presenting-grid__item
+     modifiers in site.css). */
 
   function renderPresenting() {
-    var leftGroup = $("#presenting-left");
-    var rightGroup = $("#presenting-right");
-    if (!leftGroup || !rightGroup) return;
+    var root = $("#presenting-grid");
+    if (!root) return;
 
     var items = (DATA.presenting && DATA.presenting.items) || [];
 
     if (!items.length) {
-      leftGroup.appendChild(
+      root.appendChild(
         el("p", "presenting-row__placeholder", "Logos & Icons folgen in Kürze.")
       );
       return;
     }
 
     items.forEach(function (item) {
-      var box = el(item.url ? "a" : "div", "presenting-row__item reveal");
+      var box = el(
+        item.url ? "a" : "div",
+        "presenting-grid__item presenting-grid__item--" + item.slot + " reveal"
+      );
 
       if (item.url) {
         box.href = item.url;
@@ -393,7 +388,7 @@
       img.decoding = "async";
       box.appendChild(img);
 
-      (item.group === "right" ? rightGroup : leftGroup).appendChild(box);
+      root.appendChild(box);
     });
   }
 
