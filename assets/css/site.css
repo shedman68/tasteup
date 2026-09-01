@@ -188,6 +188,12 @@ p {
   margin-top: 0.5rem;
 }
 
+/* Used where a heading carries the whole section-head alone (no eyebrow,
+   no lede) and should read as unmistakably the headline. */
+.section-head h2.section-head--big {
+  font-size: var(--step-5);
+}
+
 .section-head p {
   margin-top: 1rem;
   color: var(--ink-soft);
@@ -896,41 +902,6 @@ p {
 /* --------------------------------------------------------------------------
    14. Startups
    -------------------------------------------------------------------------- */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  justify-content: center;
-  margin-bottom: 2.5rem;
-}
-
-.filter {
-  padding: 0.55rem 1.15rem;
-  border: 2px solid var(--line-strong);
-  border-radius: 999px;
-  background: transparent;
-  font-size: 0.92rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
-}
-
-.filter:hover {
-  border-color: var(--ink);
-}
-
-.filter[aria-pressed="true"] {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: var(--cream);
-}
-
-.filter__count {
-  opacity: 0.6;
-  margin-left: 0.35rem;
-  font-variant-numeric: tabular-nums;
-}
-
 .cards {
   display: grid;
   gap: var(--gap);
@@ -966,6 +937,19 @@ p {
   align-items: center;
   justify-content: center;
   margin-bottom: 1.2rem;
+}
+
+/* Stand-in for a missing logo — a condensed wordmark rather than another
+   small pill, so it doesn't just repeat the category tag underneath it. */
+.card__logo-fallback {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--line-strong);
+  line-height: 1.15;
 }
 
 .card__logo img {

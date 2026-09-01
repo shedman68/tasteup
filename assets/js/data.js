@@ -27,7 +27,7 @@ window.TASTEUP = {
     times: false, // confirmed: 18:00 – 21:00
     venue: false, // confirmed: Brauerei Unser Bier
     agenda: true, // set false once the round count for 2026 is confirmed (gates the "Degustationsrunden" stat — no Programm section on the page right now)
-    startups: true, // list below is the 2025 line-up, not the 2026 one
+    startups: false, // confirmed: 2026 line-up below
     tickets: false // confirmed: eventfrog.ch/taste-up
   },
 
@@ -159,113 +159,80 @@ window.TASTEUP = {
 
   /* ------------------------------------------------------------- categories */
   startupCategories: [
-    { id: "all", label: "Alle" },
     { id: "drinks", label: "Getränke" },
     { id: "sweets", label: "Süsses & Gebäck" },
     { id: "food", label: "Food" },
     { id: "foodtech", label: "FoodTech" },
-    { id: "gastro", label: "Gastro & Catering" }
+    { id: "gastro", label: "Gastro & Catering" },
+    { id: "service", label: "Service & Programm" }
   ],
 
-  /* --------------------------------------------------------------- startups */
+  /* --------------------------------------------------------------- startups
+     2026 line-up. No logo files supplied yet for any of these — each card
+     falls back to a plain name tag in place of a logo until one is added. */
   startups: [
     {
-      name: "Passib Elixir",
-      category: "drinks",
-      logo: "./images/Passib Elixir Logo.png",
-      url: "https://www.passibelixir.ch",
-      text: "Celebrate with purity and style. Passib Elixir is a refined non-alcoholic sparkling wine, offering a premium alternative to traditional bubbly. Crafted in Switzerland from hibiscus, it is designed for conscious enjoyment."
-    },
-    {
-      name: "Oh Crumble",
+      name: "RadicalCacao",
       category: "sweets",
-      logo: "./images/Oh Crumble Logo.png",
-      url: "https://www.ohcrumble.ch",
-      text: "Oh Crumble bringt dir das ultimative Cookie-Erlebnis: 100 % vegan, handgemacht und voller Geschmack. Jeder Cookie vereint handwerkliche Qualität mit purer Genussfreude – ganz ohne tierische Produkte, aber mit jeder Menge Liebe."
+      logo: "",
+      url: "https://radicalcacao.com/",
+      text: "Beyond cacao, nothing. RadicalCacao makes 100% single-origin bean-to-bar chocolate, handcrafted in small batches in Basel. No sugar, no additives, just stone-ground cacao beans, left to speak for themselves."
     },
     {
-      name: "Basler Boden",
-      category: "drinks",
-      logo: "./images/BaslerBoden logo.png",
-      url: "https://www.instagram.com/baslerboden/",
-      text: "Eine Basler Schnapsidee, die knallt. BaslerBoden vereint Minze, Frucht und eine ordentliche Portion Frechheit zu einem Likör, der mit Charakter und einem erfrischenden Kick begeistert."
-    },
-    {
-      name: "Halestron Foods",
+      name: "WÜRZMEISTER",
       category: "food",
-      logo: "./images/halestron logo.png",
-      url: "https://halestronfoods.ch/",
-      text: "Fresh, authentic, and full of flavor. Halestron Foods stands for premium noodles made freshly in Switzerland with specially sourced flour and crafted on top-tier Japanese production machines."
+      logo: "",
+      url: "",
+      text: "Gewürze mit Herz. WÜRZMEISTER stellt eigene Gewürzmischungen in kleinen Bio-Chargen her - frisch gemahlen, ohne Zusatzstoffe, glutenfrei und vegan. Gleichzeitig bietet das Sozialunternehmen rund zwanzig Menschen in schwierigen Lebenslagen eine sinnstiftende Aufgabe."
     },
     {
-      name: "AMARA Cacao",
+      name: "Atelier Gourmetch",
       category: "sweets",
-      logo: "./images/AMARA LOGO.png",
-      url: "https://www.instagram.com/amara_cacao/",
-      text: "Raw Cacao – pure, natural, energizing. Discover the power of nature with Amara Cacao. Their raw cacao is minimally processed to preserve its rich flavour, nutrients and natural energy."
+      logo: "",
+      url: "https://www.instagram.com/ateliergourmetch/?hl=de",
+      text: "Süsse Erinnerung an Brasilien. Atelier Gourmetch fertigt in Basel handgemachte brasilianische Kuchen und Süssigkeiten auf Bestellung, allen voran den brasilianischen Klassiker Brigadeiro."
     },
     {
-      name: "Ingwer Manufaktur",
+      name: "Mimmis Kombucha",
       category: "drinks",
-      logo: "./images/Ingwer Manufaktur Logo.png",
-      url: "https://www.ingwer-manufaktur.ch/",
-      text: "Die Ingwer Manufaktur bringt dir die volle Kraft von Ingwer und Kurkuma ins Glas. In Basel frisch gepresst, zu 100 % bio und mit viel Liebe hergestellt. Natürlich, intensiv und belebend."
+      logo: "",
+      url: "https://mimmis-kombucha.ch/",
+      text: "Lebendig, spritzig, vegan. Das Team von Mimmis Kombucha braut in einer kleinen Basler Craft-Brauerei Kombucha aus biozertifiziertem Darjeeling- und Earl-Grey-Tee sowie Fairtrade-Rohrzucker. In einer zweiten Fermentation entstehen fruchtige Sorten wie Apfel & Rosmarin, Rhabarber & Chili oder Passionsfrucht."
     },
     {
-      name: "Maus Robotics",
-      category: "foodtech",
-      logo: "./images/maus robotics logo.png",
-      url: "https://www.mausrobotics.com/en",
-      text: "Frische Crêpes in 60 Sekunden. Mit Maus Robotics werden Crêpes frisch, vollautomatisch, aus regionalen Zutaten und mit wählbarer Füllung live zubereitet – auf Knopfdruck an Uni, Bahnhof oder Büro."
+      name: "Haferey",
+      category: "food",
+      logo: "",
+      url: "https://haferey.ch/",
+      text: "Haferey – the hafer way. Samy Küng will mit seiner Basler Haferey den unterschätzten Hafer zum Trend-Food machen: Seine Haferbowls verkauft er an Basler Märkten im Gundeli und steht für eine bewusste Ernährung mitten im schnellen Alltag."
     },
     {
-      name: "Nino Drinks",
-      category: "drinks",
-      logo: "./images/Logo_NINO_Schrift (1).png",
-      url: "https://www.ninodrinks.com/",
-      text: "Nino verwandelt alkoholfreien Genuss in ein prickelndes Erlebnis. Handwerklich komponierte Tees, Kräuter, Früchte und botanische Destillate vereinen sich zu vollmundigen Drinks – ob zu Speisen oder solo."
-    },
-    {
-      name: "Remi's Bagels",
-      category: "sweets",
-      logo: "./images/Remis Bagels_ LOGO TRANSPARENCY 1-black.png",
-      url: "https://www.remisbagels.ch/",
-      text: "Remi's Bagels werden von Hand zu veganen Sauerteig-Bagels voller Charakter gerollt. Monatliche Spezialitäten mit frischen, regionalen Zutaten feiern die Jahreszeiten – kombiniert mit hausgemachtem Frischkäse."
-    },
-    {
-      name: "Ting Yu Tea House",
-      category: "drinks",
-      logo: "./images/Ting Yu Logo.png",
-      url: "https://tingyuteahouse.com/de",
-      text: "Mit Ting Yu Tee in einen Zen-Moment eintauchen. Hochwertiger chinesischer Tee, direkt aus sorgfältig ausgewählten Provinzen importiert, schenkt Ruhe, Tradition und die Vielfalt der grünen chinesischen Gärten."
-    },
-    {
-      name: "Zappa & Lotta",
-      category: "sweets",
-      logo: "./images/ZappaLotta Logo.png",
-      url: "https://www.zappa-lotta.ch/",
-      text: "Bei Zappa & Lotta trifft italienische Tradition auf Basler Handwerkskunst. Handgemachte Cantucci, ohne künstliche Aromen, mit feinen Gewürzen und nach original italienischem Rezept gebacken."
-    },
-    {
-      name: "Vakeup",
+      name: "Kitchen Angel",
       category: "gastro",
-      logo: "./images/vakeup logo new.png",
-      url: "https://vakeup.ch/",
-      text: "Vakeup begeistert Gäste mit kreativen, pflanzlichen Geschmackserlebnissen. Vegane und vegetarische Menüs verwandeln jede Veranstaltung in ein kulinarisches Highlight – köstlich, innovativ und nachhaltig zugleich."
+      logo: "",
+      url: "https://kitchenangel.ch/",
+      text: "Kulinarik mit Herz & Verstand. Kitchen Angel ist Sarahs Herzensprojekt in Basel-Gundeli: ein Café- und Catering-Betrieb, der Menschen in herausfordernden Lebenslagen echte Arbeit mit Würde bietet. Für Events entstehen handgemachte Kreationen mit lokalen Zutaten – von Käse vom Milchhüsli beider Basel bis zu Bagels von Remi's."
     },
     {
-      name: "Awazé",
-      category: "food",
-      logo: "./images/Awaze Logo.png",
-      url: "",
-      text: "Awazé Saucen bietet ein authentisches Geschmackserlebnis mit handgemachten, natürlich konservierten Saucen und Würzmischungen, inspiriert von äthiopischen Wurzeln und verfeinert mit globalen Aromen."
+      name: "Sauerteigfreude",
+      category: "service",
+      logo: "",
+      url: "https://www.sauerteigfreude.ch/",
+      text: "Freude am Backen teilen. In ihren Workshops zeigt Fallone, wie aus Mehl, Wasser und Salz mit viel Geduld ein luftiges, aromatisches Sauerteigbrot entsteht. Entspannt, in kleiner Runde und mit ganz viel SauerteigFreude begleitet sie Teilnehmende Schritt für Schritt zu ihrem eigenen Brot."
     },
     {
-      name: "Herbal Well",
-      category: "drinks",
-      logo: "./images/HerbalWell logo.png",
-      url: "",
-      text: "Herbal Well verbindet die alte Weisheit „Nahrung ist zugleich Heilmittel“ mit der Reinheit der Natur. Die Kräutertees richten sich besonders an Menschen im Büro, die mitten im Arbeitstag kleine Momente der Ruhe suchen."
+      name: "Stielbruch (Event & Gastro Floristik)",
+      category: "service",
+      logo: "",
+      url: "https://stielbruch.ch/index.html",
+      text: "Ethische Floristik. Stielbruch verzichtet komplett auf importierte Pestizid-Schnittblumen und kombiniert stattdessen handgefertigte Kunstblumen aus Brockenstuben mit lokal gefundenem Grünschnitt. Die Basler Sträusse werden per Velo geliefert, später wieder abgeholt, neu zusammengestellt und wiederverwendet – nachhaltige Floristik im lokalen Kreislauf für Gastronomie und Events."
+    },
+    {
+      name: "Seraina Oppliger Fotografie (Food Fotografie)",
+      category: "service",
+      logo: "",
+      url: "https://www.serainaoppliger.com/",
+      text: "Bilder, die Appetit machen. Seraina Oppliger ist diplomierte Fotodesignerin HFP aus Basel und seit 2016 freischaffend, mit Fokus auf Food- und Still-Life-Fotografie für Werbung und Firmenkunden. Am TasteUp zeigt sie, wie aus feinen Zutaten ein Bild wird, das man am liebsten anbeissen möchte."
     }
   ],
 

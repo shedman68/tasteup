@@ -341,28 +341,7 @@
 
   function renderStartups() {
     var grid = $("#startup-grid");
-    var filterBar = $("#startup-filters");
     if (!grid) return;
-
-    /* Until the 2026 line-up is confirmed, say plainly that these are last
-       year's exhibitors rather than presenting them as this year's. */
-    if (TBD.startups) {
-      var section = grid.closest("section");
-      var note = section ? $(".section-head p", section) : null;
-      if (note) {
-        note.textContent =
-          "Die Startups für " +
-          start.getFullYear() +
-          " werden gerade ausgewählt. Zur Einstimmung: das Line-up der letzten Ausgabe.";
-      }
-      var badge = section ? $(".section-head .eyebrow", section) : null;
-      if (badge) badge.textContent = "Line-up 2025";
-    }
-
-    var counts = {};
-    DATA.startups.forEach(function (s) {
-      counts[s.category] = (counts[s.category] || 0) + 1;
-    });
 
     var labels = {};
     DATA.startupCategories.forEach(function (cat) {
@@ -371,20 +350,22 @@
 
     DATA.startups.forEach(function (startup) {
       var card = el("article", "card reveal");
-      card.setAttribute("data-category", startup.category);
 
       var logoBox = el("div", "card__logo");
-      var img = el("img");
-      img.src = startup.logo;
-      img.alt = startup.name + " Logo";
-      img.loading = "lazy";
-      img.decoding = "async";
-      img.addEventListener("error", function () {
-        logoBox.removeChild(img);
-        var fallback = el("span", "card__tag", startup.name);
-        logoBox.appendChild(fallback);
-      });
-      logoBox.appendChild(img);
+      if (startup.logo) {
+        var img = el("img");
+        img.src = startup.logo;
+        img.alt = startup.name + " Logo";
+        img.loading = "lazy";
+        img.decoding = "async";
+        img.addEventListener("error", function () {
+          logoBox.removeChild(img);
+          logoBox.appendChild(el("span", "card__logo-fallback", startup.name));
+        });
+        logoBox.appendChild(img);
+      } else {
+        logoBox.appendChild(el("span", "card__logo-fallback", startup.name));
+      }
       card.appendChild(logoBox);
 
       card.appendChild(
@@ -407,45 +388,6 @@
       }
 
       grid.appendChild(card);
-    });
-
-    if (!filterBar) return;
-
-    DATA.startupCategories.forEach(function (cat) {
-      var count = cat.id === "all" ? DATA.startups.length : counts[cat.id] || 0;
-      if (!count) return; /* hide categories nobody is in */
-
-      var btn = el("button", "filter");
-      btn.type = "button";
-      btn.setAttribute("data-filter", cat.id);
-      btn.setAttribute("aria-pressed", cat.id === "all" ? "true" : "false");
-      btn.appendChild(document.createTextNode(cat.label));
-      btn.appendChild(el("span", "filter__count", String(count)));
-      filterBar.appendChild(btn);
-    });
-
-    var status = $("#startup-status");
-
-    filterBar.addEventListener("click", function (evt) {
-      var btn = evt.target.closest("[data-filter]");
-      if (!btn) return;
-
-      var wanted = btn.getAttribute("data-filter");
-      $$("[data-filter]", filterBar).forEach(function (other) {
-        other.setAttribute("aria-pressed", other === btn ? "true" : "false");
-      });
-
-      var shown = 0;
-      $$(".card", grid).forEach(function (card) {
-        var match = wanted === "all" || card.getAttribute("data-category") === wanted;
-        card.hidden = !match;
-        if (match) shown += 1;
-      });
-
-      if (status) {
-        status.textContent =
-          shown + (shown === 1 ? " Startup" : " Startups") + " angezeigt.";
-      }
     });
   }
 
