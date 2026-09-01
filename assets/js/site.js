@@ -31,23 +31,8 @@
 
   /* Inline icon set — keeps the page free of an icon dependency. */
   var ICONS = {
-    sparkles:
-      '<path d="M12 3l1.9 4.6L18.5 9.5 13.9 11.4 12 16l-1.9-4.6L5.5 9.5l4.6-1.9L12 3z"/><path d="M18.5 14.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9.9-2.1z"/>',
-    cup: '<path d="M4 5h11v7a5.5 5.5 0 01-11 0V5z"/><path d="M15 7h2.5a2.5 2.5 0 010 5H15"/><path d="M3 21h13"/>',
-    mic: '<rect x="9" y="2.5" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0013 0"/><path d="M12 17.5V21"/><path d="M8.5 21h7"/>',
-    users:
-      '<circle cx="9" cy="8" r="3.4"/><path d="M2.5 20a6.5 6.5 0 0113 0"/><path d="M16.5 5.2a3.4 3.4 0 010 5.6"/><path d="M17.5 14.4A6.5 6.5 0 0121.5 20"/>',
-    book: '<path d="M4 4.5A2 2 0 016 3h13v15H6a2 2 0 00-2 2V4.5z"/><path d="M4 20a2 2 0 012-2h13v3H6a2 2 0 01-2-2z"/><path d="M9 7.5h6"/>',
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 7.8h.01"/>',
-    calendar:
-      '<rect x="3.5" y="5" width="17" height="16" rx="2.5"/><path d="M8 3v4"/><path d="M16 3v4"/><path d="M3.5 10h17"/>',
-    pin: '<path d="M12 21s7-5.3 7-11a7 7 0 10-14 0c0 5.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/>',
-    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 1.9"/>',
-    ticket:
-      '<path d="M3.5 8.5V7a1.5 1.5 0 011.5-1.5h14A1.5 1.5 0 0120.5 7v1.5a2.6 2.6 0 000 5.2V17a1.5 1.5 0 01-1.5 1.5H5A1.5 1.5 0 013.5 17v-3.3a2.6 2.6 0 000-5.2z"/><path d="M13.5 6v12"/>',
-    check: '<circle cx="12" cy="12" r="9"/><path d="M8.2 12.3l2.6 2.6 5-5.4"/>',
-    arrow: '<path d="M5 12h13"/><path d="M12.5 6l6 6-6 6"/>',
-    mail: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.6 6.6l8.4 6 8.4-6"/>'
+    arrow: '<path d="M5 12h13"/><path d="M12.5 6l6 6-6 6"/>'
   };
 
   function icon(name, size) {
@@ -222,67 +207,6 @@
     var timer = window.setInterval(tick, 1000);
   }
 
-  /* ---------------------------------------------------------- highlights */
-
-  var NUMBER_WORDS = ["null", "ein", "zwei", "drei", "vier", "fünf", "sechs", "sieben"];
-
-  function renderHighlights() {
-    var root = $("#highlights");
-    if (!root) return;
-
-    /* Same gate as the stats: never promise something not yet confirmed. */
-    var usable = DATA.highlights.filter(function (item) {
-      if (item.needs === "speaker") return !!DATA.speaker;
-      return !item.needs || !TBD[item.needs];
-    });
-
-    var heading = $("#highlights-heading");
-    if (heading) {
-      heading.textContent =
-        "Ein Abend, " + (NUMBER_WORDS[usable.length] || usable.length) + " Gründe";
-    }
-
-    usable.forEach(function (item) {
-      var card = el("article", "highlight reveal");
-      var box = el("div", "highlight__icon");
-      box.appendChild(icon(item.icon));
-      card.appendChild(box);
-      card.appendChild(el("h3", null, item.title));
-      card.appendChild(el("p", null, item.text));
-      root.appendChild(card);
-    });
-  }
-
-  /* --------------------------------------------------------------- stats */
-
-  function renderStats() {
-    var root = $("#stats");
-    if (!root) return;
-
-    /* Only claim a figure we can actually stand behind: a stat whose source
-       is still unconfirmed (or, for the keynote, absent) is left out. */
-    var usable = DATA.stats.filter(function (stat) {
-      if (stat.needs === "speaker") return !!DATA.speaker;
-      return !stat.needs || !TBD[stat.needs];
-    });
-
-    if (usable.length < 2) {
-      var section = root.closest("section");
-      if (section) section.remove();
-      else root.remove();
-      return;
-    }
-
-    usable.forEach(function (stat) {
-      /* Counted values stay in sync with the data instead of being typed in. */
-      var value = stat.from === "startups" ? String(DATA.startups.length) : stat.value;
-      var box = el("div", "stat reveal");
-      box.appendChild(el("span", "stat__num", value));
-      box.appendChild(el("span", "stat__label", stat.label));
-      root.appendChild(box);
-    });
-  }
-
   /* ------------------------------------------------------------- keynote
      No speaker in the data means no Keynote section and no nav entry. */
 
@@ -337,7 +261,12 @@
     body.appendChild(text);
   }
 
-  /* ------------------------------------------------------------ startups */
+  /* ------------------------------------------------------------ startups
+     Cards run in one line and auto-scroll left (CSS animation on
+     .marquee__track). The track holds the line-up twice back-to-back so
+     the loop point is invisible; the second copy is built as its own set
+     of nodes (not a clone) so its images still get their own load/error
+     handling, and it's hidden from assistive tech and keyboard focus. */
 
   function renderStartups() {
     var grid = $("#startup-grid");
@@ -348,8 +277,9 @@
       labels[cat.id] = cat.label;
     });
 
-    DATA.startups.forEach(function (startup) {
-      var card = el("article", "card reveal");
+    function buildCard(startup, isDuplicate) {
+      var card = el("article", "card");
+      if (isDuplicate) card.setAttribute("aria-hidden", "true");
 
       var logoBox = el("div", "card__logo");
       if (startup.logo) {
@@ -379,6 +309,7 @@
         link.href = startup.url;
         link.target = "_blank";
         link.rel = "noopener";
+        if (isDuplicate) link.tabIndex = -1;
         link.appendChild(document.createTextNode("Website besuchen"));
         link.appendChild(icon("arrow", 16));
         link.setAttribute("aria-label", "Website von " + startup.name + " besuchen");
@@ -387,7 +318,14 @@
         card.appendChild(el("span", "card__soon", "Website folgt bald"));
       }
 
-      grid.appendChild(card);
+      return card;
+    }
+
+    DATA.startups.forEach(function (startup) {
+      grid.appendChild(buildCard(startup, false));
+    });
+    DATA.startups.forEach(function (startup) {
+      grid.appendChild(buildCard(startup, true));
     });
   }
 
@@ -420,36 +358,26 @@
     });
   }
 
-  /* ----------------------------------------------------------- presenting */
+  /* ----------------------------------------------------------- presenting
+     Bubbles flanking the "Line-up 2026" title — #presenting-left before it,
+     #presenting-right after. */
 
   function renderPresenting() {
-    var root = $("#presenting-row");
-    if (!root) return;
+    var leftGroup = $("#presenting-left");
+    var rightGroup = $("#presenting-right");
+    if (!leftGroup || !rightGroup) return;
 
     var items = (DATA.presenting && DATA.presenting.items) || [];
 
     if (!items.length) {
-      root.appendChild(
-        el(
-          "p",
-          "presenting-row__placeholder",
-          "Logos & Icons folgen in Kürze."
-        )
+      leftGroup.appendChild(
+        el("p", "presenting-row__placeholder", "Logos & Icons folgen in Kürze.")
       );
       return;
     }
 
-    /* Two clusters: the logos (+ 10+ Startups) on the left, sized larger;
-       the remaining badges spread out on the right, a size step smaller. */
-    var leftGroup = el("div", "presenting-row__group presenting-row__group--left");
-    var rightGroup = el("div", "presenting-row__group presenting-row__group--right");
-
     items.forEach(function (item) {
-      var variant = item.type === "badge" ? "badge" : "logo";
-      var box = el(
-        item.url ? "a" : "div",
-        "presenting-row__item presenting-row__item--" + variant + " reveal"
-      );
+      var box = el(item.url ? "a" : "div", "presenting-row__item reveal");
 
       if (item.url) {
         box.href = item.url;
@@ -467,9 +395,6 @@
 
       (item.group === "right" ? rightGroup : leftGroup).appendChild(box);
     });
-
-    root.appendChild(leftGroup);
-    root.appendChild(rightGroup);
   }
 
   /* --------------------------------------------------------- about dialog */
@@ -602,8 +527,6 @@
 
   function init() {
     injectText();
-    renderHighlights();
-    renderStats();
     renderKeynote();
     renderStartups();
     renderPartners();

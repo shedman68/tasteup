@@ -525,124 +525,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   9. Highlights — organic blobs in the same palette as Was/Wann/Wo
-   -------------------------------------------------------------------------- */
-.highlights {
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-}
-
-.highlight {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: clamp(230px, 190px + 8vw, 290px);
-  padding: clamp(1.8rem, 1.5rem + 1.5vw, 2.6rem) clamp(1.5rem, 1.2rem + 1.5vw, 2.1rem);
-  transition: transform 0.25s ease;
-}
-
-.highlight:hover {
-  transform: scale(1.03);
-}
-
-/* Five blob shapes, cycled so the layout still reads as organic — not
-   tiled — however many highlight cards are shown at once. */
-.highlight:nth-child(5n + 1) {
-  background: var(--orange-ink);
-  color: var(--white);
-  border-radius: 62% 38% 45% 55% / 45% 40% 60% 55%;
-}
-.highlight:nth-child(5n + 2) {
-  background: var(--amber);
-  color: var(--ink);
-  border-radius: 38% 62% 55% 45% / 55% 45% 55% 45%;
-}
-.highlight:nth-child(5n + 3) {
-  background: var(--sky);
-  color: var(--ink);
-  border-radius: 50% 50% 40% 60% / 40% 55% 45% 60%;
-}
-.highlight:nth-child(5n + 4) {
-  background: var(--forest);
-  color: var(--cream);
-  border-radius: 55% 45% 60% 40% / 60% 40% 55% 45%;
-}
-.highlight:nth-child(5n + 5) {
-  background: var(--grape);
-  color: var(--cream);
-  border-radius: 45% 55% 50% 50% / 50% 60% 40% 50%;
-}
-
-.highlight__icon {
-  width: 56px;
-  height: 56px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  margin-bottom: 1.2rem;
-  background: rgba(255, 255, 255, 0.3);
-  border: 2px solid rgba(255, 255, 255, 0.48);
-}
-
-.highlight:nth-child(5n + 2) .highlight__icon,
-.highlight:nth-child(5n + 3) .highlight__icon {
-  background: rgba(43, 15, 54, 0.12);
-  border-color: rgba(43, 15, 54, 0.22);
-  color: var(--grape);
-}
-
-.highlight__icon svg {
-  width: 26px;
-  height: 26px;
-}
-
-.highlight h3 {
-  font-size: var(--step-1);
-  margin-bottom: 0.6rem;
-  color: inherit;
-}
-
-.highlight p {
-  font-size: 0.96rem;
-  color: inherit;
-}
-
-/* --------------------------------------------------------------------------
-   10. Stats
-   -------------------------------------------------------------------------- */
-.stats {
-  display: grid;
-  gap: clamp(1.5rem, 1rem + 2vw, 3rem);
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  text-align: center;
-}
-
-.stat__num {
-  display: block;
-  font-family: var(--font-display);
-  font-size: clamp(2.8rem, 2rem + 3.4vw, 4.6rem);
-  font-weight: 700;
-  line-height: 1;
-  color: var(--amber);
-  font-variant-numeric: tabular-nums;
-}
-
-.stat__label {
-  display: block;
-  margin-top: 0.6rem;
-  font-weight: 600;
-  font-size: 0.95rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: rgba(241, 233, 222, 0.85);
-}
-
-/* --------------------------------------------------------------------------
-   11. Facts (Was / Wann / Wo) — the original site's organic blob cards
+   9. Facts (Was / Wann / Wo) — the original site's organic blob cards
    -------------------------------------------------------------------------- */
 .blob-facts {
   display: grid;
@@ -748,40 +631,28 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   12. Presenting
+   10. Presenting — bubbles flanking the "Line-up 2026" title
    -------------------------------------------------------------------------- */
-/* Grid, not flex: two clusters that each need to spread within their own
-   half without a flex "space-between" line-wrap snapping a lone wrapped
-   group back to the start edge. auto-fit also collapses to one stacked
-   column on narrow viewports with no extra breakpoint needed. */
-.presenting-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: clamp(1.5rem, 1rem + 2vw, 3rem) clamp(2rem, 1rem + 3vw, 4rem);
-  align-items: center;
+/* Wider than the standard .section-head's 68ch cap — this one needs room
+   for a full-size heading plus a cluster of bubbles either side of it. */
+.startups-head {
+  max-width: none;
 }
 
-/* Two clusters: Food Factory + FoodHealth + 10+ Startups on the left;
-   the remaining badges spread out on the right. */
+.presenting-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.2rem, 0.9rem + 1.5vw, 2.25rem);
+}
+
 .presenting-row__group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   gap: clamp(1rem, 0.8rem + 1vw, 1.5rem);
-}
-
-.presenting-row__group--right {
-  justify-content: flex-end;
-  /* "Spread out" — noticeably more breathing room than the left cluster. */
-  gap: clamp(1.5rem, 1rem + 2vw, 2.25rem);
-}
-
-@media (max-width: 720px) {
-  .presenting-row__group,
-  .presenting-row__group--right {
-    justify-content: center;
-  }
 }
 
 .presenting-row__placeholder {
@@ -789,18 +660,19 @@ p {
   font-style: italic;
 }
 
-/* Every item — painted brush-stroke badge or plain logo mark alike — sits
-   in a fixed-height box so each cluster reads as one consistent set. */
+/* Every bubble is a finished painted-oval graphic (colour, brush-stroke
+   edge and text baked into the artwork) — shown as-is, just boxed to a
+   shared height so the two clusters read as one consistent set. */
 .presenting-row__item {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: clamp(100px, 7.5vw, 148px);
+  height: clamp(88px, 6.5vw, 128px);
   flex-shrink: 0;
   /* A flex item's default min-width/min-height is `auto`, which refuses
      to shrink below its content's intrinsic size — without this, the
-     img's own (much larger) natural dimensions win over the box sizes
-     set below, regardless of what width/height this rule specifies. */
+     img's own (much larger) natural dimensions win over the height set
+     above, regardless of what this rule specifies. */
   min-width: 0;
   min-height: 0;
   text-decoration: none;
@@ -811,10 +683,7 @@ p {
   transform: scale(1.05);
 }
 
-/* Badge items (10+ Startups, Event Floristik, …) already are a finished
-   bubble graphic — colour, brush-stroke edge and text baked into the
-   artwork — so they're placed as-is, just boxed to a shared height. */
-.presenting-row__item--badge img {
+.presenting-row__item img {
   height: 100%;
   width: auto;
   min-width: 0;
@@ -822,28 +691,8 @@ p {
   object-fit: contain;
 }
 
-/* Logo items (Food Factory, FoodHealth) are flat marks shown as-is, no
-   circle behind them — sized a step bigger than the badges so the two
-   logos still read as the anchors of the left-hand cluster. */
-.presenting-row__item--logo {
-  width: clamp(132px, 10vw, 190px);
-  height: clamp(132px, 10vw, 190px);
-  flex-shrink: 0;
-  box-sizing: border-box;
-}
-
-.presenting-row__item--logo img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
-  min-width: 0;
-  min-height: 0;
-  object-fit: contain;
-}
-
 /* --------------------------------------------------------------------------
-   13. Keynote
+   11. Keynote
    -------------------------------------------------------------------------- */
 .keynote {
   display: grid;
@@ -918,17 +767,73 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   14. Startups
+   12. Startups
    -------------------------------------------------------------------------- */
-.cards {
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+/* One line, auto-scrolling left. The track holds the line-up twice
+   back-to-back (see renderStartups in site.js) and animates from 0 to
+   exactly -50%, so the loop point is invisible. */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black clamp(1.5rem, 1rem + 2vw, 4rem),
+    black calc(100% - clamp(1.5rem, 1rem + 2vw, 4rem)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black clamp(1.5rem, 1rem + 2vw, 4rem),
+    black calc(100% - clamp(1.5rem, 1rem + 2vw, 4rem)),
+    transparent
+  );
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+  }
+  .marquee__track {
+    animation: none;
+  }
+  .marquee__track [aria-hidden="true"] {
+    display: none;
+  }
 }
 
 .card {
   display: flex;
   flex-direction: column;
+  flex: 0 0 clamp(272px, 24vw, 320px);
+  width: clamp(272px, 24vw, 320px);
+  /* Spacing lives on the card itself (not a `gap` on .marquee__track): the
+     track is the line-up doubled back-to-back, animated by exactly -50% to
+     loop seamlessly, and that only lands precisely on the seam if every
+     card — including the last one — carries the same trailing space. A
+     flex `gap` doesn't count a trailing gap after the final child, which
+     throws the halfway point off by half a gap. */
+  margin-right: var(--gap);
   padding: 1.6rem;
   background: var(--white);
   border: 1px solid var(--line);
@@ -1035,7 +940,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   15. Partners
+   13. Partners
    -------------------------------------------------------------------------- */
 .partners {
   display: grid;
@@ -1090,7 +995,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   16. Ticket band
+   14. Ticket band
    -------------------------------------------------------------------------- */
 .ticket-band {
   text-align: center;
@@ -1108,7 +1013,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   17. Footer
+   15. Footer
    -------------------------------------------------------------------------- */
 .site-footer {
   background: var(--ink);
@@ -1172,7 +1077,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   18. Legal / prose pages
+   16. Legal / prose pages
    -------------------------------------------------------------------------- */
 .page-head {
   background: var(--grape);
@@ -1278,7 +1183,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   19. About dialog (opened from the Was?-card's "Mehr Details")
+   17. About dialog (opened from the Was?-card's "Mehr Details")
    -------------------------------------------------------------------------- */
 .about-dialog {
   width: min(90vw, 560px);
@@ -1337,7 +1242,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   20. Motion
+   18. Motion
    -------------------------------------------------------------------------- */
 .reveal {
   opacity: 0;
@@ -1370,7 +1275,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   21. Print
+   19. Print
    -------------------------------------------------------------------------- */
 @media print {
   .filters,

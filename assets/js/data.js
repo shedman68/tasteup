@@ -26,7 +26,6 @@ window.TASTEUP = {
   tbd: {
     times: false, // confirmed: 18:00 – 21:00
     venue: false, // confirmed: Brauerei Unser Bier
-    agenda: true, // set false once the round count for 2026 is confirmed (gates the "Degustationsrunden" stat — no Programm section on the page right now)
     startups: false, // confirmed: 2026 line-up below
     tickets: false // confirmed: eventfrog.ch/taste-up
   },
@@ -73,73 +72,23 @@ window.TASTEUP = {
     ]
   },
 
-  /* ------------------------------------------------ what the evening gives
-     Wording follows the official TasteUp poster. */
-  highlights: [
-    {
-      icon: "sparkles",
-      title: "Regionale Startups entdecken",
-      text: "Craft Food & Beverage Gründer:innen aus der Region zeigen, woran sie gerade arbeiten – direkt am Stand, ohne Umwege."
-    },
-    {
-      icon: "cup",
-      title: "Unlimitiert degustieren",
-      text: "Offene Verkostung an allen Ständen: Fingerfood, Getränkeproben und Neuheiten, so viel du probieren möchtest."
-    },
-    {
-      icon: "mic",
-      title: "Keynote mit Impact",
-      /* `needs` gates a highlight on data being present. Shown only when a
-         keynote speaker is actually booked. */
-      needs: "speaker",
-      text: "Ein kurzer, praxisnaher Input aus der Basler Foodszene – Wissen zum Mitnehmen statt langer Vortragsblock."
-    },
-    {
-      icon: "users",
-      title: "Inspiration & Networking",
-      text: "Foodies, Gastronomiebetriebe und Gründer:innen an einem Ort. Fliessend, in entspannter Afterwork-Atmosphäre."
-    }
-    /* The 2025 line-up had a fifth highlight ("Food-Literatur zum Stöbern")
-       about the reading corner at the old Literaturhaus venue. Removed
-       outright rather than re-gated: it was specific to that location, and
-       nothing about it carries over to Brauerei Unser Bier. */
-  ],
-
-  /* ------------------------------------------------------------ presenting
-     "Presenting" section, directly below Was/Wann/Wo. Each entry is
-     `{ name, logo, type, group, url }` (url is optional, for when one
-     exists):
-       - type: "badge" — a finished bubble graphic (colour, brush-stroke
-         edge and text already baked into the artwork) shown as-is.
-       - type: "logo"  — a flat logo mark with no bubble of its own, shown
-         inside a plain white circle so it matches the badges around it.
-       - group: "left" | "right" — the two logos and the 10+ Startups
-         badge cluster on the left, sized larger; the other badges spread
-         out on the right, sized a step smaller than the logos.
+  /* --------------------------------------------------------- presenting row
+     The sponsor/programme bubbles shown flanking the "Line-up 2026" title,
+     above the startup cards. Each entry is `{ name, logo, group, url }`
+     (url optional): every bubble is a finished painted-oval graphic (colour,
+     brush-stroke edge and text baked into the artwork) shown as-is.
+       - group: "left" | "right" — which side of the title the bubble sits on.
      Leave `items` empty to fall back to a "folgen in Kürze" placeholder. */
   presenting: {
-    title: "Presenting",
-    lede: "Tauche mit uns in die regionale Food & Beverage Szene ein:",
     items: [
-      { name: "Food Factory", logo: "./images/Food Factory.png", type: "logo", group: "left" },
-      { name: "FoodHealth", logo: "./images/logo-foodhealth.png", type: "logo", group: "left" },
-      { name: "10+ Startups", logo: "./images/10 Startups.png", type: "badge", group: "left" },
-      { name: "Event Floristik", logo: "./images/Event Floristik.png", type: "badge", group: "right" },
-      { name: "Food Fotografie", logo: "./images/Food Fotografie.png", type: "badge", group: "right" },
-      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", type: "badge", group: "right" }
+      { name: "Food Factory", logo: "./images/food-factory-badge.png", group: "left" },
+      { name: "FoodHealth", logo: "./images/foodhealth-badge.png", group: "left" },
+      { name: "10+ Startups", logo: "./images/10 Startups.png", group: "left" },
+      { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" },
+      { name: "Food Fotografie", logo: "./images/Food Fotografie.png", group: "right" },
+      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", group: "right" }
     ]
   },
-
-  /* --------------------------------------------------------------- figures
-     The startup count is read live from the `startups` array below; the
-     other three are static text, each gated by a `tbd` flag so nothing is
-     claimed before it's actually confirmed. */
-  stats: [
-    { value: "14", label: "Startups am Marktplatz", from: "startups", needs: "startups" },
-    { value: "2", label: "Degustationsrunden", needs: "agenda" },
-    { value: "1", label: "Keynote", needs: "speaker" },
-    { value: "3h", label: "Afterwork-Programm", needs: "times" }
-  ],
 
   /* ---------------------------------------------------------------- speaker
      No keynote speaker for the 2026 edition. `speaker: null` removes the
