@@ -2,8 +2,8 @@
    TasteUp — site content
    --------------------------------------------------------------------------
    This is the only file you need to touch to update the website's content.
-   Everything on the page (facts, programme, startups, partners) is
-   rendered from the object below.
+   Everything on the page (facts, startups, partners) is rendered from
+   the object below.
 
    >>> WHAT STILL NEEDS FILLING IN FOR 2026 is listed in the `tbd` block at
    >>> the top. While a `tbd` flag is true, that part of the page shows a
@@ -26,7 +26,7 @@ window.TASTEUP = {
   tbd: {
     times: true, // start/end time below are carried over from 2025
     venue: true, // new location not yet announced
-    agenda: true, // programme for 2026 not yet set
+    agenda: true, // set false once the round count for 2026 is confirmed (gates the "Degustationsrunden" stat — no Programm section on the page right now)
     startups: true, // list below is the 2025 line-up, not the 2026 one
     tickets: true // no ticket link for 2026 yet
   },
@@ -114,51 +114,14 @@ window.TASTEUP = {
   ],
 
   /* --------------------------------------------------------------- figures
-     All four numbers are counted from the programme and the startup list
-     below, so they stay honest when you add or remove entries. */
+     The startup count is read live from the `startups` array below; the
+     other three are static text, each gated by a `tbd` flag so nothing is
+     claimed before it's actually confirmed. */
   stats: [
     { value: "14", label: "Startups am Marktplatz", from: "startups", needs: "startups" },
     { value: "2", label: "Degustationsrunden", needs: "agenda" },
     { value: "1", label: "Keynote", needs: "speaker" },
     { value: "3h", label: "Afterwork-Programm", needs: "times" }
-  ],
-
-  /* -------------------------------------------------------------- programme */
-  agenda: [
-    {
-      from: "18:00",
-      to: "18:10",
-      title: "Begrüssung & Eröffnung",
-      points: ["Kurzansprache durch Startup Academy und Lunch-Check"]
-    },
-    {
-      from: "18:10",
-      to: "19:10",
-      title: "Marktplatz & Degustation – Runde 1",
-      points: [
-        "Startups präsentieren ihre Produkte an den Ständen",
-        "Offene Verkostung für alle Gäste (Fingerfood, Getränkeproben etc.)",
-        "Offener Austausch zwischen Publikum, Startups und Gastronomie"
-      ]
-    },
-    {
-      from: "19:15",
-      to: "19:30",
-      title: "Keynote: „Storytelling mit Geschmack“",
-      points: [
-        "Jessica Manurung, Gründerin von Basel Eats, zeigt, wie Food Startups und Gastronomiebetriebe mit authentischem Storytelling und kreativem Content-Marketing ihre Marke stärken, Emotionen wecken und Kund:innen nachhaltig binden können."
-      ]
-    },
-    {
-      from: "19:30",
-      to: "21:00",
-      title: "Marktplatz & Degustation – Runde 2 / Networking",
-      points: [
-        "Weitere Verkostungen, vertiefte Gespräche mit Startups",
-        "Fliessendes Networking direkt am Marktplatz – Besucher:innen kommen und gehen nach eigenem Tempo",
-        "Food-Literatur-Ecke"
-      ]
-    }
   ],
 
   /* ---------------------------------------------------------------- speaker

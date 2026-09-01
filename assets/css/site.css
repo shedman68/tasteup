@@ -398,32 +398,6 @@ p {
   height: 1em;
 }
 
-/* Pills used for meta facts and categories */
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.4rem 0.85rem;
-  border-radius: 999px;
-  font-size: var(--step--1);
-  font-weight: 600;
-  line-height: 1.3;
-  background: rgba(43, 15, 54, 0.07);
-  color: var(--ink);
-}
-
-.pill svg {
-  width: 1.05em;
-  height: 1.05em;
-  flex-shrink: 0;
-  color: var(--orange-ink);
-}
-
-.pill--solid {
-  background: var(--white);
-  box-shadow: var(--shadow-sm);
-}
-
 /* --------------------------------------------------------------------------
    6. Tile motif — rebuilds the banner's icon grid from the source icon art
    -------------------------------------------------------------------------- */
@@ -469,74 +443,49 @@ p {
 /* --------------------------------------------------------------------------
    8. Hero
    -------------------------------------------------------------------------- */
-.hero {
-  position: relative;
-  background: var(--cream);
-  padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) clamp(3rem, 2rem + 4vw, 5.5rem);
-  overflow: hidden;
+
+/* The full-width banner artwork carries the wordmark and tagline itself, so
+   it needs no overlaid text — just scale it to the viewport. */
+.banner-image {
+  line-height: 0;
 }
 
-.hero__grid {
-  display: grid;
-  gap: clamp(2rem, 1rem + 4vw, 4rem);
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  align-items: center;
+.banner-image img {
+  width: 100%;
+  height: auto;
 }
 
-@media (max-width: 900px) {
-  .hero__grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.hero__tagline {
-  font-family: var(--font-display);
-  font-size: clamp(0.8rem, 0.72rem + 0.4vw, 1.05rem);
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--orange-ink);
-  margin-bottom: 1rem;
-}
-
-.hero h1 {
-  color: var(--grape);
-  margin-bottom: 1.25rem;
-}
-
-.hero h1 .accent {
+/* Accent word used inside any headline (the hero's h1 is plain text; the
+   "Basel" callout lives in the Was/Wann/Wo headline instead). */
+.accent {
   color: var(--orange);
 }
 
-.hero__lede {
-  font-size: var(--step-1);
-  color: var(--ink-soft);
-  max-width: 46ch;
-  margin-bottom: 1.75rem;
+.hero-narrow {
+  background: var(--cream);
+  padding-block: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  text-align: center;
 }
 
-.hero__meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  margin-bottom: 1.9rem;
-}
-
-.hero__cta {
-  margin-bottom: 1.5rem;
-}
-
-.hero__note {
-  font-size: var(--step--1);
-  color: var(--ink-soft);
+.hero-narrow h1 {
+  font-family: var(--font-body);
+  font-size: clamp(1.3rem, 1.1rem + 1vw, 1.75rem);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--grape);
+  max-width: 44ch;
+  margin-inline: auto;
+  margin-bottom: 2rem;
 }
 
 /* Countdown */
 .countdown {
   display: flex;
+  justify-content: center;
   gap: 0.6rem;
   flex-wrap: wrap;
-  margin-bottom: 1.6rem;
+  margin-top: 1.8rem;
 }
 
 .countdown__unit {
@@ -566,69 +515,6 @@ p {
   text-transform: uppercase;
   color: var(--ink-soft);
   margin-top: 0.3rem;
-}
-
-.status-note {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.65rem 1.1rem;
-  border-radius: 14px;
-  background: var(--blush);
-  color: var(--ink);
-  font-weight: 600;
-  font-size: var(--step--1);
-  margin-bottom: 1.6rem;
-  max-width: 46ch;
-  line-height: 1.45;
-}
-
-/* Hero artwork: the cream blob logo lockup over a tile field */
-.hero__art {
-  position: relative;
-  aspect-ratio: 4 / 3.4;
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-lg);
-}
-
-.hero__tiles {
-  position: absolute;
-  inset: 0;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 1fr;
-}
-
-.hero__tiles img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.hero__blob {
-  position: absolute;
-  inset: 14% 8%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  background: var(--cream);
-  border-radius: 62% 38% 55% 45% / 48% 55% 45% 52%;
-  box-shadow: 0 20px 45px -25px rgba(43, 15, 54, 0.6);
-}
-
-.hero__blob img {
-  width: min(78%, 320px);
-  height: auto;
-}
-
-@media (max-width: 900px) {
-  .hero__art {
-    aspect-ratio: 16 / 10;
-    max-width: 560px;
-    margin-inline: auto;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -727,154 +613,102 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   11. Facts (Was / Wann / Wo)
+   11. Facts (Was / Wann / Wo) — the original site's organic blob cards
    -------------------------------------------------------------------------- */
-.facts {
+.blob-facts {
   display: grid;
   gap: var(--gap);
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-.fact {
+.blob-card {
   display: flex;
   flex-direction: column;
-  padding: 1.9rem 1.7rem;
-  background: var(--cream);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow);
+  align-items: center;
+  text-align: center;
+  min-height: clamp(320px, 280px + 8vw, 380px);
+  padding: clamp(1.8rem, 1.4rem + 2vw, 3rem);
+  transition: transform 0.25s ease;
 }
 
-.fact__icon {
-  width: 54px;
-  height: 54px;
+.blob-card:hover {
+  transform: scale(1.03);
+}
+
+.blob-card--orange {
+  background: var(--orange-ink);
+  color: var(--white);
+  border-radius: 65% 35% 70% 30% / 40% 60% 40% 60%;
+}
+
+.blob-card--amber {
+  background: var(--amber);
+  color: var(--ink);
+  border-radius: 40% 60% 30% 70% / 55% 45% 55% 45%;
+}
+
+.blob-card--cream {
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 50% 50% 45% 55% / 35% 65% 35% 65%;
+}
+
+.blob-card__icon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: var(--grape);
-  color: var(--cream);
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
+  background: rgba(255, 255, 255, 0.32);
+  border: 2px solid rgba(255, 255, 255, 0.5);
 }
 
-.fact:nth-child(2) .fact__icon {
-  background: var(--orange);
+.blob-card--cream .blob-card__icon {
+  background: rgba(43, 15, 54, 0.12);
+  border-color: rgba(43, 15, 54, 0.22);
+  color: var(--grape);
+}
+
+.blob-card__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.blob-card h3 {
+  margin-bottom: 0.9rem;
+}
+
+.blob-card--orange h3,
+.blob-card--orange p {
   color: var(--white);
 }
-.fact:nth-child(3) .fact__icon {
-  background: var(--forest);
-  color: var(--cream);
+
+.blob-card--amber p,
+.blob-card--cream p {
+  color: rgba(43, 15, 54, 0.8);
 }
 
-.fact__icon svg {
-  width: 26px;
-  height: 26px;
-}
-
-.fact h3 {
-  color: var(--grape);
-  margin-bottom: 0.7rem;
-}
-
-.fact p {
-  color: var(--ink-soft);
-  margin-bottom: 1rem;
-}
-
-.fact .link {
-  margin-top: auto;
-  align-self: flex-start;
-}
-
-.fact strong {
-  color: var(--ink);
-}
-
-/* --------------------------------------------------------------------------
-   12. Programme timeline
-   -------------------------------------------------------------------------- */
-.agenda {
-  display: grid;
-  gap: 1rem;
-  max-width: 860px;
-}
-
-.slot {
-  display: grid;
-  grid-template-columns: 108px minmax(0, 1fr);
-  gap: 1.4rem;
-  padding: 1.5rem;
-  background: var(--white);
-  border-radius: var(--radius);
-  border: 1px solid var(--line);
-  border-left: 6px solid var(--sky);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.slot:hover {
-  transform: translateX(4px);
-  box-shadow: var(--shadow);
-}
-
-.slot:nth-child(2) {
-  border-left-color: var(--amber);
-}
-.slot:nth-child(3) {
-  border-left-color: var(--orange);
-}
-.slot:nth-child(4) {
-  border-left-color: var(--grape);
-}
-
-.slot__time {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
+.blob-card p strong {
+  color: inherit;
   font-weight: 700;
-  line-height: 1.15;
+}
+
+.blob-card .link {
+  margin-top: 1.1rem;
+}
+
+.blob-card--orange .link {
+  color: var(--white);
+}
+
+.blob-card--amber .link {
   color: var(--grape);
-  font-variant-numeric: tabular-nums;
-}
-
-.slot__time span {
-  display: block;
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
-  margin-top: 0.25rem;
-}
-
-.slot h3 {
-  font-size: var(--step-1);
-  margin-bottom: 0.6rem;
-  color: var(--ink);
-}
-
-.slot ul {
-  margin: 0;
-  padding-left: 1.1rem;
-  color: var(--ink-soft);
-  font-size: 0.98rem;
-}
-
-.slot li + li {
-  margin-top: 0.35rem;
-}
-
-@media (max-width: 640px) {
-  .slot {
-    grid-template-columns: 1fr;
-    gap: 0.9rem;
-  }
-  .slot__time span {
-    display: inline;
-    margin-left: 0.5rem;
-  }
 }
 
 /* --------------------------------------------------------------------------
-   13. Keynote
+   12. Keynote
    -------------------------------------------------------------------------- */
 .keynote {
   display: grid;
@@ -949,7 +783,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   14. Startups
+   13. Startups
    -------------------------------------------------------------------------- */
 .filters {
   display: flex;
@@ -1087,47 +921,8 @@ p {
   background: rgba(1, 58, 32, 0.14);
 }
 
-.empty-note {
-  text-align: center;
-  color: var(--ink-soft);
-  padding: 2rem 0;
-}
-
 /* --------------------------------------------------------------------------
-   15. Split call-to-action (exhibitors)
-   -------------------------------------------------------------------------- */
-.split {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: clamp(1.5rem, 1rem + 3vw, 3.5rem);
-  align-items: center;
-}
-
-.split__list {
-  display: grid;
-  gap: 0.85rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.split__list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  font-weight: 500;
-}
-
-.split__list svg {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-  margin-top: 0.2rem;
-  color: var(--amber);
-}
-
-/* --------------------------------------------------------------------------
-   16. Partners
+   14. Partners
    -------------------------------------------------------------------------- */
 .partners {
   display: grid;
@@ -1182,7 +977,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   17. Ticket band
+   15. Ticket band
    -------------------------------------------------------------------------- */
 .ticket-band {
   text-align: center;
@@ -1200,7 +995,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   18. Footer
+   16. Footer
    -------------------------------------------------------------------------- */
 .site-footer {
   background: var(--ink);
@@ -1264,7 +1059,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   19. Legal / prose pages
+   17. Legal / prose pages
    -------------------------------------------------------------------------- */
 .page-head {
   background: var(--grape);
@@ -1370,7 +1165,7 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   20. Motion
+   18. Motion
    -------------------------------------------------------------------------- */
 .reveal {
   opacity: 0;
@@ -1403,11 +1198,10 @@ p {
 }
 
 /* --------------------------------------------------------------------------
-   21. Print
+   19. Print
    -------------------------------------------------------------------------- */
 @media print {
   .filters,
-  .hero__art,
   .tile-band {
     display: none !important;
   }

@@ -153,37 +153,11 @@
 
   function renderEventState() {
     var countdown = $("#countdown");
-    var note = $("#event-status");
     var ticketsLive = !TBD.tickets && !!DATA.event.ticketUrl && isUpcoming;
 
     if (countdown) {
       if (isUpcoming) startCountdown(countdown);
       else countdown.hidden = true;
-    }
-
-    if (note) {
-      var message = "";
-
-      if (!isUpcoming) {
-        message =
-          "Die letzte Ausgabe fand am " +
-          dateShort +
-          " statt. Das Datum der nächsten Edition wird bald bekannt gegeben.";
-      } else if (TBD.tickets) {
-        message =
-          "Das Datum steht: " +
-          dateLong +
-          ". Location, Programm und Ticketverkauf geben wir in den nächsten Wochen bekannt.";
-      }
-
-      if (message) {
-        note.hidden = false;
-        note.textContent = "";
-        note.appendChild(icon("info", 18));
-        note.appendChild(document.createTextNode(message));
-      } else {
-        note.hidden = true;
-      }
     }
 
     /* Without a live ticket shop, every ticket button becomes a way to get
@@ -306,51 +280,6 @@
       box.appendChild(el("span", "stat__num", value));
       box.appendChild(el("span", "stat__label", stat.label));
       root.appendChild(box);
-    });
-  }
-
-  /* ----------------------------------------------------------- programme */
-
-  function renderAgenda() {
-    var root = $("#agenda");
-    if (!root) return;
-
-    if (TBD.agenda) {
-      var section = root.closest("section");
-      var head = section ? $(".section-head p", section) : null;
-      if (head) {
-        head.textContent =
-          "Das detaillierte Programm für " +
-          start.getFullYear() +
-          " stellen wir gerade zusammen und veröffentlichen es hier, sobald es steht.";
-      }
-      root.appendChild(
-        el(
-          "p",
-          "empty-note",
-          "Programm folgt — der Ablauf des Abends wird in Kürze bekannt gegeben."
-        )
-      );
-      return;
-    }
-
-    DATA.agenda.forEach(function (slot) {
-      var item = el("article", "slot reveal");
-
-      var time = el("div", "slot__time", slot.from);
-      time.appendChild(el("span", null, "bis " + slot.to));
-      item.appendChild(time);
-
-      var body = el("div");
-      body.appendChild(el("h3", null, slot.title));
-      var list = el("ul");
-      slot.points.forEach(function (point) {
-        list.appendChild(el("li", null, point));
-      });
-      body.appendChild(list);
-      item.appendChild(body);
-
-      root.appendChild(item);
     });
   }
 
@@ -646,7 +575,6 @@
     injectText();
     renderHighlights();
     renderStats();
-    renderAgenda();
     renderKeynote();
     renderStartups();
     renderPartners();
