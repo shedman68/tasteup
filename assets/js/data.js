@@ -106,15 +106,24 @@ window.TASTEUP = {
   ],
 
   /* ------------------------------------------------------------ presenting
-     "Presenting" section between the facts and the highlights. `items` is
-     empty until the logos/icons are supplied — the section then shows a
-     placeholder instead of rendering nothing. Once you have them, add
-     entries here shaped like `{ name, logo, url }` (url is optional) and
-     they render as a logo row automatically. */
+     "Presenting" section, directly below Was/Wann/Wo. Each entry is
+     `{ name, logo, type, url }` (url is optional, for when one exists):
+       - type: "badge" — a finished bubble graphic (colour, brush-stroke
+         edge and text already baked into the artwork) shown as-is.
+       - type: "logo"  — a flat logo mark with no bubble of its own, shown
+         inside a plain white circle so it matches the badges around it.
+     Leave `items` empty to fall back to a "folgen in Kürze" placeholder. */
   presenting: {
     title: "Presenting",
     lede: "Tauche mit uns in die regionale Food & Beverage Szene ein:",
-    items: []
+    items: [
+      { name: "10+ Startups", logo: "./images/10 Startups.png", type: "badge" },
+      { name: "Food Factory", logo: "./images/Food Factory.png", type: "logo" },
+      { name: "Event Floristik", logo: "./images/Event Floristik.png", type: "badge" },
+      { name: "FoodHealth", logo: "./images/logo-foodhealth.png", type: "logo" },
+      { name: "Food Fotografie", logo: "./images/Food Fotografie.png", type: "badge" },
+      { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", type: "badge" }
+    ]
   },
 
   /* --------------------------------------------------------------- figures

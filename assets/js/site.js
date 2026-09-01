@@ -498,24 +498,25 @@
     }
 
     items.forEach(function (item) {
-      var box = el("div", "presenting-row__logo reveal");
+      var variant = item.type === "badge" ? "badge" : "logo";
+      var box = el(
+        item.url ? "a" : "div",
+        "presenting-row__item presenting-row__item--" + variant + " reveal"
+      );
+
+      if (item.url) {
+        box.href = item.url;
+        box.target = "_blank";
+        box.rel = "noopener";
+        box.setAttribute("aria-label", item.name);
+      }
+
       var img = el("img");
       img.src = item.logo;
       img.alt = item.name;
       img.loading = "lazy";
       img.decoding = "async";
-
-      if (item.url) {
-        var link = el("a");
-        link.href = item.url;
-        link.target = "_blank";
-        link.rel = "noopener";
-        link.setAttribute("aria-label", item.name);
-        link.appendChild(img);
-        box.appendChild(link);
-      } else {
-        box.appendChild(img);
-      }
+      box.appendChild(img);
 
       root.appendChild(box);
     });
