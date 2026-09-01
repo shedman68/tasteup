@@ -822,22 +822,14 @@ p {
   object-fit: contain;
 }
 
-/* Logo items (Food Factory, FoodHealth) are flat marks with no bubble of
-   their own, so they get one: a plain white circle, matching the site's
-   circular icon-badge language, with the logo centred inside it. Sized a
-   step bigger than the badges so the two logos read as the anchors of
-   the left-hand cluster. */
+/* Logo items (Food Factory, FoodHealth) are flat marks shown as-is, no
+   circle behind them — sized a step bigger than the badges so the two
+   logos still read as the anchors of the left-hand cluster. */
 .presenting-row__item--logo {
   width: clamp(132px, 10vw, 190px);
   height: clamp(132px, 10vw, 190px);
   flex-shrink: 0;
   box-sizing: border-box;
-  border-radius: 50%;
-  background: var(--white);
-  box-shadow: var(--shadow);
-  /* A percentage here would resolve against the row's width, not this
-     item's own box, and blow it out — fixed units only. */
-  padding: clamp(20px, 2vw, 30px);
 }
 
 .presenting-row__item--logo img {
