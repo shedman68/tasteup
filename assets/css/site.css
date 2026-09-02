@@ -652,6 +652,15 @@ p {
   gap: clamp(1rem, 0.8rem + 1vw, 1.5rem);
 }
 
+/* Heading and its sentence travel as one flex item, so the row's gap sits
+   around the pair rather than between them — that keeps the same tight
+   heading/lede pairing the other sections have. The width cap stands in
+   for .section-head's 68ch, which .startups-head opts out of. */
+.startups-head__title {
+  max-width: 68ch;
+  margin-inline: auto;
+}
+
 .presenting-row__placeholder {
   color: var(--ink-soft);
   font-style: italic;
