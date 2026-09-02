@@ -770,56 +770,70 @@ p {
 /* --------------------------------------------------------------------------
    12. Startups
    -------------------------------------------------------------------------- */
-/* One line, auto-scrolling left. The track holds the line-up twice
-   back-to-back (see renderStartups in site.js) and animates from 0 to
-   exactly -50%, so the loop point is invisible. */
-.marquee {
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black clamp(1.5rem, 1rem + 2vw, 4rem),
-    black calc(100% - clamp(1.5rem, 1rem + 2vw, 4rem)),
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black clamp(1.5rem, 1rem + 2vw, 4rem),
-    black calc(100% - clamp(1.5rem, 1rem + 2vw, 4rem)),
-    transparent
-  );
-}
-
-.marquee__track {
+/* One line, browsed manually: swipe or trackpad-scroll the track directly,
+   or use the prev/next buttons either side — both just move the same
+   native scroll position, so nothing ever fights an in-progress touch
+   scroll the way a continuously-animated marquee did on mobile. */
+.carousel {
   display: flex;
-  width: max-content;
-  animation: marquee 46s linear infinite;
+  align-items: center;
+  gap: clamp(0.5rem, 0.5vw, 1rem);
 }
 
-.marquee:hover .marquee__track,
-.marquee:focus-within .marquee__track {
-  animation-play-state: paused;
+.carousel__track {
+  display: flex;
+  gap: var(--gap);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding-block: 0.4rem;
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+.carousel__track::-webkit-scrollbar {
+  display: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .marquee {
-    overflow-x: auto;
+.carousel__btn {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.carousel__btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.carousel__btn:hover {
+  transform: scale(1.08);
+  box-shadow: var(--shadow);
+}
+
+.carousel__btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+  pointer-events: none;
+}
+
+@media (max-width: 640px) {
+  .carousel__btn {
+    width: 40px;
+    height: 40px;
   }
-  .marquee__track {
-    animation: none;
-  }
-  .marquee__track [aria-hidden="true"] {
-    display: none;
+  .carousel__btn svg {
+    width: 18px;
+    height: 18px;
   }
 }
 
@@ -828,13 +842,7 @@ p {
   flex-direction: column;
   flex: 0 0 clamp(272px, 24vw, 320px);
   width: clamp(272px, 24vw, 320px);
-  /* Spacing lives on the card itself (not a `gap` on .marquee__track): the
-     track is the line-up doubled back-to-back, animated by exactly -50% to
-     loop seamlessly, and that only lands precisely on the seam if every
-     card — including the last one — carries the same trailing space. A
-     flex `gap` doesn't count a trailing gap after the final child, which
-     throws the halfway point off by half a gap. */
-  margin-right: var(--gap);
+  scroll-snap-align: start;
   padding: 1.6rem;
   background: var(--white);
   border: 1px solid var(--line);
@@ -1248,6 +1256,12 @@ p {
 
 @media (prefers-reduced-motion: reduce) {
   html {
+    scroll-behavior: auto;
+  }
+
+  /* scroll-behavior isn't inherited from html — the carousel track needs
+     its own override so the prev/next buttons jump instead of animating. */
+  .carousel__track {
     scroll-behavior: auto;
   }
 

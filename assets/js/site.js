@@ -262,19 +262,17 @@
   }
 
   /* ------------------------------------------------------------ startups
-     Cards run in one line and auto-scroll left (CSS animation on
-     .marquee__track). The track holds the line-up twice back-to-back so
-     the loop point is invisible; the second copy is built as its own set
-     of nodes (not a clone) so its images still get their own load/error
-     handling, and it's hidden from assistive tech and keyboard focus. */
+     Cards sit in a horizontally scrollable track (native touch/trackpad
+     scroll — nothing animated, so it never fights the browser over an
+     in-progress scroll the way a CSS-animated marquee did on mobile).
+     The prev/next buttons below just nudge that same scroll position. */
 
   function renderStartups() {
     var grid = $("#startup-grid");
     if (!grid) return;
 
-    function buildCard(startup, isDuplicate) {
+    DATA.startups.forEach(function (startup) {
       var card = el("article", "card");
-      if (isDuplicate) card.setAttribute("aria-hidden", "true");
 
       var logoBox = el("div", "card__logo");
       if (startup.logo) {
@@ -301,7 +299,6 @@
         link.href = startup.url;
         link.target = "_blank";
         link.rel = "noopener";
-        if (isDuplicate) link.tabIndex = -1;
         link.appendChild(document.createTextNode("Website besuchen"));
         link.appendChild(icon("arrow", 16));
         link.setAttribute("aria-label", "Website von " + startup.name + " besuchen");
@@ -310,15 +307,45 @@
         card.appendChild(el("span", "card__soon", "Website folgt bald"));
       }
 
-      return card;
+      grid.appendChild(card);
+    });
+  }
+
+  /* ------------------------------------------------------------ carousel
+     Prev/next buttons step the startup track by one card width. Button
+     state (disabled at either end) follows the track's own scroll
+     position, so it stays right whether that came from a click, a swipe,
+     or a trackpad. */
+
+  function initCarousel() {
+    var track = $("#startup-grid");
+    var prevBtn = $("#startup-prev");
+    var nextBtn = $("#startup-next");
+    if (!track || !prevBtn || !nextBtn) return;
+
+    function step() {
+      var card = track.querySelector(".card");
+      if (!card) return track.clientWidth;
+      var gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+      return card.getBoundingClientRect().width + gap;
     }
 
-    DATA.startups.forEach(function (startup) {
-      grid.appendChild(buildCard(startup, false));
+    function updateButtons() {
+      var max = track.scrollWidth - track.clientWidth;
+      prevBtn.disabled = track.scrollLeft <= 2;
+      nextBtn.disabled = track.scrollLeft >= max - 2;
+    }
+
+    prevBtn.addEventListener("click", function () {
+      track.scrollBy({ left: -step(), behavior: "smooth" });
     });
-    DATA.startups.forEach(function (startup) {
-      grid.appendChild(buildCard(startup, true));
+    nextBtn.addEventListener("click", function () {
+      track.scrollBy({ left: step(), behavior: "smooth" });
     });
+
+    track.addEventListener("scroll", updateButtons, { passive: true });
+    window.addEventListener("resize", updateButtons);
+    updateButtons();
   }
 
   /* ------------------------------------------------------ partner banner
@@ -553,6 +580,7 @@
     injectText();
     renderKeynote();
     renderStartups();
+    initCarousel();
     renderPartnerBanner();
     renderPartners();
     renderPresenting();
