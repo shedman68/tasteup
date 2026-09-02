@@ -1,0 +1,1287 @@
+/* ==========================================================================
+   TasteUp — design system
+   Palette sampled directly from the official banner and poster artwork.
+   No CSS framework: everything below is the site's own stylesheet.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  /* Brand colours, sampled from images/banner.png + images/TasteUp Poster.png */
+  --cream: #f1e9de;
+  --paper: #fbf7f1;
+  --white: #ffffff;
+  --grape: #510965;
+  --forest: #013a20;
+  --orange: #e55121;
+  --amber: #fca80a;
+  --sky: #6f9fc5;
+  --blush: #eebdaa;
+
+  /* Derived working colours */
+  --ink: #2b0f36; /* body text — 14:1 on cream */
+  --ink-soft: #5c4463; /* secondary text — 6.4:1 on cream */
+  --orange-ink: #d13c0f; /* solid buttons: white on this passes AA */
+  --orange-deep: #a83609;
+  --grape-deep: #3a0449;
+  --line: rgba(43, 15, 54, 0.14);
+  --line-strong: rgba(43, 15, 54, 0.28);
+
+  /* Typography */
+  --font-display: "Antonio", "Oswald", "Arial Narrow", sans-serif;
+  --font-body: "Heebo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Fluid type scale */
+  --step--1: clamp(0.82rem, 0.79rem + 0.14vw, 0.9rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.12rem);
+  --step-1: clamp(1.18rem, 1.1rem + 0.4vw, 1.4rem);
+  --step-2: clamp(1.45rem, 1.3rem + 0.75vw, 1.95rem);
+  --step-3: clamp(1.9rem, 1.6rem + 1.5vw, 2.9rem);
+  --step-4: clamp(2.5rem, 1.9rem + 3vw, 4.4rem);
+  --step-5: clamp(3.1rem, 2rem + 5.4vw, 7rem);
+
+  /* Space + shape */
+  --gap: clamp(1rem, 0.8rem + 1vw, 1.75rem);
+  --section-y: clamp(3.5rem, 2.5rem + 4vw, 7rem);
+  --shell: 1200px;
+  --radius: 18px;
+  --radius-lg: 30px;
+  --shadow-sm: 0 2px 8px rgba(43, 15, 54, 0.07);
+  --shadow: 0 14px 34px -18px rgba(43, 15, 54, 0.4);
+  --shadow-lg: 0 30px 60px -30px rgba(43, 15, 54, 0.55);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset + base
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--step-0);
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--orange-ink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--amber);
+  color: var(--ink);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. Typography
+   -------------------------------------------------------------------------- */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--step-5);
+}
+
+h2 {
+  font-size: var(--step-4);
+}
+
+h3 {
+  font-size: var(--step-2);
+}
+
+h4 {
+  font-size: var(--step-1);
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Small uppercase label — the poster's "GRÜNDEN.GENIESSEN.VERNETZEN" voice */
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--step--1);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange-ink);
+  display: block;
+}
+
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 62ch;
+}
+
+.section-head {
+  max-width: 68ch;
+  margin-bottom: clamp(2rem, 1.4rem + 2vw, 3.5rem);
+}
+
+.section-head.is-centred {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-head h2 {
+  margin-top: 0.5rem;
+}
+
+/* A couple of section-heads carry a short, large headline on its own —
+   the standard 68ch cap would force it to wrap sooner than it needs to. */
+.facts-head,
+.startups-head {
+  max-width: none;
+}
+
+.section-head p {
+  margin-top: 1rem;
+  color: var(--ink-soft);
+  font-size: var(--step-1);
+}
+
+.section-head.is-centred p {
+  margin-inline: auto;
+}
+
+/* --------------------------------------------------------------------------
+   4. Layout
+   -------------------------------------------------------------------------- */
+.shell {
+  width: min(100% - 2.5rem, var(--shell));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--section-y);
+  position: relative;
+}
+
+.section--cream {
+  background: var(--cream);
+}
+.section--paper {
+  background: var(--paper);
+}
+.section--white {
+  background: var(--white);
+}
+
+.section--grape {
+  background: var(--grape);
+  color: var(--cream);
+}
+.section--forest {
+  background: var(--forest);
+  color: var(--cream);
+}
+.section--amber {
+  background: var(--amber);
+  color: var(--ink);
+}
+.section--sky {
+  background: var(--sky);
+  color: var(--ink);
+}
+.section--orange {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.section--grape .eyebrow,
+.section--forest .eyebrow {
+  color: var(--amber);
+}
+.section--orange .eyebrow {
+  color: var(--white);
+}
+.section--amber .eyebrow,
+.section--sky .eyebrow {
+  color: var(--grape);
+}
+
+.section--grape .section-head p,
+.section--forest .section-head p {
+  color: rgba(241, 233, 222, 0.82);
+}
+.section--orange .section-head p {
+  color: rgba(255, 255, 255, 0.9);
+}
+.section--amber .section-head p,
+.section--sky .section-head p {
+  color: rgba(43, 15, 54, 0.78);
+}
+
+/* --------------------------------------------------------------------------
+   5. Buttons + chips
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.6rem;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: var(--step-0);
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.18s ease, background-color 0.18s ease,
+    border-color 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn svg {
+  width: 1.05em;
+  height: 1.05em;
+  flex-shrink: 0;
+}
+
+.btn--primary {
+  background: var(--orange-ink);
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.btn--primary:hover {
+  background: var(--orange-deep);
+}
+
+.btn--ink {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+.btn--ink:hover {
+  background: var(--grape);
+}
+
+.btn--outline {
+  border-color: currentColor;
+  color: inherit;
+}
+
+.btn--outline:hover {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+
+.section--grape .btn--outline:hover,
+.section--forest .btn--outline:hover,
+.section--orange .btn--outline:hover {
+  background: var(--cream);
+  color: var(--ink);
+  border-color: var(--cream);
+}
+
+.btn--light {
+  background: var(--white);
+  color: var(--orange-ink);
+  box-shadow: var(--shadow);
+}
+
+.btn--light:hover {
+  background: var(--cream);
+}
+
+.btn--lg {
+  padding: 1.05rem 2.2rem;
+  font-size: var(--step-1);
+}
+
+.btn--sm {
+  padding: 0.55rem 1.1rem;
+  font-size: var(--step--1);
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.btn-row.is-centred {
+  justify-content: center;
+}
+
+/* Text link with animated underline */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--orange-ink);
+  border-bottom: 2px solid currentColor;
+  padding-bottom: 1px;
+  transition: gap 0.18s ease, color 0.18s ease;
+}
+
+.link:hover {
+  gap: 0.7rem;
+}
+
+.section--grape .link,
+.section--forest .link,
+.section--orange .link {
+  color: var(--amber);
+}
+
+.section--amber .link,
+.section--sky .link {
+  color: var(--grape);
+}
+
+.link svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* --------------------------------------------------------------------------
+   6. Tile motif — rebuilds the banner's icon grid from the source icon art
+   -------------------------------------------------------------------------- */
+.tile-band {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(56px, 8vw, 96px);
+  overflow: hidden;
+  height: clamp(56px, 8vw, 96px);
+}
+
+.tile-band img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile-band--thin {
+  grid-auto-columns: clamp(38px, 5vw, 60px);
+  height: clamp(38px, 5vw, 60px);
+}
+
+/* --------------------------------------------------------------------------
+   7. Brand mark (used in the footer — the page has no header)
+   -------------------------------------------------------------------------- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand img {
+  height: 42px;
+  width: auto;
+}
+
+.site-footer .brand img {
+  height: 54px;
+}
+
+/* --------------------------------------------------------------------------
+   8. Hero
+   -------------------------------------------------------------------------- */
+
+/* The full-width banner artwork carries the wordmark and tagline itself, so
+   it needs no overlaid text — just scale it to the viewport. */
+.banner-image {
+  line-height: 0;
+}
+
+.banner-image img {
+  width: 100%;
+  height: auto;
+}
+
+/* Accent word used inside any headline (the hero's h1 is plain text; the
+   "Basel" callout lives in the Was/Wann/Wo headline instead). */
+.accent {
+  color: var(--orange);
+}
+
+.hero-narrow {
+  background: var(--cream);
+  padding-block: clamp(2.5rem, 2rem + 2vw, 3.5rem);
+  text-align: center;
+}
+
+.hero-narrow h1 {
+  font-family: var(--font-body);
+  font-size: clamp(1.7rem, 1.35rem + 2vw, 2.6rem);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  color: var(--grape);
+  max-width: 46ch;
+  margin-inline: auto;
+  margin-bottom: 2rem;
+}
+
+/* Countdown */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 1.8rem;
+}
+
+.countdown__unit {
+  min-width: 68px;
+  padding: 0.6rem 0.8rem;
+  background: var(--white);
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.countdown__num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.85rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--grape);
+  font-variant-numeric: tabular-nums;
+}
+
+.countdown__label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-top: 0.3rem;
+}
+
+/* --------------------------------------------------------------------------
+   9. Facts (Was / Wann / Wo) — the original site's organic blob cards
+   -------------------------------------------------------------------------- */
+.blob-facts {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.blob-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  min-height: clamp(320px, 280px + 8vw, 380px);
+  padding: clamp(1.8rem, 1.4rem + 2vw, 3rem);
+  transition: transform 0.25s ease;
+}
+
+.blob-card:hover {
+  transform: scale(1.03);
+}
+
+.blob-card--orange {
+  background: var(--orange-ink);
+  color: var(--white);
+  border-radius: 65% 35% 70% 30% / 40% 60% 40% 60%;
+}
+
+.blob-card--amber {
+  background: var(--amber);
+  color: var(--ink);
+  border-radius: 40% 60% 30% 70% / 55% 45% 55% 45%;
+}
+
+.blob-card--cream {
+  background: var(--cream);
+  color: var(--ink);
+  border-radius: 50% 50% 45% 55% / 35% 65% 35% 65%;
+}
+
+.blob-card__icon {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  margin-bottom: 1.4rem;
+  background: rgba(255, 255, 255, 0.32);
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.blob-card--cream .blob-card__icon {
+  background: rgba(43, 15, 54, 0.12);
+  border-color: rgba(43, 15, 54, 0.22);
+  color: var(--grape);
+}
+
+.blob-card__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.blob-card h3 {
+  margin-bottom: 0.9rem;
+}
+
+.blob-card--orange h3,
+.blob-card--orange p {
+  color: var(--white);
+}
+
+.blob-card--amber p,
+.blob-card--cream p {
+  color: rgba(43, 15, 54, 0.8);
+}
+
+.blob-card p strong {
+  color: inherit;
+  font-weight: 700;
+}
+
+.blob-card .link {
+  margin-top: 1.1rem;
+}
+
+.blob-card--orange .link {
+  color: var(--white);
+}
+
+.blob-card--amber .link {
+  color: var(--grape);
+}
+
+/* The venue name/address doubles as the maps link — underlined so it reads
+   as clickable without needing its own separate "open maps" label. */
+.venue-link {
+  display: inline-block;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1.5px;
+}
+
+/* --------------------------------------------------------------------------
+   10. Presenting — bubbles stacked above/below the "Line-up" title
+   -------------------------------------------------------------------------- */
+/* Stacked, not side-by-side: the left trio sits above the heading, the
+   right trio below it — deliberately, rather than relying on the row
+   happening to wrap at some viewport width. */
+.presenting-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(1.5rem, 1rem + 2vw, 2.5rem);
+}
+
+.presenting-row__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 0.8rem + 1vw, 1.5rem);
+}
+
+.presenting-row__placeholder {
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* Every bubble is a finished painted-oval graphic (colour, brush-stroke
+   edge and text baked into the artwork) — shown as-is, just boxed to a
+   shared height so the two clusters read as one consistent set. */
+.presenting-row__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: clamp(100px, 7.2vw, 144px);
+  flex-shrink: 0;
+  /* A flex item's default min-width/min-height is `auto`, which refuses
+     to shrink below its content's intrinsic size — without this, the
+     img's own (much larger) natural dimensions win over the height set
+     above, regardless of what this rule specifies. */
+  min-width: 0;
+  min-height: 0;
+  text-decoration: none;
+  transition: transform 0.22s ease;
+}
+
+.presenting-row__item:hover {
+  transform: scale(1.05);
+}
+
+.presenting-row__item--big {
+  height: clamp(124px, 9vw, 176px);
+}
+
+.presenting-row__item img {
+  height: 100%;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  object-fit: contain;
+}
+
+/* --------------------------------------------------------------------------
+   11. Keynote
+   -------------------------------------------------------------------------- */
+.keynote {
+  display: grid;
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+  gap: clamp(1.8rem, 1rem + 3vw, 3.5rem);
+  align-items: center;
+}
+
+@media (max-width: 760px) {
+  .keynote {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .keynote__portrait {
+    margin-inline: auto;
+  }
+  .keynote .btn-row {
+    justify-content: center;
+  }
+}
+
+.keynote__portrait {
+  position: relative;
+  width: min(100%, 320px);
+  aspect-ratio: 1;
+}
+
+.keynote__portrait::after {
+  content: "";
+  position: absolute;
+  inset: -6%;
+  background: var(--cream);
+  border-radius: 58% 42% 47% 53% / 46% 55% 45% 54%;
+  z-index: 0;
+}
+
+.keynote__portrait img {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: var(--shadow);
+}
+
+.keynote__role {
+  font-weight: 700;
+  color: var(--grape);
+  margin-bottom: 1rem;
+}
+
+.keynote h3 {
+  font-size: var(--step-3);
+  color: var(--grape);
+  margin-bottom: 0.35rem;
+}
+
+.keynote__talk {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 1rem;
+}
+
+.keynote p {
+  color: rgba(43, 15, 54, 0.82);
+}
+
+.keynote .btn-row {
+  margin-top: 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   12. Startups
+   -------------------------------------------------------------------------- */
+/* One line, auto-scrolling left. The track holds the line-up twice
+   back-to-back (see renderStartups in site.js) and animates from 0 to
+   exactly -50%, so the loop point is invisible. */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black clamp(1.5rem, 1rem + 2vw, 4rem),
+    black calc(100% - clamp(1.5rem, 1rem + 2vw, 4rem)),
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black clamp(1.5rem, 1rem + 2vw, 4rem),
+    black calc(100% - clamp(1.5rem, 1rem + 2vw, 4rem)),
+    transparent
+  );
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+
+.marquee:hover .marquee__track,
+.marquee:focus-within .marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    overflow-x: auto;
+  }
+  .marquee__track {
+    animation: none;
+  }
+  .marquee__track [aria-hidden="true"] {
+    display: none;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 clamp(272px, 24vw, 320px);
+  width: clamp(272px, 24vw, 320px);
+  /* Spacing lives on the card itself (not a `gap` on .marquee__track): the
+     track is the line-up doubled back-to-back, animated by exactly -50% to
+     loop seamlessly, and that only lands precisely on the seam if every
+     card — including the last one — carries the same trailing space. A
+     flex `gap` doesn't count a trailing gap after the final child, which
+     throws the halfway point off by half a gap. */
+  margin-right: var(--gap);
+  padding: 1.6rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow);
+  border-color: var(--line-strong);
+}
+
+.card[hidden] {
+  display: none;
+}
+
+/* Flex, not grid: an auto-sized grid track would resolve the image's
+   max-width against its own intrinsic width and blow past the card. */
+.card__logo {
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.2rem;
+}
+
+/* Stand-in for a missing logo — a condensed wordmark in its place. */
+.card__logo-fallback {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 0.95rem + 0.6vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--line-strong);
+  line-height: 1.15;
+}
+
+.card__logo img {
+  max-height: 100%;
+  max-width: 78%;
+  width: auto;
+  object-fit: contain;
+}
+
+.card h3 {
+  font-size: var(--step-1);
+  margin-bottom: 0.6rem;
+  color: var(--ink);
+}
+
+.card p {
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+  margin-bottom: 1.3rem;
+}
+
+.card .link {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: 0.92rem;
+}
+
+.card__soon {
+  margin-top: auto;
+  align-self: flex-start;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   13. Partner banner — empty (and out of the page) until an image is set
+   -------------------------------------------------------------------------- */
+.partner-banner {
+  padding-block: clamp(1.5rem, 1rem + 2vw, 3rem);
+  background: var(--paper);
+}
+
+.partner-banner__frame {
+  width: min(100% - 2.5rem, var(--shell));
+  margin-inline: auto;
+}
+
+.partner-banner__link {
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.partner-banner__link img {
+  width: 100%;
+  height: auto;
+}
+
+/* --------------------------------------------------------------------------
+   14. Partners
+   -------------------------------------------------------------------------- */
+.partners {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.partner {
+  text-align: center;
+}
+
+.partner__role {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+
+.partner__frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 130px;
+  padding: 1.4rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.partner__frame:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.partner__frame img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+.partner__name {
+  display: block;
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+/* --------------------------------------------------------------------------
+   15. Ticket band
+   -------------------------------------------------------------------------- */
+.ticket-band {
+  text-align: center;
+}
+
+.ticket-band p {
+  max-width: 54ch;
+  margin: 0 auto 2rem;
+  font-size: var(--step-1);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* --------------------------------------------------------------------------
+   16. Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--ink);
+  color: rgba(241, 233, 222, 0.78);
+  padding-block: clamp(3rem, 2rem + 3vw, 4.5rem) 2rem;
+  font-size: 0.95rem;
+}
+
+.site-footer__grid {
+  display: grid;
+  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(241, 233, 222, 0.16);
+}
+
+.site-footer h4 {
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  color: var(--amber);
+  margin-bottom: 1rem;
+}
+
+.site-footer ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.site-footer a {
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.site-footer a:hover {
+  color: var(--amber);
+}
+
+.site-footer address {
+  font-style: normal;
+  line-height: 1.8;
+}
+
+.site-footer__bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.75rem;
+  font-size: 0.87rem;
+  color: rgba(241, 233, 222, 0.6);
+}
+
+.site-footer__bottom nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   17. Legal / prose pages
+   -------------------------------------------------------------------------- */
+.page-head {
+  background: var(--grape);
+  color: var(--cream);
+  padding-block: clamp(2.5rem, 2rem + 3vw, 4.5rem);
+}
+
+.page-head h1 {
+  font-size: var(--step-4);
+}
+
+.page-head p {
+  margin-top: 0.75rem;
+  color: rgba(241, 233, 222, 0.8);
+}
+
+.page-head__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--amber);
+  font-weight: 700;
+  font-size: var(--step--1);
+  text-decoration: none;
+  margin-bottom: 1.4rem;
+}
+
+.page-head__back svg {
+  width: 1.05em;
+  height: 1.05em;
+}
+
+.page-head__back:hover {
+  color: var(--cream);
+}
+
+.prose {
+  width: min(100% - 2.5rem, 780px);
+  margin-inline: auto;
+  padding-block: var(--section-y);
+}
+
+.prose h2 {
+  font-size: var(--step-2);
+  color: var(--grape);
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.prose h2:first-of-type {
+  margin-top: 0;
+}
+
+.prose h3 {
+  font-size: var(--step-1);
+  color: var(--ink);
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.prose p,
+.prose ul {
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+.prose ul {
+  padding-left: 1.3rem;
+}
+
+.prose li {
+  margin-bottom: 0.35rem;
+}
+
+.prose a {
+  color: var(--orange-ink);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.prose strong {
+  color: var(--ink);
+}
+
+.prose .callout {
+  padding: 1.4rem 1.6rem;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--amber);
+  border-radius: var(--radius);
+  margin-bottom: 1.5rem;
+}
+
+.prose .callout p:last-child {
+  margin-bottom: 0;
+}
+
+.prose .updated {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  font-size: 0.9rem;
+}
+
+/* --------------------------------------------------------------------------
+   18. About dialog (opened from the Was?-card's "Mehr Details")
+   -------------------------------------------------------------------------- */
+.about-dialog {
+  width: min(90vw, 560px);
+  padding: clamp(2rem, 1.6rem + 1.5vw, 2.75rem);
+  border: none;
+  border-radius: var(--radius-lg);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--shadow-lg);
+}
+
+.about-dialog::backdrop {
+  background: rgba(43, 15, 54, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.about-dialog h3 {
+  font-size: var(--step-2);
+  color: var(--grape);
+  margin-bottom: 1.2rem;
+  padding-right: 2rem;
+}
+
+.about-dialog__body p {
+  color: var(--ink-soft);
+  margin-bottom: 1rem;
+}
+
+.about-dialog__body p:last-child {
+  margin-bottom: 0;
+}
+
+.about-dialog__close {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.1rem;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: var(--line);
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.18s ease;
+}
+
+.about-dialog__close:hover {
+  background: var(--line-strong);
+}
+
+.about-dialog__close svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --------------------------------------------------------------------------
+   19. Motion
+   -------------------------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   20. Print
+   -------------------------------------------------------------------------- */
+@media print {
+  .filters,
+  .tile-band {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+  }
+
+  .section {
+    padding-block: 1.5rem;
+    background: #fff !important;
+    color: #000 !important;
+  }
+}
