@@ -359,10 +359,12 @@
       var box = el("div", "partner reveal");
       box.appendChild(el("span", "partner__role", partner.role));
 
-      var frame = el("a", "partner__frame");
-      frame.href = partner.url;
-      frame.target = "_blank";
-      frame.rel = "noopener";
+      var frame = el(partner.url ? "a" : "div", "partner__frame");
+      if (partner.url) {
+        frame.href = partner.url;
+        frame.target = "_blank";
+        frame.rel = "noopener";
+      }
       frame.setAttribute("aria-label", partner.name + " (" + partner.role + ")");
 
       var img = el("img");

@@ -188,10 +188,11 @@ p {
   margin-top: 0.5rem;
 }
 
-/* Used where a heading carries the whole section-head alone (no eyebrow,
-   no lede) and should read as unmistakably the headline. */
-.section-head h2.section-head--big {
-  font-size: var(--step-5);
+/* A couple of section-heads carry a short, large headline on its own —
+   the standard 68ch cap would force it to wrap sooner than it needs to. */
+.facts-head,
+.startups-head {
+  max-width: none;
 }
 
 .section-head p {
@@ -633,12 +634,6 @@ p {
 /* --------------------------------------------------------------------------
    10. Presenting — bubbles stacked above/below the "Line-up" title
    -------------------------------------------------------------------------- */
-/* Wider than the standard .section-head's 68ch cap — this one needs room
-   for a full-size heading plus a trio of bubbles above and below it. */
-.startups-head {
-  max-width: none;
-}
-
 /* Stacked, not side-by-side: the left trio sits above the heading, the
    right trio below it — deliberately, rather than relying on the row
    happening to wrap at some viewport width. */

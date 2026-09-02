@@ -182,14 +182,10 @@ window.TASTEUP = {
     url: ""
   },
 
-  /* --------------------------------------------------------------- partners */
+  /* --------------------------------------------------------------- partners
+     `url` is optional — leave it out and the logo renders without a link
+     instead of pointing nowhere. */
   partners: [
-    {
-      role: "Patronat",
-      name: "Lunch-Check Schweiz",
-      logo: "./images/lunch check.png",
-      url: "https://www.lunch-check.ch/"
-    },
     {
       role: "Veranstalter",
       name: "Startup Academy Schweiz",
@@ -198,15 +194,21 @@ window.TASTEUP = {
     },
     {
       role: "Location-Partner",
-      name: "Café Kafka",
-      logo: "./images/café kafka.png",
-      url: "https://www.literaturhaus-basel.ch/de/besuch/cafe-kafka/"
+      name: "Unser Bier",
+      logo: "./images/Unser-Bier.png",
+      url: ""
     },
     {
-      role: "Medienpartner",
-      name: "Basel Eats",
-      logo: "./images/basel eats.png",
-      url: "https://www.baseleats.ch/"
+      role: "Netzwerkpartner",
+      name: "Food Health",
+      logo: "./images/logo-foodhealth.png",
+      url: ""
+    },
+    {
+      role: "Netzwerkpartner",
+      name: "Food Factory",
+      logo: "./images/Food Factory.png",
+      url: ""
     }
   ]
 };
