@@ -680,6 +680,10 @@ p {
   transform: scale(1.05);
 }
 
+.presenting-row__item--big {
+  height: clamp(124px, 9vw, 176px);
+}
+
 .presenting-row__item img {
   height: 100%;
   width: auto;

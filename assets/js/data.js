@@ -66,7 +66,7 @@ window.TASTEUP = {
 
     /* Shown in the "Mehr Details" dialog opened from the Was?-card. */
     about: [
-      "TasteUp ist ein Ort des Austauschs, der Degustation und des Netzwerkens. Entdecke kulinarische Trends und degustiere in entspannter Afterwork-Atmosphäre neue Produkte. Lerne spannende Gründer:innen kennen, triff Programme wie FoodFactory und FoodHealth und vernetze dich mit der Food & Beverage Startup Community.",
+      "TasteUp ist ein Ort des Austauschs, der Degustation und des Netzwerkens. Entdecke kulinarische Trends und degustiere in entspannter Afterwork-Atmosphäre neue Produkte. Lerne spannende Gründer:innen kennen, triff Programme wie Food Factory und Food Health und vernetze dich mit der Food & Beverage Startup Community.",
       "Ob als Foodie, Gastronom:in oder Startup – bei TasteUp findest du Inspiration, Geschmack und neue Kontakte."
     ]
   },
@@ -74,18 +74,19 @@ window.TASTEUP = {
   /* --------------------------------------------------------- presenting row
      The sponsor/programme bubbles shown stacked above and below the
      "Line-up" title, ahead of the startup cards. Each entry is
-     `{ name, logo, group, url }` (url optional): every bubble is a finished
-     painted-oval graphic (colour, brush-stroke edge and text baked into the
-     artwork) shown as-is.
+     `{ name, logo, group, url, big }` (url and big optional): every bubble
+     is a finished painted-oval graphic (colour, brush-stroke edge and text
+     baked into the artwork) shown as-is.
        - group: "left" | "right" — "left" renders as the row of three above
          the title, "right" as the row of three below it (the names are
          legacy from when the two groups sat side by side).
+       - big: true sizes that one bubble up above the rest.
      Leave `items` empty to fall back to a "folgen in Kürze" placeholder. */
   presenting: {
     items: [
-      { name: "10+ Startups", logo: "./images/10 Startups.png", group: "left" },
-      { name: "FoodHealth", logo: "./images/foodhealth-badge.png", group: "left" },
-      { name: "Food Factory", logo: "./images/food-factory-badge.png", group: "left" },
+      { name: "10+ Startups", logo: "./images/10 Startups.png", group: "left", big: true },
+      { name: "Food Health", logo: "./images/foodhealth-badge.png", group: "left" },
+      { name: "Food Factory", logo: "./images/food-factory-badge.png", group: "left", big: true },
       { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", group: "right" },
       { name: "Food Fotografie", logo: "./images/Food Fotografie.png", group: "right" },
       { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" }
@@ -196,19 +197,19 @@ window.TASTEUP = {
       role: "Location-Partner",
       name: "Unser Bier",
       logo: "./images/Unser-Bier.png",
-      url: ""
+      url: "https://www.unserbier.ch/"
     },
     {
       role: "Netzwerkpartner",
       name: "Food Health",
       logo: "./images/logo-foodhealth.png",
-      url: ""
+      url: "https://foodhealth.ch/"
     },
     {
       role: "Netzwerkpartner",
       name: "Food Factory",
       logo: "./images/Food Factory.png",
-      url: ""
+      url: "https://foodfactorybasel.ch/"
     }
   ]
 };

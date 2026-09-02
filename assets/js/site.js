@@ -399,7 +399,9 @@
     }
 
     items.forEach(function (item) {
-      var box = el(item.url ? "a" : "div", "presenting-row__item reveal");
+      var className = "presenting-row__item reveal";
+      if (item.big) className += " presenting-row__item--big";
+      var box = el(item.url ? "a" : "div", className);
 
       if (item.url) {
         box.href = item.url;
