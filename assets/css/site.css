@@ -826,11 +826,28 @@ p {
   pointer-events: none;
 }
 
+/* On a phone the buttons either side would eat ~135px of an already narrow
+   row, leaving the track too tight to show one card whole. Wrap them under
+   the track instead, so it gets the full width and the buttons sit as a
+   centred pair below it. */
 @media (max-width: 640px) {
-  .carousel__btn {
-    width: 40px;
-    height: 40px;
+  .carousel {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
   }
+
+  .carousel__track {
+    order: -1;
+    flex: 0 0 100%;
+    width: 100%;
+  }
+
+  .carousel__btn {
+    width: 44px;
+    height: 44px;
+  }
+
   .carousel__btn svg {
     width: 18px;
     height: 18px;
