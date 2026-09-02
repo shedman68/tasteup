@@ -992,10 +992,6 @@ p {
   text-align: center;
 }
 
-.ticket-band h2 {
-  margin-bottom: 1rem;
-}
-
 .ticket-band p {
   max-width: 54ch;
   margin: 0 auto 2rem;
