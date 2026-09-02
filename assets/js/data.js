@@ -145,19 +145,19 @@ window.TASTEUP = {
       name: "Haferey",
       logo: "./images/Haferey_2025_black.png",
       url: "https://haferey.ch/",
-      text: "Haferey – the hafer way. Samy Küng will mit seiner Basler Haferey den unterschätzten Hafer zum Trend-Food machen: Seine Haferbowls verkauft er an Basler Märkten im Gundeli und steht für eine bewusste Ernährung mitten im schnellen Alltag."
+      text: "Haferey – the hafer way. Für Samy Küng muss gesundes Essen auch lecker sein. Deshalb will er den unterschätzten Hafer mit Haferey zum Trend-Food machen - mit süssen und pikanten Bowls in modernen Variationen. Nach der Testphase an Basler Märkten im Gundeli sucht er nun ein festes Lokal. Bis dahin gibt's die bewusste Ernährung für den schnellen Alltag direkt am Marktstand."
     },
     {
       name: "Kitchen Angel",
       logo: "./images/kitchen Angel Logo.png",
       url: "https://kitchenangel.ch/",
-      text: "Kulinarik mit Herz & Verstand. Kitchen Angel ist Sarahs Herzensprojekt in Basel-Gundeli: ein Café- und Catering-Betrieb, der Menschen in herausfordernden Lebenslagen echte Arbeit mit Würde bietet. Für Events entstehen handgemachte Kreationen mit lokalen Zutaten – von Käse vom Milchhüsli beider Basel bis zu Bagels von Remi's."
+      text: "Kulinarik mit Herz & Verstand. Kitchen Angel ist Sarah Kleiber’s Herzensprojekt in Basel-Gundeli: ein Café- und Catering-Betrieb, der Menschen in herausfordernden Lebenslagen echte Arbeit mit Würde bietet. Für Events entstehen handgemachte Kreationen mit lokalen Zutaten wie Käse vom Milchhüsli beider Basel oder Bagels von Remi's Bagels."
     },
     {
       name: "Sauerteigfreude",
       logo: "./images/SauerteigFreude.png",
       url: "https://www.sauerteigfreude.ch/",
-      text: "Sauerteig mit Geduld und Hingabe. Bei SauerteigFreude entsteht jede Woche frisches Sauerteigbrot aus Bio-Mehl – von Hand geformt und über viele Stunden fermentiert, bis sich Geschmack, Aroma und eine saftige Krume entwickeln. Wer das Handwerk selbst lernen möchte, wird in Fallones Workshops Schritt für Schritt dorthin begleitet: entspannt, in kleiner Runde und mit ganz viel SauerteigFreude."
+      text: "Freude am Backen teilen. In ihren Workshops zeigt Fallone Hampel, wie aus Mehl, Wasser und Salz mit viel Geduld ein luftiges, aromatisches Sauerteigbrot entsteht. Entspannt, in kleiner Runde und mit ganz viel SauerteigFreude begleitet sie Teilnehmende Schritt für Schritt zu ihrem eigenen Brot."
     },
     {
       name: "Stielbruch (Event & Gastro Floristik)",
