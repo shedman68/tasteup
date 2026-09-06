@@ -568,10 +568,18 @@
       };
     }
 
-    var script = document.createElement("script");
-    script.type = "application/ld+json";
+    /* index.html ships this schema statically so non-JS crawlers still get
+       the date/venue/ticket facts. Refresh that element rather than adding
+       a second one, so data.js stays the source of truth without leaving
+       two competing Event blocks on the page. */
+    var script = $("#event-schema");
+    if (!script) {
+      script = document.createElement("script");
+      script.type = "application/ld+json";
+      script.id = "event-schema";
+      document.head.appendChild(script);
+    }
     script.textContent = JSON.stringify(payload);
-    document.head.appendChild(script);
   }
 
   /* ---------------------------------------------------------------- boot */
