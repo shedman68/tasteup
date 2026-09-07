@@ -89,7 +89,8 @@ window.TASTEUP = {
       { name: "Food Factory", logo: "./images/food-factory-badge.png", group: "left", big: true },
       { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", group: "right" },
       { name: "Food Fotografie", logo: "./images/Food Fotografie.png", group: "right" },
-      { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" }
+      { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" },
+      { name: "Fizz Hub", logo: "./images/Fizz Hub bubble.png", group: "right" }
     ]
   },
 
@@ -210,6 +211,12 @@ window.TASTEUP = {
       name: "Food Factory",
       logo: "./images/Food Factory.png",
       url: "https://foodfactorybasel.ch/"
+    },
+    {
+      role: "Netzwerkpartner",
+      name: "Fizz Hub",
+      logo: "./images/Fizz Hub Logo.png",
+      url: ""
     }
   ]
 };
