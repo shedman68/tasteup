@@ -1055,6 +1055,13 @@ p {
   border-bottom: 1px solid rgba(241, 233, 222, 0.16);
 }
 
+/* Was a style="" attribute on all three pages. Moved here so the CSP's
+   style-src doesn't have to allow 'unsafe-inline'. */
+.site-footer__claim {
+  margin-top: 1rem;
+  max-width: 30ch;
+}
+
 .site-footer h4 {
   font-size: 0.82rem;
   letter-spacing: 0.16em;
