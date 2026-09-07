@@ -162,16 +162,16 @@ window.TASTEUP = {
       text: "Freude am Backen teilen. In ihren Workshops zeigt Fallone Hampel, wie aus Mehl, Wasser und Salz mit viel Geduld ein luftiges, aromatisches Sauerteigbrot entsteht. Entspannt, in kleiner Runde und mit ganz viel SauerteigFreude begleitet sie Teilnehmende Schritt für Schritt zu ihrem eigenen Brot."
     },
     {
+      name: "Maus Robotics",
+      logo: "./images/maus robotics logo.png",
+      url: "https://www.mausrobotics.com/en",
+      text: "Frische Crêpes in 60 Sekunden. Mit Maus Robotics werden Crêpes frisch, vollautomatisch, aus regionalen Zutaten und mit wählbarer Füllung live zubereitet. Dein Lieblings-Crêpe auf Knopfdruck im Automaten direkt vor Ort an Uni, Bahnhof oder Büro."
+    },
+    {
       name: "Stielbruch (Event & Gastro Floristik)",
       logo: "./images/stielbruch logo.jpg",
       url: "https://stielbruch.ch/index.html",
       text: "Ethische Floristik. Stielbruch verzichtet komplett auf importierte Pestizid-Schnittblumen und kombiniert stattdessen handgefertigte Kunstblumen aus Brockenstuben mit lokal gefundenem Grünschnitt. Die Basler Sträusse werden per Velo geliefert, später wieder abgeholt, neu zusammengestellt und wiederverwendet – nachhaltige Floristik im lokalen Kreislauf für Gastronomie und Events."
-    },
-    {
-      name: "Maus Robotics",
-      logo: "./images/maus robotics logo.png",
-      url: "https://www.mausrobotics.com/en",
-      text: "Frische Crêpes in 60 Sekunden. Mit Maus Robotics werden Crepes frisch, vollautomatisch, aus regionalen Zutaten und mit wählbarer Füllung live zubereitet. Dein Lieblings-Crêpe auf Knopfdruck im Automaten direkt vor Ort an Uni, Bahnhof oder Büro."
     },
     {
       name: "Seraina Oppliger Fotografie (Food Fotografie)",
