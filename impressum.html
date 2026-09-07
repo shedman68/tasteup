@@ -11,6 +11,17 @@
 <meta name="theme-color" content="#f1e9de">
 <link rel="canonical" href="https://taste-up.ch/impressum.html">
 
+<!-- Security headers, delivered as meta tags because GitHub Pages serves
+     static files and gives no way to set real HTTP response headers.
+     The policy is deliberately tight: the site loads nothing but its own
+     files plus Google Fonts, has no forms, makes no network calls and
+     embeds no frames, so everything else is denied outright.
+     Note: frame-ancestors (clickjacking) and X-Content-Type-Options are
+     header-only — browsers ignore them in a meta tag — so those two can't
+     be set on GitHub Pages. See SECURITY.md. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'none'; form-action 'none'; frame-src 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <link rel="icon" type="image/png" href="./images/tasteup-mark.png">
 <link rel="apple-touch-icon" href="./images/tasteup-mark.png">
 
@@ -18,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@500;600;700&family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="./assets/css/site.css?v=4">
+<link rel="stylesheet" href="./assets/css/site.css?v=5">
 </head>
 
 <body>
@@ -86,7 +97,7 @@
         <a class="brand" href="index.html" aria-label="TasteUp Startseite">
           <img src="./images/tasteup-logo-light.png" alt="" width="799" height="262">
         </a>
-        <p style="margin-top: 1rem; max-width: 30ch;">
+        <p class="site-footer__claim">
           Der Afterwork-Marktplatz für Craft Food &amp; Beverage Startups, Foodies &amp; Gastronomie
         </p>
       </div>
@@ -129,7 +140,7 @@
   </div>
 </footer>
 
-<script src="./assets/js/data.js?v=4"></script>
-<script src="./assets/js/site.js?v=4"></script>
+<script src="./assets/js/data.js?v=5"></script>
+<script src="./assets/js/site.js?v=5"></script>
 </body>
 </html>

@@ -67,6 +67,17 @@
 }
 </script>
 
+<!-- Security headers, delivered as meta tags because GitHub Pages serves
+     static files and gives no way to set real HTTP response headers.
+     The policy is deliberately tight: the site loads nothing but its own
+     files plus Google Fonts, has no forms, makes no network calls and
+     embeds no frames, so everything else is denied outright.
+     Note: frame-ancestors (clickjacking) and X-Content-Type-Options are
+     header-only — browsers ignore them in a meta tag — so those two can't
+     be set on GitHub Pages. See SECURITY.md. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self'; connect-src 'none'; form-action 'none'; frame-src 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <link rel="icon" type="image/png" href="./images/tasteup-mark.png">
 <link rel="apple-touch-icon" href="./images/tasteup-mark.png">
 
@@ -78,7 +89,7 @@
      old stylesheet/script otherwise, and a fresh index.html paired with a
      stale site.css renders badly. Bump the number on all three pages
      (index, impressum, datenschutz) whenever site.css or site.js change. -->
-<link rel="stylesheet" href="./assets/css/site.css?v=4">
+<link rel="stylesheet" href="./assets/css/site.css?v=5">
 </head>
 
 <body>
@@ -247,7 +258,7 @@
         <a class="brand" href="#top" aria-label="TasteUp Startseite">
           <img src="./images/tasteup-logo-light.png" alt="" width="799" height="262">
         </a>
-        <p style="margin-top: 1rem; max-width: 30ch;" data-tu="claim">
+        <p class="site-footer__claim" data-tu="claim">
           Der Afterwork-Marktplatz für Craft Food &amp; Beverage Startups, Foodies &amp; Gastronomie
         </p>
       </div>
@@ -291,7 +302,7 @@
   </div>
 </footer>
 
-<script src="./assets/js/data.js?v=4"></script>
-<script src="./assets/js/site.js?v=4"></script>
+<script src="./assets/js/data.js?v=5"></script>
+<script src="./assets/js/site.js?v=5"></script>
 </body>
 </html>
