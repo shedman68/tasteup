@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Only the homepage is listed: impressum.html and datenschutz.html both
+     carry <meta name="robots" content="noindex">, so listing them here
+     would ask search engines to index pages the pages themselves refuse. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://taste-up.ch/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
