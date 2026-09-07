@@ -77,9 +77,10 @@ window.TASTEUP = {
      `{ name, logo, group, url, big }` (url and big optional): every bubble
      is a finished painted-oval graphic (colour, brush-stroke edge and text
      baked into the artwork) shown as-is.
-       - group: "left" | "right" — "left" renders as the row of three above
-         the title, "right" as the row of three below it (the names are
-         legacy from when the two groups sat side by side).
+       - group: "left" | "right" — "left" renders as the row above the
+         title, "right" as the row below it (the names are legacy from
+         when the two groups sat side by side). Each row just takes
+         however many items are assigned to it.
        - big: true sizes that one bubble up above the rest.
      Leave `items` empty to fall back to a "folgen in Kürze" placeholder. */
   presenting: {
@@ -87,10 +88,10 @@ window.TASTEUP = {
       { name: "10+ Startups", logo: "./images/10 Startups.png", group: "left", big: true },
       { name: "Food Health", logo: "./images/foodhealth-badge.png", group: "left" },
       { name: "Food Factory", logo: "./images/food-factory-badge.png", group: "left", big: true },
+      { name: "Fizz Hub", logo: "./images/Fizz Hub bubble.png", group: "left" },
       { name: "F&B Mentoring", logo: "./images/F&B Mentoring.png", group: "right" },
       { name: "Food Fotografie", logo: "./images/Food Fotografie.png", group: "right" },
-      { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" },
-      { name: "Fizz Hub", logo: "./images/Fizz Hub bubble.png", group: "right" }
+      { name: "Event Floristik", logo: "./images/Event Floristik.png", group: "right" }
     ]
   },
 
