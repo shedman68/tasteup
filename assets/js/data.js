@@ -168,6 +168,12 @@ window.TASTEUP = {
       text: "Ethische Floristik. Stielbruch verzichtet komplett auf importierte Pestizid-Schnittblumen und kombiniert stattdessen handgefertigte Kunstblumen aus Brockenstuben mit lokal gefundenem Grünschnitt. Die Basler Sträusse werden per Velo geliefert, später wieder abgeholt, neu zusammengestellt und wiederverwendet – nachhaltige Floristik im lokalen Kreislauf für Gastronomie und Events."
     },
     {
+      name: "Maus Robotics",
+      logo: "./images/maus robotics logo.png",
+      url: "https://www.mausrobotics.com/en",
+      text: "Frische Crêpes in 60 Sekunden. Mit Maus Robotics werden Crepes frisch, vollautomatisch, aus regionalen Zutaten und mit wählbarer Füllung live zubereitet. Dein Lieblings-Crêpe auf Knopfdruck im Automaten direkt vor Ort an Uni, Bahnhof oder Büro."
+    },
+    {
       name: "Seraina Oppliger Fotografie (Food Fotografie)",
       logo: "./images/Seraina Oppliger Logo.png",
       url: "https://www.serainaoppliger.com/",
