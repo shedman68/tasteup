@@ -168,16 +168,16 @@ window.TASTEUP = {
       text: "Robotik, die dich zum Lächeln bringt. Der Crêpe-Roboter von Maus Robotics verwandelt rohen Teig in 90 Sekunden in einen frisch gefalteten Crêpe – transparent und komplett automatisch, direkt vor euren Augen. Das Basler Robotik-Lab will damit frisch gekochtes Essen dorthin bringen, wo es sonst keine Küche gibt: an Bahnhöfe, Büros, Events und mehr."
     },
     {
-      name: "Stielbruch (Event & Gastro Floristik)",
-      logo: "./images/stielbruch logo.jpg",
-      url: "https://stielbruch.ch/index.html",
-      text: "Ethische Floristik. Stielbruch verzichtet komplett auf importierte Pestizid-Schnittblumen und kombiniert stattdessen handgefertigte Kunstblumen aus Brockenstuben mit lokal gefundenem Grünschnitt. Die Basler Sträusse werden per Velo geliefert, später wieder abgeholt, neu zusammengestellt und wiederverwendet – nachhaltige Floristik im lokalen Kreislauf für Gastronomie und Events."
-    },
-    {
       name: "OSMO",
       logo: "./images/OSMO logo.png",
       url: "https://osmo.swiss/",
       text: "Full Flavour. Clear Mind. OSMO braut alkoholfreie Biere und Maté-Getränke in kleinen Chargen auf einer eigenen 10hl-Anlage – ohne zugesetzten Zucker, dafür mit echtem Geschmack aus Malz, Hopfen und Hefe. Bewusster Genuss statt Verzicht: erfrischend, ausgewogen und trotzdem mit vollem Geschmack."
+    },
+    {
+      name: "Stielbruch (Event & Gastro Floristik)",
+      logo: "./images/stielbruch logo.jpg",
+      url: "https://stielbruch.ch/index.html",
+      text: "Ethische Floristik. Stielbruch verzichtet komplett auf importierte Pestizid-Schnittblumen und kombiniert stattdessen handgefertigte Kunstblumen aus Brockenstuben mit lokal gefundenem Grünschnitt. Die Basler Sträusse werden per Velo geliefert, später wieder abgeholt, neu zusammengestellt und wiederverwendet – nachhaltige Floristik im lokalen Kreislauf für Gastronomie und Events."
     },
     {
       name: "Seraina Oppliger Fotografie (Food Fotografie)",
