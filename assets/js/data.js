@@ -229,7 +229,7 @@ window.TASTEUP = {
       role: "Netzwerkpartner",
       name: "Fizz Hub",
       logo: "./images/Fizz Hub Logo.png",
-      url: ""
+      url: "https://www.fizzhub.ch/"
     }
   ]
 };
