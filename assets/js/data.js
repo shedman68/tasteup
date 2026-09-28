@@ -175,7 +175,7 @@ window.TASTEUP = {
     },
     {
       name: "tiajô",
-      logo: "",
+      logo: "./images/tiajo logo.png",
       url: "https://www.cafetiajo.com/de",
       text: "Der ultimative Luxus: Zeit. tiajô ist Spezialitätenkaffee aus Lateinamerika. Arabica-Bohnen in Espresso- und Crema-Mischungen, mit lückenlos nachvollziehbarer Herkunft. Statt Kaffee für die Hektik zwischendurch soll jede Tasse eine bewusste Pause werden: Zeit für ein Gespräch, das am Tisch bleibt."
     },
